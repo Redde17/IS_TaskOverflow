@@ -3,22 +3,22 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:elemsViews="clr-namespace:TaskOverflow.Views.HomeViewElems"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     d:DesignHeight="200"
     d:DesignWidth="350"
     mc:Ignorable="d">
 
 
-
-    <!--  Sidebar for navigation  -->
-    <Grid ColumnDefinitions="100, *">
-        <Panel Grid.Column="0" Background="{StaticResource DarkBackgroundBrush}" />
+    <Grid ColumnDefinitions="70, *">
+        <!--  Sidebar for navigation  -->
+        <elemsViews:NavBar Grid.Column="0" />
 
         <!--  Page Content  -->
         <Grid Grid.Column="1" RowDefinitions="50, *">
             <!--  Title bar  -->
             <Panel Grid.Row="0" Background="{StaticResource LightBackgroundBrush}">
-				   <TextBlock Foreground="Black">
+                <TextBlock Foreground="Black">
                     TITLE
                 </TextBlock>
             </Panel>
@@ -26,15 +26,12 @@
             <!--  Content panel  -->
             <Panel Grid.Row="1">
                 <Grid ColumnDefinitions="40*, 5*, 55*">
-                    <Panel Grid.Column="0"/>
-                    <Panel Grid.Column="1"/>
-                    <Panel Grid.Column="2"/>
+                    <Panel Grid.Column="0" />
+                    <Panel Grid.Column="1" />
+                    <Panel Grid.Column="2" />
                 </Grid>
             </Panel>
         </Grid>
     </Grid>
-
-
-
 </UserControl>
 

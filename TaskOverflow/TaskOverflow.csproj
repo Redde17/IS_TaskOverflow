@@ -25,7 +25,7 @@
 
 
   <ItemGroup>
+    <Folder Include="Assets\icons\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\HomeViewElems\" />
   </ItemGroup>
 </Project>
