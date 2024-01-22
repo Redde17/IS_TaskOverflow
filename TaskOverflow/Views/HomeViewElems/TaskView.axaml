@@ -1,0 +1,70 @@
+<UserControl
+    x:Class="TaskOverflow.Views.HomeViewElems.TaskView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:TaskOverflow.ViewModels"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    x:DataType="vm:MainWindowViewModel"
+    mc:Ignorable="d">
+
+    <Grid Background="{StaticResource LightBackgroundBrush}" RowDefinitions="10*, 50*, 10*, 20*, 10*">
+        <!--  Title panel  -->
+        <Grid Grid.Row="0" RowDefinitions="2*, 8*">
+            <TextBlock Grid.Row="0">
+                Titolo
+            </TextBlock>
+            <TextBox
+                Grid.Row="1"
+                Text="{Binding TaskManagerVM.CreationTask.name}"
+                Watermark="Inserisci il titolo" />
+        </Grid>
+
+        <!--  Description panel  -->
+        <Grid Grid.Row="1" RowDefinitions="1*, 9*">
+            <TextBlock Grid.Row="0">
+                Descrizione
+            </TextBlock>
+            <TextBox
+                Grid.Row="1"
+                AcceptsReturn="True"
+                Text="{Binding TaskManagerVM.CreationTask.description}"
+                TextWrapping="Wrap"
+                Watermark="Inserisci la descrizione" />
+        </Grid>
+
+        <!--  Priority panel  -->
+        <StackPanel Grid.Row="2">
+            <TextBlock>
+                Prioritá (Non funziona)
+            </TextBlock>
+            <WrapPanel>
+                <Button>L</Button>
+                <Button>M</Button>
+                <Button>H</Button>
+            </WrapPanel>
+        </StackPanel>
+
+        <!--  Date due panel  -->
+        <StackPanel Grid.Row="3">
+            <TextBlock>
+                Scadenza
+            </TextBlock>
+            <DatePicker DayFormat="ddd dd" SelectedDate="{Binding TaskManagerVM.Date}" />
+            <TimePicker ClockIdentifier="24HourClock" MinuteIncrement="20" SelectedTime="{Binding TaskManagerVM.Time}" />
+        </StackPanel>
+
+        <!--  Modify/Delete buttons panel  -->
+        <Panel Grid.Row="4">
+            <Button HorizontalAlignment="Left">
+                Annulla(Non funziona)
+            </Button>
+
+            <Button HorizontalAlignment="Right" Command="{Binding TaskManagerVM.createTask}">
+                Crea
+            </Button>
+        </Panel>
+    </Grid>
+</UserControl>

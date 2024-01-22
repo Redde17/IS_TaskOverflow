@@ -1,0 +1,100 @@
+<UserControl
+    x:Class="TaskOverflow.Views.HomeViewElems.TaskListView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:TaskManagement="clr-namespace:TaskOverflow.Models.TaskManagement"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:TaskOverflow.ViewModels"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    x:DataType="vm:MainWindowViewModel"
+    mc:Ignorable="d">
+
+    <StackPanel>
+		<!--Task title and sort controller-->
+		<Panel>
+			<TextBlock HorizontalAlignment="Left" VerticalAlignment="Center">
+				Lista dei task
+			</TextBlock>
+			<Panel HorizontalAlignment="Right" VerticalAlignment="Center">
+				<ComboBox SelectedIndex="0">
+					<ComboBoxItem>By Priority Up</ComboBoxItem>
+					<ComboBoxItem>By Priority Down</ComboBoxItem>
+					<ComboBoxItem>By Date due Up</ComboBoxItem>
+					<ComboBoxItem>By Date due Down</ComboBoxItem>
+					<ComboBoxItem>NON FUNZIONA ANCORA :)</ComboBoxItem>
+				</ComboBox>
+			</Panel>
+
+		</Panel>
+		
+		<!--Task list-->
+        <ListBox Padding="0" ItemsSource="{Binding TaskManagerVM.TaskList}">
+            <ListBox.ItemTemplate>
+                <!--  Task Card item  -->
+                <DataTemplate>
+                    <Border ClipToBounds="True" CornerRadius="15">
+                        <StackPanel Height="180" Background="{StaticResource LightBackgroundBrush}">
+
+                            <!--  Top of the card  -->
+                            <Panel Height="30" Background="{StaticResource DarkBackgroundBrush}">
+                                <!--  Name of the task  -->
+                                <Panel HorizontalAlignment="Left">
+                                    <TextBlock
+                                        Padding="15,0,15,0"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"
+                                        Foreground="White"
+                                        Text="{Binding name}" />
+                                </Panel>
+                                <!--  Priority  -->
+                                <Panel HorizontalAlignment="Right" Background="Red">
+                                    <TextBlock
+                                        Padding="15,0,15,0"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Text="H" />
+                                </Panel>
+                            </Panel>
+
+                            <!--  Task description  -->
+                            <Panel Height="120">
+                                <TextBlock Padding="15,10,15,10" Text="{Binding description}" />
+                            </Panel>
+
+                            <!--  Bottom of the card  -->
+                            <!--  Date due  -->
+                            <Grid ColumnDefinitions="7*, 3*">
+                                <Panel Grid.Column="0" />
+                                <Border
+                                    Grid.Column="1"
+                                    ClipToBounds="True"
+                                    CornerRadius="15, 0, 0, 0">
+                                    <Panel
+                                        Grid.Column="1"
+                                        Height="30"
+                                        Background="{StaticResource DarkBackgroundBrush}">
+                                        <TextBlock
+                                            Padding="20,0,20,0"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            Foreground="White"
+                                            Text="12/12/2024" />
+                                        <!--
+                                            Da vedere come bindare visto che il DateTime non é convertibile
+                                            Serve fare un convertore custom
+                                        -->
+                                    </Panel>
+                                </Border>
+                            </Grid>
+
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </StackPanel>
+
+
+</UserControl>

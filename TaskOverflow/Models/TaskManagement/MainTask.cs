@@ -7,8 +7,8 @@ using TaskOverflow.Models.DataPersistency;
 
 namespace TaskOverflow.Models.TaskManagement
 {
-    public class MainTask : Task
-    {
+    //public class MainTask : Task
+    //{
 
-    }
+    //}
 }

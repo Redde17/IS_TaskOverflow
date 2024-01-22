@@ -5,8 +5,10 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:elemsViews="clr-namespace:TaskOverflow.Views.HomeViewElems"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:TaskOverflow.ViewModels"
     d:DesignHeight="200"
     d:DesignWidth="350"
+    x:DataType="vm:MainWindowViewModel"
     mc:Ignorable="d">
 
 
@@ -18,17 +20,35 @@
         <Grid Grid.Column="1" RowDefinitions="50, *">
             <!--  Title bar  -->
             <Panel Grid.Row="0" Background="{StaticResource LightBackgroundBrush}">
-                <TextBlock Foreground="Black">
-                    TITLE
-                </TextBlock>
+                <Grid ColumnDefinitions="2*, 5*, 3*">
+                    <TextBlock Grid.Column="0" Foreground="Black">
+                        TITLE
+                    </TextBlock>
+                    <Panel Grid.Column="1" />
+                    <WrapPanel Grid.Column="2">
+                        <Button Command="{Binding TaskManagerVM.addTask}">
+                            Add sample Task (DEBUG)
+                        </Button>
+                        <!--<Button Command="{Binding TaskManagerVM.addTask}">
+							Add Task
+						</Button>-->
+                    </WrapPanel>
+                </Grid>
             </Panel>
 
             <!--  Content panel  -->
             <Panel Grid.Row="1">
                 <Grid ColumnDefinitions="40*, 5*, 55*">
-                    <Panel Grid.Column="0" />
+                    <!--  Task list  -->
+                    <Panel Grid.Column="0">
+                        <elemsViews:TaskListView />
+                    </Panel>
+                    <!--  Empty space  -->
                     <Panel Grid.Column="1" />
-                    <Panel Grid.Column="2" />
+                    <!--  Task viewer  -->
+                    <Panel Grid.Column="2">
+                        <elemsViews:TaskView />
+                    </Panel>
                 </Grid>
             </Panel>
         </Grid>

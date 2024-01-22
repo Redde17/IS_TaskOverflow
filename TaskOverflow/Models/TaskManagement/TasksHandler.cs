@@ -13,7 +13,7 @@ namespace TaskOverflow.Models.TaskManagement
             asc
         }
 
-        private List<Task> tasks { get; }
+        public List<Task> tasks { get; private set; }
 
         public TasksHandler()
         {
@@ -22,7 +22,7 @@ namespace TaskOverflow.Models.TaskManagement
 
         public bool createTask(Task task)
         {
-            if (task != null)
+            if (task == null)
                 return false;
 
             tasks.Add(task);
