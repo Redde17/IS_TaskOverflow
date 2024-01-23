@@ -22,7 +22,7 @@ namespace TaskOverflow.ViewModels
         public TaskManagmentViewModel(TasksHandler TH)
         {
             this.TH = TH;
-            TaskList = new ObservableCollection<Task>(this.TH.tasks);
+            TaskList = this.TH.tasks;
             CreationTask = new();
         }
 

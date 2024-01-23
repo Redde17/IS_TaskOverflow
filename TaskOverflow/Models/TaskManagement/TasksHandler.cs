@@ -15,7 +15,7 @@ namespace TaskOverflow.Models.TaskManagement
             asc
         }
 
-        private ObservableCollection<Task> tasks { get; set; }
+        public ObservableCollection<Task> tasks { get; set; }
 
         public TasksHandler()  //builder
         {
