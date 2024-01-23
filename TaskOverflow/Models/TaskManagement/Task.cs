@@ -2,8 +2,6 @@
 using DynamicData.Kernel;
 using Microsoft.VisualBasic;
 using System;
-using System.Runtime.Intrinsics.Arm;
-using TaskOverflow.Views;
 
 namespace TaskOverflow.Models.TaskManagement
 {
