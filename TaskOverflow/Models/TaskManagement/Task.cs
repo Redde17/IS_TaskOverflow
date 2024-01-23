@@ -1,15 +1,16 @@
 ﻿using Microsoft.VisualBasic;
+using System;
 
 namespace TaskOverflow.Models.TaskManagement
 {
     public class Task
     {
-        private int id { get; set; }
-        private string name { get; set; }
-        private string description { get; set; }
-        private DateAndTime date {  get; set; }
+        public int id { get; set; }
+        public string name { get; set; }
+        public string description { get; set; }
+        public DateTime date {  get; set; }
 
-        public Task(int id, string name, string description, DateAndTime date)
+        public Task(int id, string name, string description, DateTime date)
         {
             this.id = id;
             this.name = name;

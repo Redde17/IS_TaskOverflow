@@ -9,6 +9,11 @@ namespace TaskOverflow.Models.TaskManagement
 {
     public class MainTask : Task
     {
+        public int priority { get; set; }
 
+        public MainTask(int id, string name, string description, DateTime date, int priority) : base(id, name, description, date)
+        {
+            this.priority = priority;
+        }
     }
 }
