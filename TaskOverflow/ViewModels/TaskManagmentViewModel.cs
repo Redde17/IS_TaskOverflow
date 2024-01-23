@@ -22,10 +22,6 @@ namespace TaskOverflow.ViewModels
         public TaskManagmentViewModel(TasksHandler TH)
         {
             this.TH = TH;
-            //Task per testare 
-            this.TH.createTask(new Task(1, "test1", "descrizione 1", DateTime.Now));
-            this.TH.createTask(new Task(1, "test2", "descrizione 2", DateTime.Now));
-
             TaskList = new ObservableCollection<Task>(this.TH.tasks);
             CreationTask = new();
         }
@@ -55,38 +51,7 @@ namespace TaskOverflow.ViewModels
             TaskList.Add(newTask);
         }
 
-        public void addTask(string name, string description, string date, string time, int id = 0)
-        {
-            //TODO: Parse date from string date and time to DateTime format
-            //for now i'm using DateTime.Now as debug
-            //TaskList.Add(new Task(id, name, description, DateTime.Now));
-
-            System.Diagnostics.Debug.WriteLine(
-            string.Format(
-                $"id = {id}\n" +
-                $"nome = {name}\n" +
-                $"descrizione = {description}\n" +
-                $"Data = {date} + {time}\n"
-                )
-            );
-        }
-
-        //public void addTask(string name, string description, DateTime date, int id = 0)
-        //{
-        //    TaskList.Add(new Task(id, name, description, date));
-        //}
-
-        ////DEBUG functions
-        //public void addTaskDEBUG()
-        //{
-        //    addTask("ButtonAddTest", "Descrizione 1", DateTime.Now, 1);
-
-        //    System.Diagnostics.Debug.WriteLine("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
-        //    printTaskList();
-        //    printTHlist();
-        //    System.Diagnostics.Debug.WriteLine("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
-        //}
-
+        //DEBUG functions
         private void printTaskList()
         {
             System.Diagnostics.Debug.WriteLine("ViewModel TaskManagerVM task list");
@@ -118,5 +83,15 @@ namespace TaskOverflow.ViewModels
                 );
             }
         }
+
+        public void debugFunc()
+        {
+            System.Diagnostics.Debug.WriteLine("\ndebugFunc stream start: \n");
+
+            System.Diagnostics.Debug.WriteLine("Hello :) \n");
+
+            System.Diagnostics.Debug.WriteLine("\ndebugFunc stream end: \n");
+        }
+
     }
 }
