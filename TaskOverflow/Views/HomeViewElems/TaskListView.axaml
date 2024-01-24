@@ -3,6 +3,7 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:TaskManagement="clr-namespace:TaskOverflow.Models.TaskManagement"
+    xmlns:converter="using:TaskOverflow.Assets.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:TaskOverflow.ViewModels"
@@ -11,29 +12,33 @@
     x:DataType="vm:MainWindowViewModel"
     mc:Ignorable="d">
 
-    <StackPanel>
-		<!--Task title and sort controller-->
-		<Panel>
-			<TextBlock HorizontalAlignment="Left" VerticalAlignment="Center">
-				Lista dei task
-			</TextBlock>
-			<Panel HorizontalAlignment="Right" VerticalAlignment="Center">
-				<ComboBox SelectedIndex="0">
-					<ComboBoxItem>By Priority Up</ComboBoxItem>
-					<ComboBoxItem>By Priority Down</ComboBoxItem>
-					<ComboBoxItem>By Date due Up</ComboBoxItem>
-					<ComboBoxItem>By Date due Down</ComboBoxItem>
-					<ComboBoxItem>NON FUNZIONA ANCORA :)</ComboBoxItem>
-				</ComboBox>
-			</Panel>
+    <UserControl.Resources>
+        <converter:TaskPriorityToString x:Key="MainTaskPriorityToString" />
+    </UserControl.Resources>
 
-		</Panel>
-		
-		<!--Task list-->
+    <StackPanel>
+        <!--  Task title and sort controller  -->
+        <Panel>
+            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center">
+                Lista dei task
+            </TextBlock>
+            <Panel HorizontalAlignment="Right" VerticalAlignment="Center">
+                <ComboBox SelectedIndex="0">
+                    <ComboBoxItem>By Priority Up</ComboBoxItem>
+                    <ComboBoxItem>By Priority Down</ComboBoxItem>
+                    <ComboBoxItem>By Date due Up</ComboBoxItem>
+                    <ComboBoxItem>By Date due Down</ComboBoxItem>
+                    <ComboBoxItem>NON FUNZIONA ANCORA :)</ComboBoxItem>
+                </ComboBox>
+            </Panel>
+
+        </Panel>
+
+        <!--  Task list  -->
         <ListBox Padding="0" ItemsSource="{Binding TaskManagerVM.TaskList}">
             <ListBox.ItemTemplate>
                 <!--  Task Card item  -->
-                <DataTemplate>
+                <DataTemplate DataType="{x:Type TaskManagement:MainTask}">
                     <Border ClipToBounds="True" CornerRadius="15">
                         <StackPanel Height="180" Background="{StaticResource LightBackgroundBrush}">
 
@@ -49,12 +54,13 @@
                                         Text="{Binding name}" />
                                 </Panel>
                                 <!--  Priority  -->
+
                                 <Panel HorizontalAlignment="Right" Background="Red">
                                     <TextBlock
                                         Padding="15,0,15,0"
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
-                                        Text="H" />
+                                        Text="{Binding priority, Converter={StaticResource MainTaskPriorityToString}}" />
                                 </Panel>
                             </Panel>
 
@@ -81,10 +87,6 @@
                                             VerticalAlignment="Center"
                                             Foreground="White"
                                             Text="{Binding date}" />
-                                        <!--
-                                            Da vedere come bindare visto che il DateTime non é convertibile
-                                            Serve fare un convertore custom
-                                        -->
                                     </Panel>
                                 </Border>
                             </Grid>

@@ -38,12 +38,33 @@
         <!--  Priority panel  -->
         <StackPanel Grid.Row="2">
             <TextBlock>
-                Prioritá (Non funziona)
+                Prioritá
             </TextBlock>
             <WrapPanel>
-                <Button>L</Button>
-                <Button>M</Button>
-                <Button>H</Button>
+                <Button
+                    Name="lowPriorityButton"
+                    Background="Green"
+                    Click="clickHandlerLow"
+                    Command="{Binding TaskManagerVM.prioritySelector}"
+                    CommandParameter="0">
+                    L
+                </Button>
+                <Button
+                    Name="mediumPriorityButton"
+                    Background="Yellow"
+                    Click="clickHandlerMedium"
+                    Command="{Binding TaskManagerVM.prioritySelector}"
+                    CommandParameter="1">
+                    M
+                </Button>
+                <Button
+                    Name="highPriorityButton"
+                    Background="Red"
+                    Click="clickHandlerHigh"
+                    Command="{Binding TaskManagerVM.prioritySelector}"
+                    CommandParameter="2">
+                    H
+                </Button>
             </WrapPanel>
         </StackPanel>
 
@@ -53,7 +74,10 @@
                 Scadenza
             </TextBlock>
             <DatePicker DayFormat="ddd dd" SelectedDate="{Binding TaskManagerVM.Date}" />
-            <TimePicker ClockIdentifier="24HourClock" MinuteIncrement="20" SelectedTime="{Binding TaskManagerVM.Time}" />
+            <TimePicker
+                ClockIdentifier="24HourClock"
+                MinuteIncrement="1"
+                SelectedTime="{Binding TaskManagerVM.Time}" />
         </StackPanel>
 
         <!--  Modify/Delete buttons panel  -->

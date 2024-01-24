@@ -173,17 +173,14 @@ namespace TaskOverflow.Models.TaskManagement
                     if (descSort(type)) 
                         return true;
                     return false;
-                    break;
 
                 case OrderType.asc:
                     if (ascSort(type))
                         return true;
                     return false;
-                    break;
 
                 default:
                     return false;
-                    break;
             }
         }
     }

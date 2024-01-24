@@ -15,7 +15,7 @@ namespace TaskOverflow.ViewModels
         public ObservableCollection<Task> TaskList { get; }
 
         //input binded variables
-        public Task CreationTask { get; set; }
+        public MainTask CreationTask { get; set; }
         public DateTimeOffset Date { get; set; }
         public TimeSpan Time { get; set; }
 
@@ -24,6 +24,13 @@ namespace TaskOverflow.ViewModels
             this.TH = TH;
             TaskList = this.TH.tasks;
             CreationTask = new();
+            Date = DateTimeOffset.Now;
+        }
+
+        public void prioritySelector(int priority)
+        {
+            System.Diagnostics.Debug.WriteLine($"\npriority: {priority}\n");
+            CreationTask.priority = priority; 
         }
 
         public void createTask()
@@ -40,15 +47,17 @@ namespace TaskOverflow.ViewModels
                 $"CreationTask description: {CreationTask.description}\n" +
                 $"generated date: {newDate}\n" + 
                 $"Binded Date: {Date}\n" +
-                $"Binded Time: {Time}\n"
-                );
+                $"Binded Time: {Time}\n" +
+                $"Priority: {CreationTask.priority}\n"
+            );
 
-            Task newTask = new();
+            MainTask newTask = new();
             newTask.name = CreationTask.name;
             newTask.description= CreationTask.description;
-            newTask.date = newDate; 
+            newTask.date = newDate;
+            newTask.priority = CreationTask.priority;
 
-            TaskList.Add(newTask);
+            TaskList.Add((Task)newTask);
         }
 
         //DEBUG functions
