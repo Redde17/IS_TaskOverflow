@@ -13,29 +13,29 @@
     mc:Ignorable="d">
 
     <UserControl.Resources>
-        <converter:TaskPriorityToString x:Key="MainTaskPriorityToString" />
+        <converter:TaskPriorityToString x:Key="TaskPriorityToString" />
+        <converter:PriorityToColorConverter x:Key="PriorityToColorConverter" />
     </UserControl.Resources>
 
-    <StackPanel>
+    <StackPanel DataContext="{Binding TaskManagerVM}">
         <!--  Task title and sort controller  -->
         <Panel>
             <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center">
                 Lista dei task
             </TextBlock>
             <Panel HorizontalAlignment="Right" VerticalAlignment="Center">
-                <ComboBox SelectedIndex="0">
+                <ComboBox SelectedIndex="{Binding ComboBoxSelectedIndex}">
                     <ComboBoxItem>By Priority Up</ComboBoxItem>
                     <ComboBoxItem>By Priority Down</ComboBoxItem>
                     <ComboBoxItem>By Date due Up</ComboBoxItem>
                     <ComboBoxItem>By Date due Down</ComboBoxItem>
-                    <ComboBoxItem>NON FUNZIONA ANCORA :)</ComboBoxItem>
                 </ComboBox>
             </Panel>
 
         </Panel>
 
         <!--  Task list  -->
-        <ListBox Padding="0" ItemsSource="{Binding TaskManagerVM.TaskList}">
+        <ListBox Padding="0" ItemsSource="{Binding TaskList}">
             <ListBox.ItemTemplate>
                 <!--  Task Card item  -->
                 <DataTemplate DataType="{x:Type TaskManagement:MainTask}">
@@ -55,12 +55,12 @@
                                 </Panel>
                                 <!--  Priority  -->
 
-                                <Panel HorizontalAlignment="Right" Background="Red">
+                                <Panel HorizontalAlignment="Right" Background="{Binding priority, Converter={StaticResource PriorityToColorConverter}}">
                                     <TextBlock
                                         Padding="15,0,15,0"
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
-                                        Text="{Binding priority, Converter={StaticResource MainTaskPriorityToString}}" />
+                                        Text="{Binding priority, Converter={StaticResource TaskPriorityToString}}" />
                                 </Panel>
                             </Panel>
 

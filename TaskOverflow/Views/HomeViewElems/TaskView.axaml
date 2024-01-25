@@ -43,7 +43,7 @@
             <WrapPanel>
                 <Button
                     Name="lowPriorityButton"
-                    Background="Green"
+                    Background="{StaticResource LowPriorityUnselectedBrush}"
                     Click="clickHandlerLow"
                     Command="{Binding TaskManagerVM.prioritySelector}"
                     CommandParameter="0">
@@ -51,7 +51,7 @@
                 </Button>
                 <Button
                     Name="mediumPriorityButton"
-                    Background="Yellow"
+                    Background="{StaticResource MediumPriorityUnselectedBrush}"
                     Click="clickHandlerMedium"
                     Command="{Binding TaskManagerVM.prioritySelector}"
                     CommandParameter="1">
@@ -59,7 +59,7 @@
                 </Button>
                 <Button
                     Name="highPriorityButton"
-                    Background="Red"
+                    Background="{StaticResource HighPriorityUnselectedBrush}"
                     Click="clickHandlerHigh"
                     Command="{Binding TaskManagerVM.prioritySelector}"
                     CommandParameter="2">

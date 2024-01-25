@@ -1,6 +1,7 @@
 ﻿using Avalonia;
 using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Xml.Linq;
 using TaskOverflow.Models.TaskManagement;
 
@@ -11,13 +12,29 @@ namespace TaskOverflow.ViewModels
 {
     public class TaskManagmentViewModel : ViewModelBase
     {
+        //data objects
         private TasksHandler TH { get; set; }
         public ObservableCollection<Task> TaskList { get; }
+
 
         //input binded variables
         public MainTask CreationTask { get; set; }
         public DateTimeOffset Date { get; set; }
         public TimeSpan Time { get; set; }
+        
+        private int _comboBoxSelectedIndex;
+        public int ComboBoxSelectedIndex
+        {
+            get
+            {
+                return _comboBoxSelectedIndex;
+            }
+            set
+            {
+                sortingSelector(value);
+                _comboBoxSelectedIndex = value;
+            }
+        }
 
         public TaskManagmentViewModel(TasksHandler TH)
         {
@@ -25,27 +42,22 @@ namespace TaskOverflow.ViewModels
             TaskList = this.TH.tasks;
             CreationTask = new();
             Date = DateTimeOffset.Now;
-        }
-
-        public void prioritySelector(int priority)
-        {
-            System.Diagnostics.Debug.WriteLine($"\npriority: {priority}\n");
-            CreationTask.priority = priority; 
+            ComboBoxSelectedIndex = 0; // application start with task list sorted by priority up
         }
 
         public void createTask()
         {
             DateTime newDate = Date.UtcDateTime;
             //Aggiungo un ora poiché per qualche motivo durante la conversione ne sparisce una, non so perché
-            Time = Time.Add(new TimeSpan(1, 0, 0)); 
+            Time = Time.Add(new TimeSpan(1, 0, 0));
             newDate = newDate.Add(Time);
-            
+
             //DEBUG
             System.Diagnostics.Debug.WriteLine(
                 "DEBUG\n" +
                 $"CreationTask name: {CreationTask.name}\n" +
                 $"CreationTask description: {CreationTask.description}\n" +
-                $"generated date: {newDate}\n" + 
+                $"generated date: {newDate}\n" +
                 $"Binded Date: {Date}\n" +
                 $"Binded Time: {Time}\n" +
                 $"Priority: {CreationTask.priority}\n"
@@ -53,11 +65,72 @@ namespace TaskOverflow.ViewModels
 
             MainTask newTask = new();
             newTask.name = CreationTask.name;
-            newTask.description= CreationTask.description;
+            newTask.description = CreationTask.description;
             newTask.date = newDate;
             newTask.priority = CreationTask.priority;
 
             TaskList.Add((Task)newTask);
+        }
+
+        public void prioritySelector(int priority)
+        {
+            System.Diagnostics.Debug.WriteLine($"\npriority: {priority}\n");
+            CreationTask.priority = priority;
+        }
+
+        public void sortingSelector(int selectedIndex)
+        {
+            System.Diagnostics.Debug.WriteLine(
+                "DEBUG\n" +
+                $"Selected index: {selectedIndex}\n"
+            );
+
+            //Index mapping
+            //By prioriy up:    0
+            //By prioriy down:  1
+            //By date due up:   2
+            //By date due down: 3
+            //Invalid:          0 > selectedIndex > 3
+
+            switch (selectedIndex)
+            {
+                case 0:
+                    //By prioriy up
+                    System.Diagnostics.Debug.WriteLine(
+                        "index action: sorting by prioriy up\n"
+                    );
+                    //do the sorting 
+                    break;
+                case 1:
+                    //By prioriy down
+                    System.Diagnostics.Debug.WriteLine(
+                        "index action: sorting by prioriy down\n"
+                    );
+                    //do the sorting 
+                    break;
+                case 2:
+                    //By date due up
+                    System.Diagnostics.Debug.WriteLine(
+                        "index action: sorting by date due up\n"
+                    );
+                    //do the sorting 
+                    break;
+                case 3:
+                    //By date due down
+                    System.Diagnostics.Debug.WriteLine(
+                        "index action: sorting by date due down\n"
+                    );
+                    //do the sorting 
+                    break;
+                default:
+                    //invalid index
+                    System.Diagnostics.Debug.WriteLine(
+                        "Error in index action parsing\n"
+                    );
+                    //send error
+                    break;
+            }
+
         }
 
         //DEBUG functions

@@ -16,6 +16,7 @@ namespace TaskOverflow.Views.HomeViewElems
         private SolidColorBrush mediumUnselectedColor   = new SolidColorBrush(Color.FromArgb(255, 137, 131, 77));
         private SolidColorBrush highUnselectedColor     = new SolidColorBrush(Color.FromArgb(255, 135, 66, 69));
 
+        
         public TaskView()
         {
             InitializeComponent();
