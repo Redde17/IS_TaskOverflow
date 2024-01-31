@@ -11,7 +11,7 @@ namespace TaskOverflow.Models.TaskManagement
     {
         public ObservableCollection<Task> tasks { get; set; }
 
-        public TasksHandler()  //builder
+        public TasksHandler()  //constructor
         {
             this.tasks = new ObservableCollection<Task>();
         }
@@ -157,28 +157,21 @@ namespace TaskOverflow.Models.TaskManagement
             return false;
         }
 
-        public bool orderTasks(Type type, int orderType) //Ordina la lista di task a seconda di quale tipologia di Variabile e in che tipo di ordine vogliamo utilizzare
+        public bool orderTasks(Type type, OrderType orderType) //Ordina la lista di task a seconda di quale tipologia di Variabile e in che tipo di ordine vogliamo utilizzare
         {
             if (type == null)
                 return false;
 
             switch (orderType)
             {
-                case 0:
-                    if (descSort(type)) 
-                        return true;
-                    return false;
-                    break;
+                case OrderType.desc:
+                    return descSort(type);
 
-                case 1:
-                    if (ascSort(type))
-                        return true;
-                    return false;
-                    break;
+                case OrderType.asc:
+                    return ascSort(type);
 
                 default:
                     return false;
-                    break;
             }
         }
     }

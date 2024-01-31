@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TaskOverflow.Models.TaskManagement
 {
-    public enum OrderType : int
+    public enum OrderType
     {
         desc,
         asc
@@ -26,8 +26,7 @@ namespace TaskOverflow.Models.TaskManagement
             if (task == null)
                 return false;
 
-            bool check = tasksHandler.addTask(task);
-            return check;
+            return tasksHandler.addTask(task);
         }
 
         public bool removeTask(Task task)
@@ -35,8 +34,7 @@ namespace TaskOverflow.Models.TaskManagement
             if (task == null) 
                 return false;
 
-            bool ckeck = tasksHandler.deleteTask(task);
-            return ckeck;
+            return tasksHandler.deleteTask(task);
         }
 
         public bool modifyTask(Task oldTask, Task newTask)
@@ -44,8 +42,7 @@ namespace TaskOverflow.Models.TaskManagement
             if (oldTask == null || newTask == null)
                 return false;
 
-            bool check = tasksHandler.modifyTask(oldTask, newTask);
-            return check;
+            return tasksHandler.modifyTask(oldTask, newTask);
         }
 
         public bool descSort(Type type)
@@ -53,8 +50,7 @@ namespace TaskOverflow.Models.TaskManagement
             if (type  == null) 
                 return false;
 
-            bool check = tasksHandler.descSort(type);
-            return check;
+            return tasksHandler.descSort(type);
         }
 
         public bool ascSort(Type type)
@@ -62,8 +58,7 @@ namespace TaskOverflow.Models.TaskManagement
             if (type == null)
                 return false;
 
-            bool check = tasksHandler.ascSort(type);
-            return check;
+            return tasksHandler.ascSort(type);
         }
 
         public bool orderTasks(Type type, OrderType orderType)
@@ -71,8 +66,7 @@ namespace TaskOverflow.Models.TaskManagement
             if (type == null)
                 return false;
 
-            bool check = tasksHandler.orderTasks(type, (int)orderType);
-            return check;
+            return tasksHandler.orderTasks(type, orderType);
         }
     }
 }

@@ -20,8 +20,7 @@ namespace TaskOverflow.Models.UserManagement
             if (user == null)
                 return false;
             
-            bool check = userHandler.addUser(user);
-            return check;
+            return userHandler.addUser(user);
         }
 
         public bool removeUser(User user)
@@ -29,8 +28,7 @@ namespace TaskOverflow.Models.UserManagement
             if (user == null)
                 return false;
 
-            bool check = userHandler.removeUser(user);
-            return check;
+            return userHandler.removeUser(user);
         }
 
         public bool modifyUser(User oldUser, User newUser)
@@ -38,8 +36,7 @@ namespace TaskOverflow.Models.UserManagement
             if (oldUser == null || newUser == null)
                 return false;
 
-            bool check = userHandler.modifyUser(oldUser, newUser);
-            return check;
+            return userHandler.modifyUser(oldUser, newUser);
         }
 
         public bool chooseActiveUser(User user)
@@ -47,8 +44,7 @@ namespace TaskOverflow.Models.UserManagement
             if (user == null)
                 return false;
 
-            bool check = userHandler.chooseActiveUser(user);
-            return check;
+            return userHandler.chooseActiveUser(user);
         }
     }
 }
