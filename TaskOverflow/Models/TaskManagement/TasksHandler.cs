@@ -9,12 +9,6 @@ namespace TaskOverflow.Models.TaskManagement
 {
     public class TasksHandler
     {
-        public enum OrderType
-        {
-            desc,
-            asc
-        }
-
         public ObservableCollection<Task> tasks { get; set; }
 
         public TasksHandler()  //builder
@@ -42,7 +36,7 @@ namespace TaskOverflow.Models.TaskManagement
 
         public bool modifyTask(Task oldTask, Task newTask) //modifica una task nella lista di Task
         {
-            if (oldTask == null && newTask == null)
+            if (oldTask == null || newTask == null)
                 return false;
 
             if (tasks.Contains(oldTask))
@@ -82,30 +76,30 @@ namespace TaskOverflow.Models.TaskManagement
                 }
                 return true;
             }
-            return false;
 
-            //else if (type == typeof(int))
-            //{
-            //    for (i = 0; i < tasks.Count - 1; i++)
-            //    {
-            //        int max = i;
-            //        for (j = i + 1; j < tasks.Count; j++)
-            //        {
-            //            if (tasks[j].priority > tasks[max].priority) //capire come potrare una lista di MainTasks invece di una lista di Tasks
-            //            {
-            //                max = j;
-            //                break;
-            //            }
-            //        }
-            //        if (max != i)
-            //        {
-            //            Task temp = tasks[max];
-            //            tasks[i] = tasks[max];
-            //            tasks[max] = temp;
-            //        }
-            //    }
-            //    return true;
-            //}
+            else if (type == typeof(int))
+            {
+                for (i = 0; i < tasks.Count - 1; i++)
+                {
+                    int max = i;
+                    for (j = i + 1; j < tasks.Count; j++)
+                    {
+                        if (((MainTask)tasks[j]).priority > ((MainTask)tasks[max]).priority) //capire come potrare una lista di MainTasks invece di una lista di Tasks
+                        {
+                            max = j;
+                            break;
+                        }
+                    }
+                    if (max != i)
+                    {
+                        Task temp = tasks[max];
+                        tasks[i] = tasks[max];
+                        tasks[max] = temp;
+                    }
+                }
+                return true;
+            }
+            return false;
         }
 
         public bool ascSort(Type type) //ordina la lista in modo crescente. Trovare un modo piu' ottimizzato per il linguaggio in utilizzo
@@ -136,46 +130,47 @@ namespace TaskOverflow.Models.TaskManagement
                 }
                 return true;
             }
-            return false;
+            
 
-            //else if (type == typeof(int))
-            //{
-            //    for (i = 0; i < tasks.Count - 1; i++)
-            //    {
-            //        int min = i;
-            //        for (j = i + 1; j < tasks.Count; j++)
-            //        {
-            //            if (tasks[j].priority < tasks[min].priority) //capire come potrare una lista di MainTasks invece di una lista di Tasks
-            //            {
-            //                min = j;
-            //                break;
-            //            }
-            //        }
-            //        if (min != i)
-            //        {
-            //            Task temp = tasks[min];
-            //            tasks[i] = tasks[min];
-            //            tasks[min] = temp;
-            //        }
-            //    }
-            //    return true;
-            //}
+            else if (type == typeof(int))
+            {
+                for (i = 0; i < tasks.Count - 1; i++)
+                {
+                    int min = i;
+                    for (j = i + 1; j < tasks.Count; j++)
+                    {
+                        if (((MainTask)tasks[j]).priority < ((MainTask)tasks[min]).priority) //capire come potrare una lista di MainTasks invece di una lista di Tasks
+                        {
+                            min = j;
+                            break;
+                        }
+                    }
+                    if (min != i)
+                    {
+                        Task temp = tasks[min];
+                        tasks[i] = tasks[min];
+                        tasks[min] = temp;
+                    }
+                }
+                return true;
+            }
+            return false;
         }
 
-        public bool orderTasks(Type type, OrderType orderType) //Ordina la lista di task a seconda di quale tipologia di Variabile e in che tipo di ordine vogliamo utilizzare
+        public bool orderTasks(Type type, int orderType) //Ordina la lista di task a seconda di quale tipologia di Variabile e in che tipo di ordine vogliamo utilizzare
         {
             if (type == null)
                 return false;
 
             switch (orderType)
             {
-                case OrderType.desc:
+                case 0:
                     if (descSort(type)) 
                         return true;
                     return false;
                     break;
 
-                case OrderType.asc:
+                case 1:
                     if (ascSort(type))
                         return true;
                     return false;
