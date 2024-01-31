@@ -1,21 +1,23 @@
 ﻿using ReactiveUI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using TaskOverflow.Models.TaskManagement;
 
 namespace TaskOverflow.ViewModels
 {
     public class TaskViewModel : ViewModelBase
     {
         //Navigation handling variables
+        public ExistingTaskViewModel ExistingTaskVM { get; }
         private ViewModelBase _contentViewModel;
 
         public ViewModelBase ContentViewModel
         {
             get => _contentViewModel;
             private set => this.RaiseAndSetIfChanged(ref _contentViewModel, value);
+        }
+
+        public TaskViewModel()
+        {
+            ExistingTaskVM= new ExistingTaskViewModel();
         }
 
         //navigation functions
@@ -29,9 +31,10 @@ namespace TaskOverflow.ViewModels
             ContentViewModel = new AddModifyTaskViewModel();
         }
 
-        public void ShowExistingTaskView()
+        public void ShowExistingTaskView(Task selectedTask)
         {
-            ContentViewModel = new ExistingTaskViewModel();
+            ExistingTaskVM.SelectedTask = selectedTask;
+            ContentViewModel = ExistingTaskVM;
         }
 
         public void ShowNothing()
@@ -43,8 +46,15 @@ namespace TaskOverflow.ViewModels
     {
         public AddModifyTaskViewModel() { }
     }
+
     public class ExistingTaskViewModel : ViewModelBase
     {
-        public ExistingTaskViewModel() { }
+        private Task _selectedTask;
+        public Task SelectedTask 
+        { 
+            get => _selectedTask;
+            set => this.RaiseAndSetIfChanged(ref _selectedTask, value);
+        }
     }
 }
+

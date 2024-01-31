@@ -1,8 +1,83 @@
-<UserControl xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="TaskOverflow.Views.TaskManagementElems.ExistingTaskView">
-  Welcome to Avalonia!
+<UserControl
+    x:Class="TaskOverflow.Views.ExistingTaskView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:TaskOverflow.ViewModels"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+
+    <Border
+        ClipToBounds="True"
+        CornerRadius="20"
+        DataContext="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext).TaskManagerVM.TaskVM}">
+        <Grid
+            Margin="20"
+            Background="{StaticResource LightBackgroundBrush}"
+            RowDefinitions="10*, 50*, 10*, 20*, 10*">
+            <!--  Title panel  -->
+            <Grid
+                Grid.Row="0"
+                Background="{StaticResource DarkBackgroundBrush}"
+                RowDefinitions="2*, 8*">
+                <!--<TextBlock Grid.Row="0">
+                    Titolo
+                </TextBlock>-->
+                <TextBlock
+                    Grid.Row="1"
+                    Classes="Light h2"
+                    FontWeight="DemiBold"
+                    Text="{Binding ExistingTaskVM.SelectedTask.name}" />
+            </Grid>
+
+            <!--  Description panel  -->
+            <Grid Grid.Row="1" RowDefinitions="1*, 9*">
+                <TextBlock
+                    Grid.Row="0"
+                    Classes="Dark h2"
+                    FontWeight="DemiBold">
+                    Descrizione
+                </TextBlock>
+                <TextBlock
+                    Grid.Row="1"
+                    Classes="Dark h3"
+                    Text="{Binding ExistingTaskVM.SelectedTask.description}" />
+            </Grid>
+
+            <!--  Priority panel  -->
+            <StackPanel Grid.Row="2">
+                <TextBlock Classes="Dark h2" FontWeight="DemiBold">
+                    Prioritá
+                </TextBlock>
+                <!--  TODO when MainTask get absorbed by Task  -->
+                <TextBlock>
+                    TODO when MainTask get absorbed by Task
+                </TextBlock>
+            </StackPanel>
+
+            <!--  Date due panel  -->
+            <StackPanel Grid.Row="3">
+                <TextBlock Classes="Dark h2" FontWeight="DemiBold">
+                    Scadenza
+                </TextBlock>
+                <TextBlock
+                    Background="{StaticResource DarkBackgroundBrush}"
+                    Classes="Light h3"
+                    FontWeight="DemiBold"
+                    Text="{Binding ExistingTaskVM.SelectedTask.date}" />
+            </StackPanel>
+
+            <Panel Grid.Row="4" VerticalAlignment="Bottom">
+                <Button HorizontalAlignment="Left">
+                    Modify
+                </Button>
+                <Button HorizontalAlignment="Right" Command="{Binding ShowNothing}">
+                    Delete
+                </Button>
+            </Panel>
+        </Grid>
+    </Border>
+
 </UserControl>

@@ -25,8 +25,6 @@ namespace TaskOverflow.ViewModels
         {
             //init general data
             TH = new();
-            //TH data loading goes here
-            TH.addTask(new MainTask(0, "Test name", "Test Description", DateTime.Now, 0));
 
             //MainWindow init
             TaskManagerVM = new(TH);

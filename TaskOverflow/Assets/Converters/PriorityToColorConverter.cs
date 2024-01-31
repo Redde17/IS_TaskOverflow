@@ -24,19 +24,13 @@ namespace TaskOverflow.Assets.Converters
             if (value is not int)
                 return null;
 
-            System.Diagnostics.Debug.WriteLine($"\nvalue {value}\n");
-
-            switch (value)
+            return value switch
             {
-                case 0:
-                    return lowSelectedColor;
-                case 1:
-                    return mediumSelectedColor;
-                case 2:
-                    return highSelectedColor;
-                default:
-                    return null;
-            }
+                0 => lowSelectedColor,
+                1 => mediumSelectedColor,
+                2 => highSelectedColor,
+                _ => null,
+            };
         }
 
         public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)

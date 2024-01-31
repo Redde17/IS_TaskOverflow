@@ -1,29 +1,20 @@
 ﻿using Avalonia.Data.Converters;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace TaskOverflow.Assets.Converters
 {
-    public class TaskPriorityToString : IValueConverter
+    public class DateTimeToStringConverter : IValueConverter
     {
         public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
             if (value == null)
                 return null;
-            if (value is not int)
+            if (value is not DateTime)
                 return null;
 
-            return value switch
-            {
-                0 => "B",
-                1 => "M",
-                2 => "A",
-                _ => "NA",
-            };
+            return ((DateTime)value).ToShortDateString();
         }
 
         public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)

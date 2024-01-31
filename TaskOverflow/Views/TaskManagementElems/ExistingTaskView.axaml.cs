@@ -1,6 +1,6 @@
 using Avalonia.Controls;
 
-namespace TaskOverflow.Views.TaskManagementElems
+namespace TaskOverflow.Views
 {
     public partial class ExistingTaskView : UserControl
     {

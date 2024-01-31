@@ -12,17 +12,28 @@ namespace TaskOverflow.ViewModels
 {
     public class TaskManagementViewModel : ViewModelBase
     {
-        private TaskViewModel _taskVM;
-
-        //data objects
         public ObservableCollection<Task> TaskList { get; }
-
-        //input binded variables
         public MainTask CreationTask { get; set; }
         public DateTimeOffset Date { get; set; }
         public TimeSpan Time { get; set; }
-        private int _comboBoxSelectedIndex;
 
+        private int _taskListComboBoxSelectedIndex;
+        private int _comboBoxSelectedIndex;
+        private TaskViewModel _taskVM;
+
+        public int TaskListComboBoxSelectedIndex
+        {
+            get => _taskListComboBoxSelectedIndex;
+            set
+            {
+                if (value >= 0)
+                    TaskVM.ShowExistingTaskView(TaskList[value]);
+                else
+                    TaskVM.ShowNothing();
+
+                _taskListComboBoxSelectedIndex = value;
+            }
+        }
         public int ComboBoxSelectedIndex
         {
             get => _comboBoxSelectedIndex;

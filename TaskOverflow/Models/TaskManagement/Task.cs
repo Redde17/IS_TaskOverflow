@@ -5,7 +5,7 @@ using System;
 
 namespace TaskOverflow.Models.TaskManagement
 {
-    public class Task
+    public class Task 
     {
         public int id { get; set; }
         public string name { get; set; }

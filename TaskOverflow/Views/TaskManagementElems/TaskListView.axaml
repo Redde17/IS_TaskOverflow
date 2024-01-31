@@ -15,11 +15,12 @@
     <UserControl.Resources>
         <converter:TaskPriorityToString x:Key="TaskPriorityToString" />
         <converter:PriorityToColorConverter x:Key="PriorityToColorConverter" />
+		<converter:DateTimeToStringConverter x:Key="DateTimeToStringConverter" />
     </UserControl.Resources>
 
-    <StackPanel DataContext="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext).TaskManagerVM}">
+    <Grid DataContext="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext).TaskManagerVM}" RowDefinitions="50, *">
         <!--  Task title and sort controller  -->
-        <Panel>
+        <Panel Grid.Row="0">
             <TextBlock
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
@@ -43,11 +44,16 @@
                     </ComboBoxItem>
                 </ComboBox>
             </Panel>
-
         </Panel>
 
         <!--  Task list  -->
-        <ListBox Padding="0" ItemsSource="{Binding TaskList}">
+        <ListBox
+            Grid.Row="1"
+			Background="White"
+            ItemsSource="{Binding TaskList}"
+            ScrollViewer.VerticalScrollBarVisibility="Auto"
+            SelectedIndex="{Binding TaskListComboBoxSelectedIndex}"
+            SelectionMode="Single,Toggle">
             <ListBox.ItemTemplate>
                 <!--  Task Card item  -->
                 <DataTemplate DataType="{x:Type TaskManagement:MainTask}">
@@ -103,7 +109,7 @@
                                             VerticalAlignment="Center"
                                             Classes="Light h3"
                                             FontWeight="DemiBold"
-                                            Text="{Binding date}" />
+                                            Text="{Binding date, Converter={StaticResource DateTimeToStringConverter}}" />
                                     </Panel>
                                 </Border>
                             </Grid>
@@ -112,7 +118,7 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-    </StackPanel>
+    </Grid>
 
 
 </UserControl>
