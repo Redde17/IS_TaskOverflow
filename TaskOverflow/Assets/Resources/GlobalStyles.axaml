@@ -1,0 +1,112 @@
+﻿<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Padding="20" Background="{StaticResource DarkBackgroundBrush}">
+            <!--  Add Controls for Previewer Here  -->
+            <WrapPanel>
+                <!--  Dark theme text preview  -->
+                <StackPanel>
+                    <Panel
+                        Width="250"
+                        Height="70"
+                        Margin="5"
+                        Background="{StaticResource LighterDarkBackgroundBrush}">
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Classes="Light h1">
+                            h1 text
+                        </TextBlock>
+                    </Panel>
+                    <Panel
+                        Width="250"
+                        Height="70"
+                        Margin="5"
+                        Background="{StaticResource LighterDarkBackgroundBrush}">
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Classes="Light h2">
+                            h2 text
+                        </TextBlock>
+                    </Panel>
+                    <Panel
+                        Width="250"
+                        Height="70"
+                        Margin="5"
+                        Background="{StaticResource LighterDarkBackgroundBrush}">
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Classes="Light h3">
+                            h3 text
+                        </TextBlock>
+                    </Panel>
+                </StackPanel>
+
+                <!--  Light text preview  -->
+                <StackPanel>
+                    <Panel
+                        Width="250"
+                        Height="70"
+                        Margin="5"
+                        Background="{StaticResource LightBackgroundBrush}">
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Classes="Dark h1 Title">
+                            h1 text
+                        </TextBlock>
+                    </Panel>
+                    <Panel
+                        Width="250"
+                        Height="70"
+                        Margin="5"
+                        Background="{StaticResource LightBackgroundBrush}">
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Classes="Dark h2">
+                            h2 text
+                        </TextBlock>
+                    </Panel>
+                    <Panel
+                        Width="250"
+                        Height="70"
+                        Margin="5"
+                        Background="{StaticResource LightBackgroundBrush}">
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Classes="Dark h3">
+                            h3 text
+                        </TextBlock>
+                    </Panel>
+                </StackPanel>
+            </WrapPanel>
+        </Border>
+    </Design.PreviewWith>
+
+    <!--  TextBlock styles  -->
+    <!--  Global TextBlock style  -->
+    <Style Selector="TextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource InterFont}" />
+    </Style>
+
+    <!--  Classes for TextBlock  -->
+    <Style Selector="TextBlock.Light">
+        <Setter Property="Foreground" Value="{StaticResource LightTextBrush}" />
+    </Style>
+    <Style Selector="TextBlock.Dark">
+        <Setter Property="Foreground" Value="{StaticResource DarkTextBrush}" />
+    </Style>
+    <Style Selector="TextBlock.h1">
+        <Setter Property="FontSize" Value="35" />
+    </Style>
+    <Style Selector="TextBlock.h2">
+        <Setter Property="FontSize" Value="25" />
+    </Style>
+    <Style Selector="TextBlock.h3">
+        <Setter Property="FontSize" Value="20" />
+    </Style>
+</Styles>
+

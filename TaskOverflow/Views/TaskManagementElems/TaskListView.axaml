@@ -1,5 +1,5 @@
 <UserControl
-    x:Class="TaskOverflow.Views.HomeViewElems.TaskListView"
+    x:Class="TaskOverflow.Views.TaskManagementElems.TaskListView"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:TaskManagement="clr-namespace:TaskOverflow.Models.TaskManagement"
@@ -17,18 +17,30 @@
         <converter:PriorityToColorConverter x:Key="PriorityToColorConverter" />
     </UserControl.Resources>
 
-    <StackPanel DataContext="{Binding TaskManagerVM}">
+    <StackPanel DataContext="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext).TaskManagerVM}">
         <!--  Task title and sort controller  -->
         <Panel>
-            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center">
-                Lista dei task
+            <TextBlock
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Classes="Dark h2"
+                FontWeight="DemiBold">
+                Lista dei Task
             </TextBlock>
             <Panel HorizontalAlignment="Right" VerticalAlignment="Center">
                 <ComboBox SelectedIndex="{Binding ComboBoxSelectedIndex}">
-                    <ComboBoxItem>By Priority Up</ComboBoxItem>
-                    <ComboBoxItem>By Priority Down</ComboBoxItem>
-                    <ComboBoxItem>By Date due Up</ComboBoxItem>
-                    <ComboBoxItem>By Date due Down</ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock Classes="Dark h3">By Priority Up</TextBlock>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock Classes="Dark h3">By Priority Down</TextBlock>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock Classes="Dark h3">By Date due Up</TextBlock>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock Classes="Dark h3">By Date due Down</TextBlock>
+                    </ComboBoxItem>
                 </ComboBox>
             </Panel>
 
@@ -41,32 +53,36 @@
                 <DataTemplate DataType="{x:Type TaskManagement:MainTask}">
                     <Border ClipToBounds="True" CornerRadius="15">
                         <StackPanel Height="180" Background="{StaticResource LightBackgroundBrush}">
-
                             <!--  Top of the card  -->
                             <Panel Height="30" Background="{StaticResource DarkBackgroundBrush}">
                                 <!--  Name of the task  -->
                                 <Panel HorizontalAlignment="Left">
                                     <TextBlock
-                                        Padding="15,0,15,0"
+                                        Margin="15,0,15,0"
                                         HorizontalAlignment="Left"
                                         VerticalAlignment="Center"
-                                        Foreground="White"
+                                        Classes="Light h3"
                                         Text="{Binding name}" />
                                 </Panel>
                                 <!--  Priority  -->
 
                                 <Panel HorizontalAlignment="Right" Background="{Binding priority, Converter={StaticResource PriorityToColorConverter}}">
                                     <TextBlock
-                                        Padding="15,0,15,0"
+                                        Margin="15,0,15,0"
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
+                                        Classes="Light h3"
+                                        FontWeight="Bold"
                                         Text="{Binding priority, Converter={StaticResource TaskPriorityToString}}" />
                                 </Panel>
                             </Panel>
 
                             <!--  Task description  -->
                             <Panel Height="120">
-                                <TextBlock Padding="15,10,15,10" Text="{Binding description}" />
+                                <TextBlock
+                                    Padding="15,10,15,10"
+                                    Classes="Dark h3"
+                                    Text="{Binding description}" />
                             </Panel>
 
                             <!--  Bottom of the card  -->
@@ -85,7 +101,8 @@
                                             Padding="20,0,20,0"
                                             HorizontalAlignment="Center"
                                             VerticalAlignment="Center"
-                                            Foreground="White"
+                                            Classes="Light h3"
+                                            FontWeight="DemiBold"
                                             Text="{Binding date}" />
                                     </Panel>
                                 </Border>

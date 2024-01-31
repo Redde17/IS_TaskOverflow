@@ -4,15 +4,20 @@
             <SolidColorBrush x:Key="BackgroundBrush">White</SolidColorBrush>
             <SolidColorBrush x:Key="ForegroundBrush">Black</SolidColorBrush>
             <SolidColorBrush x:Key="DarkBackgroundBrush">#27272D</SolidColorBrush>
+            <SolidColorBrush x:Key="LighterDarkBackgroundBrush">#343440</SolidColorBrush>
             <SolidColorBrush x:Key="LightBackgroundBrush">#F5F5FB</SolidColorBrush>
-			
-			<!--<SolidColorBrush x:Key="LowPrioritySelectedBrush">#F5F5FB</SolidColorBrush>
+
+            <SolidColorBrush x:Key="LightTextBrush">#FFFFFF</SolidColorBrush>
+            <SolidColorBrush x:Key="DarkTextBrush">#27272D</SolidColorBrush>
+
+
+            <!--<SolidColorBrush x:Key="LowPrioritySelectedBrush">#F5F5FB</SolidColorBrush>
 			<SolidColorBrush x:Key="MediumPrioritySelectedBrush">#F5F5FB</SolidColorBrush>
 			<SolidColorBrush x:Key="HighPrioritySelectedBrush">#F5F5FB</SolidColorBrush>-->
-			
-			<SolidColorBrush x:Key="LowPriorityUnselectedBrush">#487747</SolidColorBrush>
-			<SolidColorBrush x:Key="MediumPriorityUnselectedBrush">#89834D</SolidColorBrush>
-			<SolidColorBrush x:Key="HighPriorityUnselectedBrush">#874245</SolidColorBrush>
+
+            <SolidColorBrush x:Key="LowPriorityUnselectedBrush">#487747</SolidColorBrush>
+            <SolidColorBrush x:Key="MediumPriorityUnselectedBrush">#89834D</SolidColorBrush>
+            <SolidColorBrush x:Key="HighPriorityUnselectedBrush">#874245</SolidColorBrush>
         </ResourceDictionary>
     </ResourceDictionary.ThemeDictionaries>
 </ResourceDictionary>

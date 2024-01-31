@@ -1,6 +1,6 @@
 using Avalonia.Controls;
 
-namespace TaskOverflow.Views.HomeViewElems
+namespace TaskOverflow.Views.TaskManagementElems
 {
     public partial class TaskListView : UserControl
     {

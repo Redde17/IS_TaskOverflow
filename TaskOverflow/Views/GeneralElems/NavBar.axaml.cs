@@ -1,6 +1,6 @@
 using Avalonia.Controls;
 
-namespace TaskOverflow.Views.HomeViewElems
+namespace TaskOverflow.Views.GeneralElems
 {
     public partial class NavBar : UserControl
     {

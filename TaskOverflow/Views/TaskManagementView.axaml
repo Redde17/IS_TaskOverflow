@@ -1,9 +1,10 @@
 <UserControl
-    x:Class="TaskOverflow.Views.HomeView"
+    x:Class="TaskOverflow.Views.TaskManagementView"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:GeneralElemsViews="clr-namespace:TaskOverflow.Views.GeneralElems"
+    xmlns:ListElemsViews="clr-namespace:TaskOverflow.Views.TaskManagementElems"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:elemsViews="clr-namespace:TaskOverflow.Views.HomeViewElems"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:TaskOverflow.ViewModels"
     d:DesignHeight="200"
@@ -11,10 +12,9 @@
     x:DataType="vm:MainWindowViewModel"
     mc:Ignorable="d">
 
-
-    <Grid ColumnDefinitions="70, *">
+    <Grid ColumnDefinitions="70, *" DataContext="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext).TaskManagerVM}">
         <!--  Sidebar for navigation  -->
-        <elemsViews:NavBar Grid.Column="0" />
+        <GeneralElemsViews:NavBar Grid.Column="0" />
 
         <!--  Page Content  -->
         <Grid Grid.Column="1" RowDefinitions="50, *">
@@ -25,19 +25,20 @@
                         Grid.Column="0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
-                        Foreground="Black">
-                        TITLE
+                        Classes="Dark h1"
+                        FontWeight="DemiBold">
+                        Tasks
                     </TextBlock>
                     <WrapPanel
                         Grid.Column="1"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center">
-                        <Button Command="{Binding TaskManagerVM.debugFunc}">
+                        <Button Command="{Binding DebugFunc}">
                             Debug button
                         </Button>
-                        <Button>
-							Add Task (Non funziona)
-						</Button>
+                        <Button Command="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext).TaskManagerVM.TaskVM.ShowAddTaskView}">
+                            Add Task
+                        </Button>
                     </WrapPanel>
                 </Grid>
             </Panel>
@@ -47,13 +48,13 @@
                 <Grid ColumnDefinitions="40*, 5*, 55*">
                     <!--  Task list  -->
                     <Panel Grid.Column="0">
-                        <elemsViews:TaskListView />
+                        <ListElemsViews:TaskListView />
                     </Panel>
                     <!--  Empty space  -->
                     <Panel Grid.Column="1" />
                     <!--  Task viewer  -->
                     <Panel Grid.Column="2">
-                        <elemsViews:TaskView />
+                        <ListElemsViews:TaskView />
                     </Panel>
                 </Grid>
             </Panel>

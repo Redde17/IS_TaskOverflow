@@ -1,9 +1,10 @@
 <UserControl
-    x:Class="TaskOverflow.Views.HomeViewElems.NavBar"
+    x:Class="TaskOverflow.Views.GeneralElems.NavBar"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:TaskOverflow.ViewModels"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
@@ -19,29 +20,29 @@
                     Source="/Assets/icons/tempLogo.png" />
             </Panel>
 
-            <Button Grid.Row="1">
+            <Button Grid.Row="1" Command="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext).navigateToTaskManager}">
                 <Image
                     Width="50"
                     Height="50"
                     Margin="10,10"
                     Source="/Assets/icons/task.png" />
-			</Button>
-			<Panel Grid.Row="2" />
-			<Button Grid.Row="3">
-				<Image
+            </Button>
+            <Panel Grid.Row="2" />
+            <Button Grid.Row="3">
+                <Image
                     Width="50"
                     Height="50"
                     Margin="10,10"
                     Source="/Assets/icons/notification.png" />
-			</Button>
+            </Button>
 
-			<Button Grid.Row="4">
-				<Image
+            <Button Grid.Row="4" Command="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext).navigateToUserManager}">
+                <Image
                     Width="50"
                     Height="50"
                     Margin="10,10"
                     Source="/Assets/icons/user.png" />
-			</Button>
+            </Button>
 
         </Grid>
     </Panel>

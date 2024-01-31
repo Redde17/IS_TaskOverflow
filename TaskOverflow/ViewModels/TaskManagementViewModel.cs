@@ -1,56 +1,63 @@
 ﻿using Avalonia;
+using ReactiveUI;
 using System;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Xml.Linq;
 using TaskOverflow.Models.TaskManagement;
+using TaskOverflow.Views.TaskManagementElems;
 
 //Per evitare conflitti con il tipo Task della libreria System
 using Task = TaskOverflow.Models.TaskManagement.Task;
 
 namespace TaskOverflow.ViewModels
 {
-    public class TaskManagmentViewModel : ViewModelBase
+    public class TaskManagementViewModel : ViewModelBase
     {
-        //data objects
-        private TasksHandler TH { get; set; }
-        public ObservableCollection<Task> TaskList { get; }
+        private TaskViewModel _taskVM;
 
+        //data objects
+        public ObservableCollection<Task> TaskList { get; }
 
         //input binded variables
         public MainTask CreationTask { get; set; }
         public DateTimeOffset Date { get; set; }
         public TimeSpan Time { get; set; }
-        
         private int _comboBoxSelectedIndex;
+
         public int ComboBoxSelectedIndex
         {
-            get
-            {
-                return _comboBoxSelectedIndex;
-            }
+            get => _comboBoxSelectedIndex;
             set
             {
-                sortingSelector(value);
+                SortingSelector(value);
                 _comboBoxSelectedIndex = value;
             }
         }
-
-        public TaskManagmentViewModel(TasksHandler TH)
+        public TaskViewModel TaskVM
         {
-            this.TH = TH;
-            TaskList = this.TH.tasks;
+            get => _taskVM;
+            private set => _taskVM = value;
+        }
+
+        public TaskManagementViewModel(TasksHandler TH)
+        {
+            TaskList = TH.tasks;
             CreationTask = new();
             Date = DateTimeOffset.Now;
             ComboBoxSelectedIndex = 0; // application start with task list sorted by priority up
+
+            TaskVM = new();
         }
 
-        public void createTask()
+
+        //functional functions
+        public void CreateTask()
         {
-            DateTime newDate = Date.UtcDateTime;
+            MainTask newTask;
+            DateTime newDate;
+
+            newDate = Date.UtcDateTime;
             //Aggiungo un ora poiché per qualche motivo durante la conversione ne sparisce una, non so perché
-            Time = Time.Add(new TimeSpan(1, 0, 0));
-            newDate = newDate.Add(Time);
+            newDate = newDate.Add(Time.Add(new TimeSpan(1, 0, 0)));
 
             //DEBUG
             System.Diagnostics.Debug.WriteLine(
@@ -63,22 +70,24 @@ namespace TaskOverflow.ViewModels
                 $"Priority: {CreationTask.priority}\n"
             );
 
-            MainTask newTask = new();
-            newTask.name = CreationTask.name;
-            newTask.description = CreationTask.description;
-            newTask.date = newDate;
-            newTask.priority = CreationTask.priority;
+            newTask = new(
+                0, 
+                CreationTask.name, 
+                CreationTask.description, 
+                newDate, 
+                CreationTask.priority
+            );
 
             TaskList.Add((Task)newTask);
         }
 
-        public void prioritySelector(int priority)
+        public void PrioritySelector(int priority)
         {
             System.Diagnostics.Debug.WriteLine($"\npriority: {priority}\n");
             CreationTask.priority = priority;
         }
 
-        public void sortingSelector(int selectedIndex)
+        public void SortingSelector(int selectedIndex)
         {
             System.Diagnostics.Debug.WriteLine(
                 "DEBUG\n" +
@@ -134,7 +143,7 @@ namespace TaskOverflow.ViewModels
         }
 
         //DEBUG functions
-        private void printTaskList()
+        private void PrintTaskList()
         {
             System.Diagnostics.Debug.WriteLine("ViewModel TaskManagerVM task list");
             foreach (Task Task in TaskList)
@@ -150,23 +159,7 @@ namespace TaskOverflow.ViewModels
             }
         }
 
-        private void printTHlist()
-        {
-            System.Diagnostics.Debug.WriteLine("Model TaskHandler task list");
-            foreach (Task Task in TH.tasks)
-            {
-                System.Diagnostics.Debug.WriteLine(
-                string.Format(
-                    $"id = {Task.id}\n" +
-                    $"nome = {Task.name}\n" +
-                    $"descrizione = {Task.description}\n" +
-                    $"Data = {Task.date}\n"
-                    )
-                );
-            }
-        }
-
-        public void debugFunc()
+        public void DebugFunc()
         {
             System.Diagnostics.Debug.WriteLine("\ndebugFunc stream start: \n");
 
@@ -174,6 +167,5 @@ namespace TaskOverflow.ViewModels
 
             System.Diagnostics.Debug.WriteLine("\ndebugFunc stream end: \n");
         }
-
     }
 }

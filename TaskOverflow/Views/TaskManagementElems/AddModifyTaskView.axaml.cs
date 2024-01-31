@@ -1,23 +1,19 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
-using Avalonia.Markup.Xaml;
 using Avalonia.Media;
-using System.Drawing;
-using Color = Avalonia.Media.Color;
 
-namespace TaskOverflow.Views.HomeViewElems
+namespace TaskOverflow.Views
 {
-    public partial class TaskView : UserControl
+    public partial class AddModifyTaskView : UserControl
     {
-        private SolidColorBrush lowSelectedColor        = new SolidColorBrush(Color.FromArgb(255, 118, 227, 108));
-        private SolidColorBrush mediumSelectedColor     = new SolidColorBrush(Color.FromArgb(255, 239, 226, 111));
-        private SolidColorBrush highSelectedColor       = new SolidColorBrush(Color.FromArgb(255, 235, 94, 94));
-        private SolidColorBrush lowUnselectedColor      = new SolidColorBrush(Color.FromArgb(255, 72, 119, 71));
-        private SolidColorBrush mediumUnselectedColor   = new SolidColorBrush(Color.FromArgb(255, 137, 131, 77));
-        private SolidColorBrush highUnselectedColor     = new SolidColorBrush(Color.FromArgb(255, 135, 66, 69));
+        private SolidColorBrush lowSelectedColor = new SolidColorBrush(Color.FromArgb(255, 118, 227, 108));
+        private SolidColorBrush mediumSelectedColor = new SolidColorBrush(Color.FromArgb(255, 239, 226, 111));
+        private SolidColorBrush highSelectedColor = new SolidColorBrush(Color.FromArgb(255, 235, 94, 94));
+        private SolidColorBrush lowUnselectedColor = new SolidColorBrush(Color.FromArgb(255, 72, 119, 71));
+        private SolidColorBrush mediumUnselectedColor = new SolidColorBrush(Color.FromArgb(255, 137, 131, 77));
+        private SolidColorBrush highUnselectedColor = new SolidColorBrush(Color.FromArgb(255, 135, 66, 69));
 
-        
-        public TaskView()
+        public AddModifyTaskView()
         {
             InitializeComponent();
         }

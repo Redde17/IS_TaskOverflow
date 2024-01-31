@@ -22,11 +22,11 @@ namespace TaskOverflow.Assets.Converters
             switch (value)
             {
                 case 0:
-                    return "L";
+                    return "B";
                 case 1:
                     return "M";
                 case 2:
-                    return "H";
+                    return "A";
                 default:
                     return "NA";
             }
