@@ -52,7 +52,7 @@
                     Prioritá
                 </TextBlock>
                 <!--  TODO when MainTask get absorbed by Task  -->
-                <TextBlock>
+                <TextBlock Foreground="Green">
                     TODO when MainTask get absorbed by Task
                 </TextBlock>
             </StackPanel>
@@ -71,10 +71,14 @@
 
             <Panel Grid.Row="4" VerticalAlignment="Bottom">
                 <Button HorizontalAlignment="Left">
-                    Modify
+                    <TextBlock Classes="Dark h2" FontWeight="DemiBold">
+                        Modify
+                    </TextBlock>
                 </Button>
                 <Button HorizontalAlignment="Right" Command="{Binding ShowNothing}">
-                    Delete
+                    <TextBlock Classes="Dark h2" FontWeight="DemiBold">
+                        Delete
+                    </TextBlock>
                 </Button>
             </Panel>
         </Grid>

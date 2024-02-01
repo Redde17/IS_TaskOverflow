@@ -20,7 +20,12 @@
                     Source="/Assets/icons/tempLogo.png" />
             </Panel>
 
-            <Button Grid.Row="1" Command="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext).navigateToTaskManager}">
+            <Button
+                Name="TaskManagementViewButton"
+                Grid.Row="1"
+                Classes="NavBarButton"
+                Click="clickHandlerTaskManagmentView"
+                Command="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext).navigateToTaskManager}">
                 <Image
                     Width="50"
                     Height="50"
@@ -28,7 +33,7 @@
                     Source="/Assets/icons/task.png" />
             </Button>
             <Panel Grid.Row="2" />
-            <Button Grid.Row="3">
+            <Button Grid.Row="3" Classes="NavBarButton">
                 <Image
                     Width="50"
                     Height="50"
@@ -36,7 +41,12 @@
                     Source="/Assets/icons/notification.png" />
             </Button>
 
-            <Button Grid.Row="4" Command="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext).navigateToUserManager}">
+            <Button
+                Name="UserManagementViewButton"
+                Grid.Row="4"
+                Classes="NavBarButton"
+                Click="clickHandlerUserManagmentView"
+                Command="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext).navigateToUserManager}">
                 <Image
                     Width="50"
                     Height="50"

@@ -33,7 +33,10 @@
 
             <!--  Description panel  -->
             <Grid Grid.Row="1" RowDefinitions="1*, 9*">
-                <TextBlock Grid.Row="0">
+                <TextBlock
+                    Grid.Row="0"
+                    Classes="Dark h2"
+                    FontWeight="DemiBold">
                     Descrizione
                 </TextBlock>
                 <TextBox
@@ -46,7 +49,7 @@
 
             <!--  Priority panel  -->
             <StackPanel Grid.Row="2">
-                <TextBlock>
+                <TextBlock Classes="Dark h2" FontWeight="DemiBold">
                     Prioritá
                 </TextBlock>
                 <WrapPanel>
@@ -85,7 +88,7 @@
 
             <!--  Date due panel  -->
             <StackPanel Grid.Row="3">
-                <TextBlock>
+                <TextBlock Classes="Dark h2" FontWeight="DemiBold">
                     Scadenza
                 </TextBlock>
                 <DatePicker DayFormat="ddd dd" SelectedDate="{Binding Date}" />
@@ -98,13 +101,13 @@
             <!--  Modify/Delete buttons panel  -->
             <Panel Grid.Row="4">
                 <Button HorizontalAlignment="Left" Command="{Binding TaskVM.ShowNothing}">
-                    <TextBlock>
+                    <TextBlock Classes="Dark h2">
                         Annulla
                     </TextBlock>
                 </Button>
 
                 <Button HorizontalAlignment="Right" Command="{Binding CreateTask}">
-                    <TextBlock>
+                    <TextBlock Classes="Dark h2">
                         Crea
                     </TextBlock>
                 </Button>

@@ -15,6 +15,7 @@
   <ItemGroup>
     <AvaloniaResource Remove="Assets\Resources\FontDictionary.axaml" />
     <AvaloniaResource Remove="Assets\Resources\GlobalStyles.axaml" />
+    <AvaloniaResource Remove="Assets\Resources\TaskManagementStyles.axaml" />
   </ItemGroup>
 
 
@@ -41,6 +42,13 @@
   <ItemGroup>
     <Folder Include="Assets\icons\" />
     <Folder Include="Models\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <AvaloniaXaml Update="Assets\Resources\TaskManagementStyles.axaml">
+      <SubType>Designer</SubType>
+    </AvaloniaXaml>
   </ItemGroup>
 
 

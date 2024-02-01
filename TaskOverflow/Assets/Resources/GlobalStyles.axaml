@@ -108,5 +108,23 @@
     <Style Selector="TextBlock.h3">
         <Setter Property="FontSize" Value="20" />
     </Style>
+	
+	<!-- Classes for global buttons -->
+	<Style Selector="Button">
+		<Setter Property="Background" Value="White"/>
+	</Style>
+	
+	<!-- Classes for navbar buttons -->
+	<Style Selector="Button.NavBarButton">
+		<Setter Property="Background" Value="{StaticResource DarkBackgroundBrush}"/>
+	</Style>
+	<Style Selector="Button.NavBarButton:disabled">
+		<Setter Property="Background" Value="{StaticResource DarkBackgroundBrush}"/>
+	</Style>
+	
+	<!-- Classes for the Task list-->
+	<Style Selector="ListBox:pointerover">
+		<Setter Property="Background" Value="Green"/>
+	</Style>
 </Styles>
 
