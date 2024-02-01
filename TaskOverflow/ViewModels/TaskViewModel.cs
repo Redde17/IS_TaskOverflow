@@ -26,11 +26,6 @@ namespace TaskOverflow.ViewModels
             ContentViewModel = new AddModifyTaskViewModel();
         }
 
-        public void ShowModifyTaskView()
-        {
-            ContentViewModel = new AddModifyTaskViewModel();
-        }
-
         public void ShowExistingTaskView(Task selectedTask)
         {
             ExistingTaskVM.SelectedTask = selectedTask;

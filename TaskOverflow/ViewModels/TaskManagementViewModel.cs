@@ -17,6 +17,7 @@ namespace TaskOverflow.ViewModels
         public DateTimeOffset Date { get; set; }
         public TimeSpan Time { get; set; }
 
+        private TasksHandler taskHandler;
         private int _taskListComboBoxSelectedIndex;
         private int _comboBoxSelectedIndex;
         private TaskViewModel _taskVM;
@@ -51,6 +52,7 @@ namespace TaskOverflow.ViewModels
 
         public TaskManagementViewModel(TasksHandler TH)
         {
+            taskHandler = TH;
             TaskList = TH.tasks;
             CreationTask = new();
             Date = DateTimeOffset.Now;
@@ -89,7 +91,21 @@ namespace TaskOverflow.ViewModels
                 CreationTask.priority
             );
 
-            TaskList.Add((Task)newTask);
+            //TaskList.Add((Task)newTask);
+            taskHandler.addTask( newTask );
+        }
+
+        public void DeleteSelectedTask()
+        {
+            taskHandler.deleteTask(TaskList[TaskListComboBoxSelectedIndex]);
+        }
+
+        public void ModifySelectedTask()
+        {
+            CreationTask = (MainTask)TaskList[TaskListComboBoxSelectedIndex];
+            Date = new DateTimeOffset( CreationTask.date );
+            
+            TaskVM.ShowAddTaskView();
         }
 
         public void PrioritySelector(int priority)
