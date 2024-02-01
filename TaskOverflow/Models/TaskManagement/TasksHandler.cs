@@ -14,6 +14,7 @@ namespace TaskOverflow.Models.TaskManagement
     }
     public class TasksHandler
     {
+
         public ObservableCollection<Task> tasks { get; set; }
 
         public TasksHandler()  //constructor
@@ -53,112 +54,37 @@ namespace TaskOverflow.Models.TaskManagement
             return true;
         }
 
-        public bool descSort(Type type) //ordina la lista in modo decrescente. Trovare un modo piu' ottimizzato per il linguaggio in utilizzo
+        public bool descSort(Type type) //ordina la lista in modo decrescente.
         {
-            int i, j;
+            if (type == typeof(int))
+            {
+                tasks = new ObservableCollection<Task>(tasks.OrderByDescending(o => o.priority));
+                return true;
+            }
 
-            if (tasks == null)
-                return false;
             if (type == typeof(DateTime))
             {
-                for (i = 0; i < tasks.Count - 1; i++)
-                {
-                    int max = i;
-                    for (j = i + 1; j < tasks.Count; j++)
-                    {
-                        if (tasks[j].date > tasks[max].date)
-                        {
-                            max = j;
-                            break;
-                        }
-                    }
-                    if (max != i)
-                    {
-                        Task temp = tasks[max];
-                        tasks[i] = tasks[max];
-                        tasks[max] = temp;
-                    }
-                }
+                tasks = new ObservableCollection<Task>(tasks.OrderByDescending(o => o.date));
                 return true;
             }
 
-            else if (type == typeof(int))
-            {
-                for (i = 0; i < tasks.Count - 1; i++)
-                {
-                    int max = i;
-                    for (j = i + 1; j < tasks.Count; j++)
-                    {
-                        if ((tasks[j]).priority > (tasks[max]).priority) 
-                        {
-                            max = j;
-                            break;
-                        }
-                    }
-                    if (max != i)
-                    {
-                        Task temp = tasks[max];
-                        tasks[i] = tasks[max];
-                        tasks[max] = temp;
-                    }
-                }
-                return true;
-            }
             return false;
         }
 
-        public bool ascSort(Type type) //ordina la lista in modo crescente. Trovare un modo piu' ottimizzato per il linguaggio in utilizzo
+        public bool ascSort(Type type) //ordina la lista in modo crescente.
         {
-            int i, j;
+            if (type == typeof(int))
+            {
+                tasks = new ObservableCollection<Task>(tasks.OrderBy(o => o.priority));
+                return true;
+            }
 
-            if (tasks == null)
-                return false;
             if (type == typeof(DateTime))
             {
-                for (i = 0; i < tasks.Count - 1; i++)
-                {
-                    int min = i;
-                    for (j = i + 1; j < tasks.Count; j++)
-                    {
-                        if (tasks[j].date < tasks[min].date)
-                        {
-                            min = j;
-                            break;
-                        }
-                    }
-                    if (min != i)
-                    {
-                        Task temp = tasks[min];
-                        tasks[i] = tasks[min];
-                        tasks[min] = temp;
-                    }
-                }
+                tasks = new ObservableCollection<Task>(tasks.OrderBy(o => o.date));
                 return true;
             }
-            
 
-            else if (type == typeof(int))
-            {
-                for (i = 0; i < tasks.Count - 1; i++)
-                {
-                    int min = i;
-                    for (j = i + 1; j < tasks.Count; j++)
-                    {
-                        if ((tasks[j]).priority < (tasks[min]).priority) 
-                        {
-                            min = j;
-                            break;
-                        }
-                    }
-                    if (min != i)
-                    {
-                        Task temp = tasks[min];
-                        tasks[i] = tasks[min];
-                        tasks[min] = temp;
-                    }
-                }
-                return true;
-            }
             return false;
         }
 
@@ -179,5 +105,7 @@ namespace TaskOverflow.Models.TaskManagement
                     return false;
             }
         }
+
+        
     }
 }
