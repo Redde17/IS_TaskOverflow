@@ -45,7 +45,7 @@ namespace TaskOverflow.Models.TaskManagement
             if (oldTask == null || newTask == null)
                 return false;
 
-            if (tasks.Contains(oldTask))
+            if (!tasks.Contains(oldTask))
                 return false;
 
             tasks.Remove(oldTask);
