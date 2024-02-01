@@ -12,6 +12,12 @@
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <AvaloniaResource Remove="Assets\Resources\FontDictionary.axaml" />
+    <AvaloniaResource Remove="Assets\Resources\GlobalStyles.axaml" />
+    <AvaloniaResource Remove="Assets\Resources\TaskManagementStyles.axaml" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="11.0.6" />
@@ -26,6 +32,7 @@
 
 
   <ItemGroup>
+    <Folder Include="Assets\Fonts\Inter\" />
     <Folder Include="Models\Notification\" />
     <Folder Include="Models\SystemAlert\" />
   </ItemGroup>
@@ -33,5 +40,36 @@
 
   <ItemGroup>
     <Folder Include="Assets\icons\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <AvaloniaXaml Update="Assets\Resources\TaskManagementStyles.axaml">
+      <SubType>Designer</SubType>
+    </AvaloniaXaml>
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <AvaloniaXaml Update="Assets\Resources\FontDictionary.axaml">
+      <SubType>Designer</SubType>
+    </AvaloniaXaml>
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <AvaloniaXaml Update="Assets\Resources\GlobalStyles.axaml">
+      <SubType>Designer</SubType>
+    </AvaloniaXaml>
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Compile Update="Views\TaskManagementView.axaml.cs">
+      <DependentUpon>TaskManagementView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\UserManagementView.axaml.cs">
+      <DependentUpon>UserManagementView.axaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>

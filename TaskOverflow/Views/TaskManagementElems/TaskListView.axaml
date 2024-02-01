@@ -1,0 +1,124 @@
+<UserControl
+    x:Class="TaskOverflow.Views.TaskManagementElems.TaskListView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:TaskManagement="clr-namespace:TaskOverflow.Models.TaskManagement"
+    xmlns:converter="using:TaskOverflow.Assets.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:TaskOverflow.ViewModels"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    x:DataType="vm:MainWindowViewModel"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <converter:TaskPriorityToString x:Key="TaskPriorityToString" />
+        <converter:PriorityToColorConverter x:Key="PriorityToColorConverter" />
+		<converter:DateTimeToStringConverter x:Key="DateTimeToStringConverter" />
+    </UserControl.Resources>
+
+    <Grid DataContext="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext).TaskManagerVM}" RowDefinitions="50, *">
+        <!--  Task title and sort controller  -->
+        <Panel Grid.Row="0">
+            <TextBlock
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Classes="Dark h2"
+                FontWeight="DemiBold">
+                Lista dei Task
+            </TextBlock>
+            <Panel HorizontalAlignment="Right" VerticalAlignment="Center">
+                <ComboBox SelectedIndex="{Binding ComboBoxSelectedIndex}">
+                    <ComboBoxItem>
+                        <TextBlock Classes="Dark h3">By Priority Up</TextBlock>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock Classes="Dark h3">By Priority Down</TextBlock>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock Classes="Dark h3">By Date due Up</TextBlock>
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        <TextBlock Classes="Dark h3">By Date due Down</TextBlock>
+                    </ComboBoxItem>
+                </ComboBox>
+            </Panel>
+        </Panel>
+
+        <!--  Task list  -->
+        <ListBox
+            Grid.Row="1"
+			Background="White"
+            ItemsSource="{Binding TaskList}"
+            ScrollViewer.VerticalScrollBarVisibility="Auto"
+            SelectedIndex="{Binding TaskListComboBoxSelectedIndex}"
+            SelectionMode="Single,Toggle">
+            <ListBox.ItemTemplate>
+                <!--  Task Card item  -->
+                <DataTemplate DataType="{x:Type TaskManagement:Task}">
+                    <Border ClipToBounds="True" CornerRadius="15">
+                        <StackPanel Height="180" Background="{StaticResource LightBackgroundBrush}">
+                            <!--  Top of the card  -->
+                            <Panel Height="30" Background="{StaticResource DarkBackgroundBrush}">
+                                <!--  Name of the task  -->
+                                <Panel HorizontalAlignment="Left">
+                                    <TextBlock
+                                        Margin="15,0,15,0"
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"
+                                        Classes="Light h3"
+                                        Text="{Binding name}" />
+                                </Panel>
+                                <!--  Priority  -->
+
+                                <Panel HorizontalAlignment="Right" Background="{Binding priority, Converter={StaticResource PriorityToColorConverter}}">
+                                    <TextBlock
+                                        Margin="15,0,15,0"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Classes="Light h3"
+                                        FontWeight="Bold"
+                                        Text="{Binding priority, Converter={StaticResource TaskPriorityToString}}" />
+                                </Panel>
+                            </Panel>
+
+                            <!--  Task description  -->
+                            <Panel Height="120">
+                                <TextBlock
+                                    Padding="15,10,15,10"
+                                    Classes="Dark h3"
+                                    Text="{Binding description}" />
+                            </Panel>
+
+                            <!--  Bottom of the card  -->
+                            <!--  Date due  -->
+                            <Grid ColumnDefinitions="6*, 4*">
+                                <Panel Grid.Column="0" />
+                                <Border
+                                    Grid.Column="1"
+                                    ClipToBounds="True"
+                                    CornerRadius="15, 0, 0, 0">
+                                    <Panel
+                                        Grid.Column="1"
+                                        Height="30"
+                                        Background="{StaticResource DarkBackgroundBrush}">
+                                        <TextBlock
+                                            Padding="20,0,20,0"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            Classes="Light h3"
+                                            FontWeight="DemiBold"
+                                            Text="{Binding date, Converter={StaticResource DateTimeToStringConverter}}" />
+                                    </Panel>
+                                </Border>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+
+
+</UserControl>

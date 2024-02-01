@@ -1,0 +1,3 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <FontFamily x:Key="InterFont">avares:\\IS_TaskOverflow\TaskOverflow\Assets\Fonts\Inter\Inter-VariableFont.ttf</FontFamily>
+</ResourceDictionary>

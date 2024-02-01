@@ -100,6 +100,7 @@ namespace TaskOverflow.Models.TaskManagement
 
                 case OrderType.asc:
                     return ascSort(type);
+                    break;
 
                 default:
                     return false;
