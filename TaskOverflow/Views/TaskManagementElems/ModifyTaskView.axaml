@@ -1,5 +1,5 @@
 <UserControl
-    x:Class="TaskOverflow.Views.AddModifyTaskView"
+    x:Class="TaskOverflow.Views.ModifyTaskView"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -8,11 +8,10 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
-
     <Border
         ClipToBounds="True"
         CornerRadius="20"
-        DataContext="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext).TaskManagerVM}">
+        DataContext="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext).TaskManagerVM.TaskVM.ModifyTaskVM}">
         <Grid
             Margin="20"
             Background="{StaticResource LightBackgroundBrush}"
@@ -27,7 +26,7 @@
                 </TextBlock>-->
                 <TextBox
                     Grid.Row="1"
-                    Text="{Binding CreationTask.name}"
+                    Text="{Binding ModificationTask.name}"
                     Watermark="Inserisci il titolo" />
             </Grid>
 
@@ -42,7 +41,7 @@
                 <TextBox
                     Grid.Row="1"
                     AcceptsReturn="True"
-                    Text="{Binding CreationTask.description}"
+                    Text="{Binding ModificationTask.description}"
                     TextWrapping="Wrap"
                     Watermark="Inserisci la descrizione" />
             </Grid>
@@ -100,13 +99,13 @@
 
             <!--  Modify/Delete buttons panel  -->
             <Panel Grid.Row="4">
-                <Button HorizontalAlignment="Left" Command="{Binding TaskVM.ShowNothing}">
+                <Button HorizontalAlignment="Left" Command="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext).TaskManagerVM.TaskVM.ShowNothing}">
                     <TextBlock Classes="Dark h2">
                         Annulla
                     </TextBlock>
                 </Button>
 
-                <Button HorizontalAlignment="Right" Command="{Binding CreateTask}">
+                <Button HorizontalAlignment="Right" Command="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext).TaskManagerVM.ModifySelectedTask}">
                     <TextBlock Classes="Dark h2">
                         Crea
                     </TextBlock>

@@ -4,7 +4,7 @@ using Avalonia.Media;
 
 namespace TaskOverflow.Views
 {
-    public partial class AddModifyTaskView : UserControl
+    public partial class ModifyTaskView : UserControl
     {
         private SolidColorBrush lowSelectedColor = new SolidColorBrush(Color.FromArgb(255, 118, 227, 108));
         private SolidColorBrush mediumSelectedColor = new SolidColorBrush(Color.FromArgb(255, 239, 226, 111));
@@ -13,7 +13,7 @@ namespace TaskOverflow.Views
         private SolidColorBrush mediumUnselectedColor = new SolidColorBrush(Color.FromArgb(255, 137, 131, 77));
         private SolidColorBrush highUnselectedColor = new SolidColorBrush(Color.FromArgb(255, 135, 66, 69));
 
-        public AddModifyTaskView()
+        public ModifyTaskView()
         {
             InitializeComponent();
         }

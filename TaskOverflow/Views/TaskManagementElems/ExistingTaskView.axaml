@@ -73,7 +73,7 @@
                 Grid.Row="4"
                 VerticalAlignment="Bottom"
                 DataContext="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext).TaskManagerVM}">
-                <Button HorizontalAlignment="Left">
+                <Button HorizontalAlignment="Left" Command="{Binding StartModificationOfSelectedTask}">
                     <TextBlock Classes="Dark h2" FontWeight="DemiBold">
                         Modify
                     </TextBlock>

@@ -50,7 +50,7 @@
         <ListBox
             Grid.Row="1"
 			Background="White"
-            ItemsSource="{Binding TaskList}"
+            ItemsSource="{Binding TH.tasks}"
             ScrollViewer.VerticalScrollBarVisibility="Auto"
             SelectedIndex="{Binding TaskListComboBoxSelectedIndex}"
             SelectionMode="Single,Toggle">

@@ -12,12 +12,8 @@ namespace TaskOverflow.ViewModels
 {
     public class TaskManagementViewModel : ViewModelBase
     {
-        public ObservableCollection<Task> TaskList { get; }
-        public Task CreationTask { get; set; }
-        public DateTimeOffset Date { get; set; }
-        public TimeSpan Time { get; set; }
+        public TasksHandler TH { get; }
 
-        private TasksHandler taskHandler;
         private int _taskListComboBoxSelectedIndex;
         private int _comboBoxSelectedIndex;
         private TaskViewModel _taskVM;
@@ -28,7 +24,7 @@ namespace TaskOverflow.ViewModels
             set
             {
                 if (value >= 0)
-                    TaskVM.ShowExistingTaskView(TaskList[value]);
+                    TaskVM.ShowExistingTaskView(TH.tasks[value]);
                 else
                     TaskVM.ShowNothing();
 
@@ -52,66 +48,34 @@ namespace TaskOverflow.ViewModels
 
         public TaskManagementViewModel(TasksHandler TH)
         {
-            taskHandler = TH;
-            TaskList = TH.tasks;
-            CreationTask = new();
-            Date = DateTimeOffset.Now;
+            this.TH = TH;     
             ComboBoxSelectedIndex = 0; // application start with task list sorted by priority up
-
-            TaskVM = new();
+            TaskVM = new(this.TH);
         }
 
 
         //functional functions
         public void CreateTask()
         {
-            Task newTask;
-            DateTime newDate;
-
-            newDate = Date.UtcDateTime;
-            //Aggiungo un ora poiché per qualche motivo durante la conversione ne sparisce una, non so perché
-            newDate = newDate.Add(Time.Add(new TimeSpan(1, 0, 0)));
-
-            //DEBUG
-            System.Diagnostics.Debug.WriteLine(
-                "DEBUG\n" +
-                $"CreationTask name: {CreationTask.name}\n" +
-                $"CreationTask description: {CreationTask.description}\n" +
-                $"generated date: {newDate}\n" +
-                $"Binded Date: {Date}\n" +
-                $"Binded Time: {Time}\n" +
-                $"Priority: {CreationTask.priority}\n"
-            );
-
-            newTask = new(
-                0, 
-                CreationTask.name, 
-                CreationTask.description, 
-                newDate, 
-                CreationTask.priority
-            );
-
-            //TaskList.Add((Task)newTask);
-            taskHandler.addTask( newTask );
+            TaskVM.AddTaskVM.createTask();
+            TaskVM.ShowNothing();
         }
 
         public void DeleteSelectedTask()
         {
-            taskHandler.deleteTask(TaskList[TaskListComboBoxSelectedIndex]);
+            TaskVM.ExistingTaskVM.deleteSelectedTask(TH.tasks[TaskListComboBoxSelectedIndex]);
+        }
+
+        public void StartModificationOfSelectedTask()
+        {
+            TaskVM.ModifyTaskVM.SetModifySelectedTask(TH.tasks[TaskListComboBoxSelectedIndex]);
+            TaskVM.ShowModifyTaskView();
         }
 
         public void ModifySelectedTask()
         {
-            CreationTask = TaskList[TaskListComboBoxSelectedIndex];
-            Date = new DateTimeOffset( CreationTask.date );
-            
-            TaskVM.ShowAddTaskView();
-        }
-
-        public void PrioritySelector(int priority)
-        {
-            System.Diagnostics.Debug.WriteLine($"\npriority: {priority}\n");
-            CreationTask.priority = priority;
+            TaskVM.ModifyTaskVM.ModifyTask();
+            TaskVM.ShowNothing();
         }
 
         public void SortingSelector(int selectedIndex)
@@ -169,11 +133,13 @@ namespace TaskOverflow.ViewModels
 
         }
 
+
+        #region debug functions
         //DEBUG functions
         private void PrintTaskList()
         {
             System.Diagnostics.Debug.WriteLine("ViewModel TaskManagerVM task list");
-            foreach (Task Task in TaskList)
+            foreach (Task Task in TH.tasks)
             {
                 System.Diagnostics.Debug.WriteLine(
                 string.Format(
@@ -194,5 +160,6 @@ namespace TaskOverflow.ViewModels
 
             System.Diagnostics.Debug.WriteLine("\ndebugFunc stream end: \n");
         }
+        #endregion
     }
 }

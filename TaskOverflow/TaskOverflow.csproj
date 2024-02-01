@@ -65,6 +65,9 @@
 
 
   <ItemGroup>
+    <Compile Update="Views\TaskManagementElems\AddTaskView.axaml.cs">
+      <DependentUpon>AddTaskView.axaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\TaskManagementView.axaml.cs">
       <DependentUpon>TaskManagementView.axaml</DependentUpon>
     </Compile>
