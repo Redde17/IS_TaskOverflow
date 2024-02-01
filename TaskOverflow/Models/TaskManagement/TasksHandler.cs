@@ -7,6 +7,11 @@ using System.Linq;
 
 namespace TaskOverflow.Models.TaskManagement
 {
+    public enum OrderType
+    {
+        desc,
+        asc
+    }
     public class TasksHandler
     {
         public ObservableCollection<Task> tasks { get; set; }
@@ -16,7 +21,7 @@ namespace TaskOverflow.Models.TaskManagement
             this.tasks = new ObservableCollection<Task>();
         }
 
-        public bool addTask(Task task) //agguinge una task alla lista di Task
+        public bool addTask(Task task) //aggiunge una task alla lista di Task
         {
             if (task == null)
                 return false;
@@ -84,7 +89,7 @@ namespace TaskOverflow.Models.TaskManagement
                     int max = i;
                     for (j = i + 1; j < tasks.Count; j++)
                     {
-                        if (((MainTask)tasks[j]).priority > ((MainTask)tasks[max]).priority) //capire come potrare una lista di MainTasks invece di una lista di Tasks
+                        if ((tasks[j]).priority > (tasks[max]).priority) 
                         {
                             max = j;
                             break;
@@ -139,7 +144,7 @@ namespace TaskOverflow.Models.TaskManagement
                     int min = i;
                     for (j = i + 1; j < tasks.Count; j++)
                     {
-                        if (((MainTask)tasks[j]).priority < ((MainTask)tasks[min]).priority) //capire come potrare una lista di MainTasks invece di una lista di Tasks
+                        if ((tasks[j]).priority < (tasks[min]).priority) 
                         {
                             min = j;
                             break;

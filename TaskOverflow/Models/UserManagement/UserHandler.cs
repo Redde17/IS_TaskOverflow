@@ -13,13 +13,13 @@ namespace TaskOverflow.Models.UserManagement
         public ObservableCollection<User> users { get; set; }
         public User activeUser { get; set; }
 
-        public UserHandler(User activeUser)
+        public UserHandler(User activeUser) //constructor
         {
             this.users = new ObservableCollection<User>();
             this.activeUser = activeUser;
         }
 
-        public bool addUser(User user)
+        public bool addUser(User user) //aggiunge uno user all'interno della lista di Users
         {
             if (user == null)
                 return false;
@@ -28,7 +28,7 @@ namespace TaskOverflow.Models.UserManagement
             return true;
         }
 
-        public bool removeUser(User user) 
+        public bool removeUser(User user) //rimuove uno user dalla lista di Users
         {  
             if (user == null) 
                 return false;
@@ -37,7 +37,7 @@ namespace TaskOverflow.Models.UserManagement
             return true; 
         }
 
-        public bool modifyUser(User oldUser, User newUser)
+        public bool modifyUser(User oldUser, User newUser) //modifica uno user dalla lista di Users
         {
             if (oldUser == null || newUser == null)
                 return false;
@@ -51,7 +51,7 @@ namespace TaskOverflow.Models.UserManagement
             return true;
         }
 
-        public bool chooseActiveUser(User user)
+        public bool chooseActiveUser(User user) //Cambia lo user attivo in quel esatto momento.
         {
             if (user == null)
                 return false;
