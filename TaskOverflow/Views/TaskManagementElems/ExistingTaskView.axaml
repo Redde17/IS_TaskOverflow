@@ -69,10 +69,14 @@
                     Text="{Binding ExistingTaskVM.SelectedTask.date}" />
             </StackPanel>
 
-            <Panel Grid.Row="4" VerticalAlignment="Bottom" DataContext="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext).TaskManagerVM}">
+            <Panel
+                Grid.Row="4"
+                VerticalAlignment="Bottom"
+                DataContext="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext).TaskManagerVM}">
                 <Button HorizontalAlignment="Left">
                     <TextBlock Classes="Dark h2" FontWeight="DemiBold">
-                        Modify"</TextBlock>
+                        Modify
+                    </TextBlock>
                 </Button>
                 <Button HorizontalAlignment="Right" Command="{Binding DeleteSelectedTask}">
                     <TextBlock Classes="Dark h2" FontWeight="DemiBold">

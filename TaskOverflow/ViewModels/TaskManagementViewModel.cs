@@ -13,7 +13,7 @@ namespace TaskOverflow.ViewModels
     public class TaskManagementViewModel : ViewModelBase
     {
         public ObservableCollection<Task> TaskList { get; }
-        public MainTask CreationTask { get; set; }
+        public Task CreationTask { get; set; }
         public DateTimeOffset Date { get; set; }
         public TimeSpan Time { get; set; }
 
@@ -65,7 +65,7 @@ namespace TaskOverflow.ViewModels
         //functional functions
         public void CreateTask()
         {
-            MainTask newTask;
+            Task newTask;
             DateTime newDate;
 
             newDate = Date.UtcDateTime;
@@ -102,7 +102,7 @@ namespace TaskOverflow.ViewModels
 
         public void ModifySelectedTask()
         {
-            CreationTask = (MainTask)TaskList[TaskListComboBoxSelectedIndex];
+            CreationTask = TaskList[TaskListComboBoxSelectedIndex];
             Date = new DateTimeOffset( CreationTask.date );
             
             TaskVM.ShowAddTaskView();

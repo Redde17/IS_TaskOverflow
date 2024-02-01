@@ -56,7 +56,7 @@
             SelectionMode="Single,Toggle">
             <ListBox.ItemTemplate>
                 <!--  Task Card item  -->
-                <DataTemplate DataType="{x:Type TaskManagement:MainTask}">
+                <DataTemplate DataType="{x:Type TaskManagement:Task}">
                     <Border ClipToBounds="True" CornerRadius="15">
                         <StackPanel Height="180" Background="{StaticResource LightBackgroundBrush}">
                             <!--  Top of the card  -->
