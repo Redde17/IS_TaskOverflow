@@ -2,6 +2,8 @@
 using ReactiveUI;
 using System;
 using System.Collections.ObjectModel;
+using Avalonia.Controls.Notifications;
+using TaskOverflow.Models.Notification;
 using TaskOverflow.Models.TaskManagement;
 using TaskOverflow.Views.TaskManagementElems;
 
@@ -172,11 +174,7 @@ namespace TaskOverflow.ViewModels
 
         public void DebugFunc()
         {
-            System.Diagnostics.Debug.WriteLine("\ndebugFunc stream start: \n");
-
-            System.Diagnostics.Debug.WriteLine("Hello :) \n");
-
-            System.Diagnostics.Debug.WriteLine("\ndebugFunc stream end: \n");
+           Console.WriteLine("Prova");
         }
     }
 }

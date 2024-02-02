@@ -32,8 +32,6 @@
 
   <ItemGroup>
     <Folder Include="Assets\Fonts\Inter\" />
-    <Folder Include="Models\Notification\" />
-    <Folder Include="Models\SystemAlert\" />
     <Folder Include="Models\UserManagement\" />
   </ItemGroup>
 
