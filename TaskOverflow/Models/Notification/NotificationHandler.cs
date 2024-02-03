@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using TaskOverflow.Models.SystemAlert;
 
 namespace TaskOverflow.Models.Notification;
 
@@ -13,6 +14,7 @@ public class NotificationHandler
 
     public NotificationHandler() //builder
     {
+        AlertHandler alertHandler = new AlertHandler();
         showableNotifications = new ObservableCollection<Notification>();
         _tasksBeingChecked = new Collection<TaskNotification>();
 
@@ -59,9 +61,11 @@ public class NotificationHandler
         while (await periodicTimer.WaitForNextTickAsync())
         {
             TaskManagement.Task referredTask = _tasksBeingChecked[0].getReferredTask();
-            if (referredTask.date == DateTime.Now)
+            Console.WriteLine("Tic tac");
+            if (referredTask.date.Minute == DateTime.Now.Minute)
             {
-                showableNotifications.Add(new TaskNotification(generateID(), referredTask.name, referredTask.description, referredTask));
+                showableNotifications.Add(_tasksBeingChecked[0]);
+                _tasksBeingChecked.RemoveAt(0);
             }
         }
     }
