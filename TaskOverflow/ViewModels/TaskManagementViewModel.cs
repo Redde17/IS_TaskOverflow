@@ -58,6 +58,7 @@ namespace TaskOverflow.ViewModels
         public void CreateTask()
         {
             TaskVM.AddTaskVM.createTask();
+            SortingSelector(ComboBoxSelectedIndex); //Reorder the task list with the new task
             TaskVM.ShowNothing();
         }
 
@@ -92,35 +93,24 @@ namespace TaskOverflow.ViewModels
             //By date due down: 3
             //Invalid:          0 > selectedIndex > 3
 
+            Task refTask = new Task();
             switch (selectedIndex)
             {
                 case 0:
                     //By prioriy up
-                    System.Diagnostics.Debug.WriteLine(
-                        "index action: sorting by prioriy up\n"
-                    );
-                    //do the sorting 
+                    TH.orderTasks(refTask.priority.GetType(), OrderType.desc);
                     break;
                 case 1:
                     //By prioriy down
-                    System.Diagnostics.Debug.WriteLine(
-                        "index action: sorting by prioriy down\n"
-                    );
-                    //do the sorting 
+                    TH.orderTasks(refTask.priority.GetType(), OrderType.asc);
                     break;
                 case 2:
                     //By date due up
-                    System.Diagnostics.Debug.WriteLine(
-                        "index action: sorting by date due up\n"
-                    );
-                    //do the sorting 
+                    TH.orderTasks(refTask.date.GetType(), OrderType.desc);
                     break;
                 case 3:
                     //By date due down
-                    System.Diagnostics.Debug.WriteLine(
-                        "index action: sorting by date due down\n"
-                    );
-                    //do the sorting 
+                    TH.orderTasks(refTask.date.GetType(), OrderType.asc);
                     break;
                 default:
                     //invalid index
@@ -142,12 +132,11 @@ namespace TaskOverflow.ViewModels
             foreach (Task Task in TH.tasks)
             {
                 System.Diagnostics.Debug.WriteLine(
-                string.Format(
                     $"id = {Task.id}\n" +
                     $"nome = {Task.name}\n" +
                     $"descrizione = {Task.description}\n" +
+                    $"prioritá = {Task.priority}\n" +
                     $"Data = {Task.date}\n"
-                    )
                 );
             }
         }

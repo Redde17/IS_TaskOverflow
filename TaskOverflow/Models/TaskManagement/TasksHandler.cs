@@ -58,13 +58,13 @@ namespace TaskOverflow.Models.TaskManagement
         {
             if (type == typeof(int))
             {
-                tasks = new ObservableCollection<Task>(tasks.OrderByDescending(o => o.priority));
+                sortTasks(new ObservableCollection<Task>(tasks.OrderByDescending(o => o.priority)));
                 return true;
             }
 
             if (type == typeof(DateTime))
             {
-                tasks = new ObservableCollection<Task>(tasks.OrderByDescending(o => o.date));
+                sortTasks(new ObservableCollection<Task>(tasks.OrderByDescending(o => o.date)));
                 return true;
             }
 
@@ -75,13 +75,13 @@ namespace TaskOverflow.Models.TaskManagement
         {
             if (type == typeof(int))
             {
-                tasks = new ObservableCollection<Task>(tasks.OrderBy(o => o.priority));
+                sortTasks(new ObservableCollection<Task>(tasks.OrderBy(o => o.priority)));
                 return true;
             }
 
             if (type == typeof(DateTime))
             {
-                tasks = new ObservableCollection<Task>(tasks.OrderBy(o => o.date));
+                sortTasks(new ObservableCollection<Task>(tasks.OrderBy(o => o.date)));
                 return true;
             }
 
@@ -100,13 +100,17 @@ namespace TaskOverflow.Models.TaskManagement
 
                 case OrderType.asc:
                     return ascSort(type);
-                    break;
 
                 default:
                     return false;
             }
         }
 
+        private void sortTasks(ObservableCollection<Task> orderedTaks)
+        {
+            for (int i = 0; i < orderedTaks.Count; i++)
+                tasks.Move(tasks.IndexOf(orderedTaks[i]), i);
+        }
         
     }
 }
