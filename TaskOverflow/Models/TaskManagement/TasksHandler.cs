@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using TaskOverflow.Models.DataPersistency;
+using TaskOverflow.Models.UserManagement;
 
 namespace TaskOverflow.Models.TaskManagement
 {
@@ -14,33 +16,44 @@ namespace TaskOverflow.Models.TaskManagement
     }
     public class TasksHandler
     {
-
         public ObservableCollection<Task> tasks { get; set; }
+        private TaskDAO taskDAO { get; set; }
+        private UserHandler userHandler;
+
+        /*
+        TODO
+        Trovare un modo per:
+        1) Controllare se l'active user funzioni
+        */
 
         public TasksHandler()  //constructor
         {
-            this.tasks = new ObservableCollection<Task>();
+            this.taskDAO = new TaskDAO();
+            this.userHandler = new UserHandler();
+            this.tasks = taskDAO.getDBTasks(userHandler.activeUser);
         }
 
-        public bool addTask(Task task) //aggiunge una task alla lista di Task
+        public bool addTask(Task task) //aggiunge una task alla lista di Task e lo aggiunge al database
         {
             if (task == null)
                 return false;
 
             tasks.Add(task);
+            taskDAO.insertTask(task);
             return true;
         }
 
-        public bool deleteTask(Task task) //elimina una task dalla lista di Task
+        public bool removeTask(Task task) //elimina una task dalla lista di Task e lo cancella dal database
         {
             if (task == null)
                 return false;
 
             tasks.Remove(task);
+            taskDAO.deleteTask(task);
             return true;
         }
 
-        public bool modifyTask(Task oldTask, Task newTask) //modifica una task nella lista di Task
+        public bool modifyTask(Task oldTask, Task newTask) //modifica una task nella lista di Task e lo modifica all'interno del database
         {
             if (oldTask == null || newTask == null)
                 return false;
@@ -51,10 +64,13 @@ namespace TaskOverflow.Models.TaskManagement
             tasks.Remove(oldTask);
             tasks.Add(newTask);
 
+            taskDAO.deleteTask(oldTask);
+            taskDAO.insertTask(newTask);
+
             return true;
         }
 
-        public bool descSort(Type type) //ordina la lista in modo decrescente.
+        private bool descSort(Type type) //ordina la lista in modo decrescente.
         {
             if (type == typeof(int))
             {
@@ -71,7 +87,7 @@ namespace TaskOverflow.Models.TaskManagement
             return false;
         }
 
-        public bool ascSort(Type type) //ordina la lista in modo crescente.
+        private bool ascSort(Type type) //ordina la lista in modo crescente.
         {
             if (type == typeof(int))
             {
@@ -100,13 +116,10 @@ namespace TaskOverflow.Models.TaskManagement
 
                 case OrderType.asc:
                     return ascSort(type);
-                    break;
 
                 default:
                     return false;
             }
         }
-
-        
     }
 }

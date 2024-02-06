@@ -88,7 +88,8 @@ namespace TaskOverflow.ViewModels
                 CreationTask.name, 
                 CreationTask.description, 
                 newDate, 
-                CreationTask.priority
+                CreationTask.priority,
+                CreationTask.userId
             );
 
             //TaskList.Add((Task)newTask);
@@ -97,7 +98,7 @@ namespace TaskOverflow.ViewModels
 
         public void DeleteSelectedTask()
         {
-            taskHandler.deleteTask(TaskList[TaskListComboBoxSelectedIndex]);
+            taskHandler.removeTask(TaskList[TaskListComboBoxSelectedIndex]);
         }
 
         public void ModifySelectedTask()
