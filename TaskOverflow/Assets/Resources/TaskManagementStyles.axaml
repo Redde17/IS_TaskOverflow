@@ -1,10 +1,215 @@
-﻿<Styles xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+﻿<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Design.PreviewWith>
         <Border Padding="20">
-            <!-- Add Controls for Previewer Here -->
+            <StackPanel Height="600">
+                <!--  Sort selector  -->
+
+                <Panel HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <ComboBox SelectedIndex="0">
+                        <ComboBoxItem>
+                            <TextBlock Classes="Dark h3">By Priority Up</TextBlock>
+                        </ComboBoxItem>
+                        <ComboBoxItem>
+                            <TextBlock Classes="Dark h3">By Priority Down</TextBlock>
+                        </ComboBoxItem>
+                        <ComboBoxItem>
+                            <TextBlock Classes="Dark h3">By Date due Up</TextBlock>
+                        </ComboBoxItem>
+                        <ComboBoxItem>
+                            <TextBlock Classes="Dark h3">By Date due Down</TextBlock>
+                        </ComboBoxItem>
+                    </ComboBox>
+                </Panel>
+
+                <!--  List  -->
+                <Panel>
+                    <ListBox
+                        Background="White"
+                        ScrollViewer.VerticalScrollBarVisibility="Auto"
+                        SelectionMode="Single,Toggle">
+
+                        <ListBoxItem>
+                            <Border ClipToBounds="True" CornerRadius="15">
+                                <StackPanel
+                                    Width="500"
+                                    Height="180"
+                                    Background="{StaticResource LightBackgroundBrush}">
+                                    <!--  Top of the card  -->
+                                    <Panel Height="30" Background="{StaticResource DarkBackgroundBrush}">
+                                        <!--  Name of the task  -->
+                                        <Panel HorizontalAlignment="Left">
+                                            <TextBlock
+                                                Margin="15,0,15,0"
+                                                HorizontalAlignment="Left"
+                                                VerticalAlignment="Center"
+                                                Classes="Light h3"
+                                                Text="Task name" />
+                                        </Panel>
+                                        <!--  Priority  -->
+
+                                        <Panel HorizontalAlignment="Right" Background="Red">
+                                            <TextBlock
+                                                Margin="15,0,15,0"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Classes="Light h3"
+                                                FontWeight="Bold"
+                                                Text="A" />
+                                        </Panel>
+                                    </Panel>
+
+                                    <!--  Task description  -->
+                                    <Panel Height="120">
+                                        <TextBlock
+                                            Padding="15,10,15,10"
+                                            Classes="Dark h3"
+                                            TextTrimming="CharacterEllipsis"
+                                            TextWrapping="Wrap">
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec consectetur, diam nec scelerisque vulputate, nulla lacus lobortis neque, et fermentum massa est lacinia purus. Proin porta ac est in tempor. Fusce vel nunc eget nibh commodo egestas tempus eget est. Integer vulputate dui ac volutpat efficitur. Phasellus non erat lacus. Phasellus et ex orci. Fusce in velit ipsum. Donec eleifend aliquam justo eget dictum.
+                                        </TextBlock>
+                                    </Panel>
+
+                                    <!--  Bottom of the card  -->
+                                    <!--  Date due  -->
+                                    <Grid ColumnDefinitions="6*, 4*">
+                                        <Panel Grid.Column="0" />
+                                        <Border
+                                            Grid.Column="1"
+                                            ClipToBounds="True"
+                                            CornerRadius="15, 0, 0, 0">
+                                            <Panel
+                                                Grid.Column="1"
+                                                Height="30"
+                                                Background="{StaticResource DarkBackgroundBrush}">
+                                                <TextBlock
+                                                    Padding="20,0,20,0"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    Classes="Light h3"
+                                                    FontWeight="DemiBold"
+                                                    Text="20/20/24" />
+                                            </Panel>
+                                        </Border>
+                                    </Grid>
+                                </StackPanel>
+                            </Border>
+                        </ListBoxItem>
+
+                        <ListBoxItem>
+                            <Border ClipToBounds="True" CornerRadius="15">
+                                <StackPanel
+                                    Width="500"
+                                    Height="180"
+                                    Background="{StaticResource LightBackgroundBrush}">
+                                    <!--  Top of the card  -->
+                                    <Panel Height="30" Background="{StaticResource DarkBackgroundBrush}">
+                                        <!--  Name of the task  -->
+                                        <Panel HorizontalAlignment="Left">
+                                            <TextBlock
+                                                Margin="15,0,15,0"
+                                                HorizontalAlignment="Left"
+                                                VerticalAlignment="Center"
+                                                Classes="Light h3"
+                                                Text="Task name" />
+                                        </Panel>
+                                        <!--  Priority  -->
+
+                                        <Panel HorizontalAlignment="Right" Background="Red">
+                                            <TextBlock
+                                                Margin="15,0,15,0"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Classes="Light h3"
+                                                FontWeight="Bold"
+                                                Text="A" />
+                                        </Panel>
+                                    </Panel>
+
+                                    <!--  Task description  -->
+                                    <Panel Height="120">
+                                        <TextBlock
+                                            Padding="15,10,15,10"
+                                            Classes="Dark h3"
+                                            Text="description text" />
+                                    </Panel>
+
+                                    <!--  Bottom of the card  -->
+                                    <!--  Date due  -->
+                                    <Grid ColumnDefinitions="6*, 4*">
+                                        <Panel Grid.Column="0" />
+                                        <Border
+                                            Grid.Column="1"
+                                            ClipToBounds="True"
+                                            CornerRadius="15, 0, 0, 0">
+                                            <Panel
+                                                Grid.Column="1"
+                                                Height="30"
+                                                Background="{StaticResource DarkBackgroundBrush}">
+                                                <TextBlock
+                                                    Padding="20,0,20,0"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    Classes="Light h3"
+                                                    FontWeight="DemiBold"
+                                                    Text="20/20/24" />
+                                            </Panel>
+                                        </Border>
+                                    </Grid>
+                                </StackPanel>
+                            </Border>
+                        </ListBoxItem>
+                    </ListBox>
+                </Panel>
+            </StackPanel>
         </Border>
     </Design.PreviewWith>
 
-    <!-- Add Styles Here -->
+    <!--  ComboBox sort selection style  -->
+    <Style Selector="ComboBox">
+        <Setter Property="BorderThickness" Value="0" />
+		<Setter Property="Width" Value="220" />
+		<Setter Property="Background" Value="{StaticResource LightBackgroundBrush}"/>
+		<Setter Property="CornerRadius" Value="5"/>
+
+		
+		<Style Selector="^ ComboBoxItem">
+			<Setter Property="BorderThickness" Value="0" />
+
+			<Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+				<Setter Property="Background" Value="{StaticResource LightBackgroundBrush}" />
+			</Style>
+
+			<Style Selector="^:selected">
+				<Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
+					<Setter Property="Background" Value="{StaticResource MainLinearGradientBrush}" />
+				</Style>
+			</Style>
+		</Style>
+	</Style>
+
+    <!--  Task list task card style  -->
+	<Style Selector="ListBox">
+		<Style Selector="^ ListBoxItem">
+			<Setter Property="Padding" Value="0" />
+			<Setter Property="Margin" Value="10,5" />
+			<Setter Property="BorderThickness" Value="4" />
+			<Setter Property="BorderBrush" Value="Transparent" />
+			<Setter Property="CornerRadius" Value="15" />
+
+			<Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+				<Setter Property="BorderBrush" Value="#AFFAB7" />
+				<Setter Property="Background" Value="Transparent" />
+			</Style>
+
+			<Style Selector="^:selected">
+				<Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
+					<Setter Property="BorderBrush" Value="{StaticResource MainLinearGradientBrush}" />
+					<Setter Property="Background" Value="Transparent" />
+				</Style>
+			</Style>
+		</Style>
+	</Style>
+
+
+
 </Styles>

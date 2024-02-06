@@ -16,6 +16,8 @@
     <AvaloniaResource Remove="Assets\Resources\FontDictionary.axaml" />
     <AvaloniaResource Remove="Assets\Resources\GlobalStyles.axaml" />
     <AvaloniaResource Remove="Assets\Resources\TaskManagementStyles.axaml" />
+    <AvaloniaResource Remove="Assets\Resources\TaskViewStyles.axaml" />
+    <AvaloniaResource Remove="Assets\Resources\ThemeDictionary.axaml" />
   </ItemGroup>
 
 
@@ -40,6 +42,20 @@
 
   <ItemGroup>
     <Folder Include="Assets\icons\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <AvaloniaXaml Update="Assets\Resources\TaskViewStyles.axaml">
+      <SubType>Designer</SubType>
+    </AvaloniaXaml>
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <AvaloniaXaml Update="Assets\Resources\CustomThemes\CustomComboBox.axaml">
+      <SubType>Designer</SubType>
+    </AvaloniaXaml>
   </ItemGroup>
 
 

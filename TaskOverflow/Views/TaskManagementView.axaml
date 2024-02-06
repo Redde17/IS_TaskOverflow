@@ -12,6 +12,11 @@
     x:DataType="vm:MainWindowViewModel"
     mc:Ignorable="d">
 
+	<UserControl.Styles>
+		<StyleInclude Source="/Assets/Resources/TaskManagementStyles.axaml"/>
+		<StyleInclude Source="/Assets/Resources/TaskViewStyles.axaml"/>
+	</UserControl.Styles>
+	
     <Grid ColumnDefinitions="70, *" DataContext="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext).TaskManagerVM}">
         <!--  Sidebar for navigation  -->
         <GeneralElemsViews:NavBar Grid.Column="0" />
@@ -21,7 +26,8 @@
             <!--  Title bar  -->
             <Panel Grid.Row="0" Background="{StaticResource LightBackgroundBrush}">
                 <Grid ColumnDefinitions="5*, 5*">
-                    <TextBlock
+					<TextBlock
+						Margin = "10 0 0 0"
                         Grid.Column="0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"

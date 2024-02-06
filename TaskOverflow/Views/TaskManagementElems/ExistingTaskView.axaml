@@ -10,47 +10,44 @@
     mc:Ignorable="d">
 
     <Border
+        Margin="20"
         ClipToBounds="True"
         CornerRadius="20"
         DataContext="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext).TaskManagerVM.TaskVM}">
-        <Grid
-            Margin="20"
-            Background="{StaticResource LightBackgroundBrush}"
-            RowDefinitions="10*, 50*, 10*, 20*, 10*">
+        <Grid Background="{StaticResource LightBackgroundBrush}" RowDefinitions="50, 5*, 2*, 2*, 1*">
             <!--  Title panel  -->
-            <Grid
-                Grid.Row="0"
-                Background="{StaticResource DarkBackgroundBrush}"
-                RowDefinitions="2*, 8*">
-                <!--<TextBlock Grid.Row="0">
-                    Titolo
-                </TextBlock>-->
+            <Panel Grid.Row="0" Background="{StaticResource DarkBackgroundBrush}">
                 <TextBlock
-                    Grid.Row="1"
+                    Margin="15,0"
+                    VerticalAlignment="Center"
                     Classes="Light h2"
-                    FontWeight="DemiBold"
+                    FontWeight="Bold"
                     Text="{Binding ExistingTaskVM.SelectedTask.name}" />
-            </Grid>
+            </Panel>
 
             <!--  Description panel  -->
-            <Grid Grid.Row="1" RowDefinitions="1*, 9*">
+            <Grid
+                Grid.Row="1"
+                Margin="15,0"
+                RowDefinitions="1*, 9*">
                 <TextBlock
                     Grid.Row="0"
                     Classes="Dark h2"
-                    FontWeight="DemiBold">
-                    Descrizione
-                </TextBlock>
+                    FontWeight="Bold"
+                    Text="Descrizione completa:" />
                 <TextBlock
                     Grid.Row="1"
                     Classes="Dark h3"
-                    Text="{Binding ExistingTaskVM.SelectedTask.description}" />
+                    Text="{Binding ExistingTaskVM.SelectedTask.description}"
+                    TextWrapping="Wrap" />
             </Grid>
 
             <!--  Priority panel  -->
-            <StackPanel Grid.Row="2">
-                <TextBlock Classes="Dark h2" FontWeight="DemiBold">
-                    Prioritá
-                </TextBlock>
+            <StackPanel Grid.Row="2" Margin="15,0">
+                <TextBlock
+                    Classes="Dark h2"
+                    FontWeight="Bold"
+                    Text="Prioritá" />
                 <!--  TODO when MainTask get absorbed by Task  -->
                 <TextBlock Foreground="Green">
                     TODO when MainTask get absorbed by Task
@@ -58,30 +55,67 @@
             </StackPanel>
 
             <!--  Date due panel  -->
-            <StackPanel Grid.Row="3">
-                <TextBlock Classes="Dark h2" FontWeight="DemiBold">
-                    Scadenza
-                </TextBlock>
+            <StackPanel Grid.Row="3" Margin="15,0">
                 <TextBlock
+                    Classes="Dark h2"
+                    FontWeight="Bold"
+                    Text="Scadenza:" />
+                <Border
+                    Width="260"
+                    HorizontalAlignment="Left"
                     Background="{StaticResource DarkBackgroundBrush}"
-                    Classes="Light h3"
-                    FontWeight="DemiBold"
-                    Text="{Binding ExistingTaskVM.SelectedTask.date}" />
+                    ClipToBounds="True"
+                    CornerRadius="15 0 15 0">
+                    <TextBlock
+                        Margin="10"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Classes="Light h3"
+                        FontWeight="DemiBold"
+                        Text="{Binding ExistingTaskVM.SelectedTask.date}" />
+                </Border>
             </StackPanel>
 
+            <!--  Buttons  -->
             <Panel
                 Grid.Row="4"
+                Margin="15,15"
                 VerticalAlignment="Bottom"
                 DataContext="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext).TaskManagerVM}">
-                <Button HorizontalAlignment="Left" Command="{Binding StartModificationOfSelectedTask}">
-                    <TextBlock Classes="Dark h2" FontWeight="DemiBold">
-                        Modify
-                    </TextBlock>
+                <!--  Modify Button  -->
+                <Button
+                    HorizontalAlignment="Left"
+                    Classes="ControlButton"
+                    Command="{Binding StartModificationOfSelectedTask}">
+                    <Grid ColumnDefinitions="50, *">
+                        <Border Grid.Column="0">
+                            <Panel Background="{StaticResource MediumPrioritySelectedBrush}" Classes="ButtonIconPanel">
+                                <Image Classes="ButtonIcon" Source="/Assets/icons/ModifyButtonIcon.png" />
+                            </Panel>
+                        </Border>
+                        <TextBlock
+                            Grid.Column="1"
+                            Classes="Dark h2"
+                            Text="Modifica" />
+                    </Grid>
                 </Button>
-                <Button HorizontalAlignment="Right" Command="{Binding DeleteSelectedTask}">
-                    <TextBlock Classes="Dark h2" FontWeight="DemiBold">
-                        Delete
-                    </TextBlock>
+
+                <!--  Delete Button  -->
+                <Button
+                    HorizontalAlignment="Right"
+                    Classes="ControlButton"
+                    Command="{Binding DeleteSelectedTask}">
+                    <Grid ColumnDefinitions="*, 50">
+                        <TextBlock
+                            Grid.Column="0"
+                            Classes="Dark h2"
+                            Text="Elimina" />
+                        <Border Grid.Column="1">
+                            <Panel Background="{StaticResource HighPrioritySelectedBrush}">
+                                <Image Source="/Assets/icons/RemoveButtonIcon.png" />
+                            </Panel>
+                        </Border>
+                    </Grid>
                 </Button>
             </Panel>
         </Grid>

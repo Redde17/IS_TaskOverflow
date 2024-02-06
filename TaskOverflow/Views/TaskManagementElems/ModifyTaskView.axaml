@@ -107,7 +107,7 @@
 
                 <Button HorizontalAlignment="Right" Command="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext).TaskManagerVM.ModifySelectedTask}">
                     <TextBlock Classes="Dark h2">
-                        Crea
+                        Modifica
                     </TextBlock>
                 </Button>
             </Panel>

@@ -1,0 +1,141 @@
+﻿<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border
+            Width="800"
+            Height="800"
+            Padding="20">
+            <Border ClipToBounds="True" CornerRadius="20">
+                <Grid Background="{StaticResource LightBackgroundBrush}" RowDefinitions="50, 5*, 2*, 2*, 1*">
+                    <!--  Title panel  -->
+                    <Panel Grid.Row="0" Background="{StaticResource DarkBackgroundBrush}">
+                        <TextBlock
+                            Margin="15,0"
+                            VerticalAlignment="Center"
+                            Classes="Light h2"
+                            FontWeight="Bold"
+                            Text="Task title" />
+                    </Panel>
+
+                    <!--  Description panel  -->
+                    <Grid
+                        Grid.Row="1"
+                        Margin="15,0"
+                        RowDefinitions="1*, 9*">
+                        <TextBlock
+                            Grid.Row="0"
+                            Classes="Dark h2"
+                            FontWeight="Bold"
+                            Text="Descrizione completa:" />
+                        <TextBlock
+                            Grid.Row="1"
+                            Classes="Dark h3"
+                            Text="Description text"
+                            TextWrapping="Wrap" />
+                    </Grid>
+
+                    <!--  Priority panel  -->
+                    <StackPanel Grid.Row="2" Margin="15,0">
+                        <TextBlock
+                            Classes="Dark h2"
+                            FontWeight="Bold"
+                            Text="Prioritá" />
+                        <!--  TODO when MainTask get absorbed by Task  -->
+                        <TextBlock Foreground="Green">
+                            TODO when MainTask get absorbed by Task
+                        </TextBlock>
+                    </StackPanel>
+
+                    <!--  Date due panel  -->
+
+                    <StackPanel Grid.Row="3" Margin="15,0">
+                        <TextBlock
+                            Classes="Dark h2"
+                            FontWeight="Bold"
+                            Text="Scadenza:" />
+                        <Border
+                            Width="260"
+                            HorizontalAlignment="Left"
+                            Background="{StaticResource DarkBackgroundBrush}"
+                            ClipToBounds="True"
+                            CornerRadius="15 0 15 0">
+                            <TextBlock
+                                Margin="10"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Classes="Light h3"
+                                FontWeight="DemiBold"
+                                Text="DD/MM/YYYY hh:mm:ss" />
+                        </Border>
+                    </StackPanel>
+
+                    <Panel
+                        Grid.Row="4"
+                        Margin="15,15"
+                        VerticalAlignment="Bottom">
+                        <Button HorizontalAlignment="Left" Classes="ControlButton">
+                            <Grid ColumnDefinitions="50, *">
+                                <Border Grid.Column="0">
+                                    <Panel Background="Yellow" Classes="ButtonIconPanel">
+                                        <Image Source="/Assets/icons/ModifyButtonIcon.png" />
+                                    </Panel>
+                                </Border>
+                                <TextBlock
+                                    Grid.Column="1"
+                                    Classes="Dark h2"
+                                    Text="Modifica" />
+                            </Grid>
+
+                        </Button>
+                        <Button HorizontalAlignment="Right" Classes="ControlButton">
+                            <Grid ColumnDefinitions="*, 50">
+                                <TextBlock
+                                    Grid.Column="0"
+                                    Classes="Dark h2"
+                                    Text="Elimina" />
+                                <Border Grid.Column="1">
+                                    <Panel Background="Red" Classes="ButtonIconPanel">
+                                        <Image Source="/Assets/icons/RemoveButtonIcon.png" />
+                                    </Panel>
+                                </Border>
+                            </Grid>
+                        </Button>
+                    </Panel>
+                </Grid>
+            </Border>
+        </Border>
+    </Design.PreviewWith>
+
+    <!--  Add Styles Here  -->
+    <Style Selector="Button.ControlButton">
+        <Setter Property="Width" Value="180" />
+        <Setter Property="Height" Value="50" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="CornerRadius" Value="10" />
+
+        <Style Selector="^ Image">
+            <Setter Property="Width" Value="25" />
+            <Setter Property="Height" Value="25" />
+        </Style>
+
+        <Style Selector="^ Panel">
+            <Setter Property="Width" Value="50" />
+            <Setter Property="Height" Value="50" />
+        </Style>
+
+        <Style Selector="^ Border">
+            <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="ClipToBounds" Value="True" />
+        </Style>
+
+        <Style Selector="^ TextBlock">
+            <Setter Property="FontWeight" Value="DemiBold" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+        </Style>
+    </Style>
+
+
+
+
+</Styles>

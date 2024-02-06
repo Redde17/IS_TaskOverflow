@@ -13,6 +13,11 @@ namespace TaskOverflow.Models.UserManagement
         public ObservableCollection<User> users { get; set; }
         public User activeUser { get; set; }
 
+        public UserHandler()
+        {
+            users = new ObservableCollection<User>();
+        }
+
         public UserHandler(User activeUser) //constructor
         {
             this.users = new ObservableCollection<User>();

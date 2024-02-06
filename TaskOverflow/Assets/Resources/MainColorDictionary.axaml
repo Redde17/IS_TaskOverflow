@@ -3,21 +3,33 @@
         <ResourceDictionary x:Key="Default">
             <SolidColorBrush x:Key="BackgroundBrush">White</SolidColorBrush>
             <SolidColorBrush x:Key="ForegroundBrush">Black</SolidColorBrush>
+
+            <!--  Main background colors  -->
             <SolidColorBrush x:Key="DarkBackgroundBrush">#27272D</SolidColorBrush>
             <SolidColorBrush x:Key="LighterDarkBackgroundBrush">#343440</SolidColorBrush>
             <SolidColorBrush x:Key="LightBackgroundBrush">#F5F5FB</SolidColorBrush>
 
+            <!--  Font colors  -->
             <SolidColorBrush x:Key="LightTextBrush">#FFFFFF</SolidColorBrush>
+            <SolidColorBrush x:Key="LightDisabledTextBrush">#919194</SolidColorBrush>
             <SolidColorBrush x:Key="DarkTextBrush">#27272D</SolidColorBrush>
 
 
-            <!--<SolidColorBrush x:Key="LowPrioritySelectedBrush">#F5F5FB</SolidColorBrush>
-			<SolidColorBrush x:Key="MediumPrioritySelectedBrush">#F5F5FB</SolidColorBrush>
-			<SolidColorBrush x:Key="HighPrioritySelectedBrush">#F5F5FB</SolidColorBrush>-->
+            <!--  Selected priority and button colors  -->
+            <SolidColorBrush x:Key="LowPrioritySelectedBrush">#76E36C</SolidColorBrush>
+            <SolidColorBrush x:Key="MediumPrioritySelectedBrush">#EFE26F</SolidColorBrush>
+            <SolidColorBrush x:Key="HighPrioritySelectedBrush">#E84545</SolidColorBrush>
 
+            <!--  Unselected priority colors  -->
             <SolidColorBrush x:Key="LowPriorityUnselectedBrush">#487747</SolidColorBrush>
             <SolidColorBrush x:Key="MediumPriorityUnselectedBrush">#89834D</SolidColorBrush>
             <SolidColorBrush x:Key="HighPriorityUnselectedBrush">#874245</SolidColorBrush>
+
+            <!--  Gradient colors  -->
+            <LinearGradientBrush x:Key="MainLinearGradientBrush" StartPoint="0%,0%" EndPoint="100%,100%">
+                <GradientStop Offset="0" Color="#AFFAB7" />
+                <GradientStop Offset="1" Color="#E6F595" />
+            </LinearGradientBrush>
         </ResourceDictionary>
     </ResourceDictionary.ThemeDictionaries>
 </ResourceDictionary>

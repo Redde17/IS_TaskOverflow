@@ -15,13 +15,14 @@
     <UserControl.Resources>
         <converter:TaskPriorityToString x:Key="TaskPriorityToString" />
         <converter:PriorityToColorConverter x:Key="PriorityToColorConverter" />
-		<converter:DateTimeToStringConverter x:Key="DateTimeToStringConverter" />
+        <converter:DateTimeToStringConverter x:Key="DateTimeToStringConverter" />
     </UserControl.Resources>
 
     <Grid DataContext="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext).TaskManagerVM}" RowDefinitions="50, *">
         <!--  Task title and sort controller  -->
         <Panel Grid.Row="0">
             <TextBlock
+                Margin="10,0,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
                 Classes="Dark h2"
@@ -49,7 +50,7 @@
         <!--  Task list  -->
         <ListBox
             Grid.Row="1"
-			Background="White"
+            Background="White"
             ItemsSource="{Binding TH.tasks}"
             ScrollViewer.VerticalScrollBarVisibility="Auto"
             SelectedIndex="{Binding TaskListComboBoxSelectedIndex}"
@@ -57,7 +58,7 @@
             <ListBox.ItemTemplate>
                 <!--  Task Card item  -->
                 <DataTemplate DataType="{x:Type TaskManagement:Task}">
-                    <Border ClipToBounds="True" CornerRadius="15">
+                    <Border ClipToBounds="True" CornerRadius="12">
                         <StackPanel Height="180" Background="{StaticResource LightBackgroundBrush}">
                             <!--  Top of the card  -->
                             <Panel Height="30" Background="{StaticResource DarkBackgroundBrush}">
@@ -88,7 +89,8 @@
                                 <TextBlock
                                     Padding="15,10,15,10"
                                     Classes="Dark h3"
-                                    Text="{Binding description}" />
+                                    Text="{Binding description}"
+                                    TextWrapping="Wrap" />
                             </Panel>
 
                             <!--  Bottom of the card  -->
@@ -98,7 +100,7 @@
                                 <Border
                                     Grid.Column="1"
                                     ClipToBounds="True"
-                                    CornerRadius="15, 0, 0, 0">
+                                    CornerRadius="13, 0, 0, 0">
                                     <Panel
                                         Grid.Column="1"
                                         Height="30"
@@ -119,6 +121,4 @@
             </ListBox.ItemTemplate>
         </ListBox>
     </Grid>
-
-
 </UserControl>
