@@ -15,6 +15,8 @@ namespace TaskOverflow.Models.DataPersistency
 
         public ObservableCollection<Task> getDBTasks(User user) //Recupera tutti i task dal database a seconda dell'activeUser
         {
+            System.IO.Directory.CreateDirectory(@"C:\Temp\");
+
             using (var db = new LiteDatabase(connection))
             {
                 var collection = db.GetCollection<Task>("Tasks");

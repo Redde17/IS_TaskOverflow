@@ -26,5 +26,12 @@ namespace TaskOverflow.Models.TaskManagement
             this.userId = userId;
         }
 
+        public Task(string name, string description, DateTime date, int priority) //constructor
+        {
+            this.name = name;
+            this.description = description;
+            this.date = date;
+            this.priority = priority;
+        }
     }
 }

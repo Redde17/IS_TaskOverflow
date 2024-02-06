@@ -28,9 +28,9 @@ namespace TaskOverflow.Models.TaskManagement
 
         public TasksHandler()  //constructor
         {
-            this.taskDAO = new TaskDAO();
             this.userHandler = new UserHandler();
-            this.tasks = taskDAO.getDBTasks(userHandler.activeUser);
+            this.taskDAO = new TaskDAO();
+            this.tasks = new ObservableCollection<Task>();
         }
 
         public bool addTask(Task task) //aggiunge una task alla lista di Task e lo aggiunge al database

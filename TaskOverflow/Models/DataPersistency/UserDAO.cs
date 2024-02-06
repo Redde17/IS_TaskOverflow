@@ -13,8 +13,10 @@ namespace TaskOverflow.Models.DataPersistency
     {
         private static string connection = @"C:\Temp\database.db";
 
-        public ObservableCollection<User> getDBUsers()
+        public ObservableCollection<User> getDBUsers() //Recupera tutti gli user all'interno del database
         {
+            System.IO.Directory.CreateDirectory(@"C:\Temp\");
+
             using (var db = new LiteDatabase(connection))
             {
                 var collection = db.GetCollection<User>("Users");
@@ -26,7 +28,7 @@ namespace TaskOverflow.Models.DataPersistency
             }
         }
 
-        public void insertUser(User user)
+        public void insertUser(User user) //Inserisce un utente all'interno del database
         {
             using (var db = new LiteDatabase(connection))
             {
@@ -35,7 +37,7 @@ namespace TaskOverflow.Models.DataPersistency
             }
         }
 
-        public void deleteUser(User user)
+        public void deleteUser(User user) //Elimina un utente dal database
         {
             using (var db = new LiteDatabase(connection))
             {
