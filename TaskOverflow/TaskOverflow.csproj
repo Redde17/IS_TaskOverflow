@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <AvaloniaResource Remove="Assets\Resources\CustomThemes\CustomDateTimePickerShared.axaml" />
     <AvaloniaResource Remove="Assets\Resources\FontDictionary.axaml" />
     <AvaloniaResource Remove="Assets\Resources\GlobalStyles.axaml" />
     <AvaloniaResource Remove="Assets\Resources\TaskManagementStyles.axaml" />
@@ -42,6 +43,13 @@
 
   <ItemGroup>
     <Folder Include="Assets\icons\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <AvaloniaXaml Update="Assets\Resources\CustomThemes\CustomDateTimePickerShared.axaml">
+      <SubType>Designer</SubType>
+    </AvaloniaXaml>
   </ItemGroup>
 
 

@@ -12,11 +12,11 @@
     x:DataType="vm:MainWindowViewModel"
     mc:Ignorable="d">
 
-	<UserControl.Styles>
-		<StyleInclude Source="/Assets/Resources/TaskManagementStyles.axaml"/>
-		<StyleInclude Source="/Assets/Resources/TaskViewStyles.axaml"/>
-	</UserControl.Styles>
-	
+    <UserControl.Styles>
+        <StyleInclude Source="/Assets/Resources/TaskManagementStyles.axaml" />
+        <StyleInclude Source="/Assets/Resources/TaskViewStyles.axaml" />
+    </UserControl.Styles>
+
     <Grid ColumnDefinitions="70, *" DataContext="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext).TaskManagerVM}">
         <!--  Sidebar for navigation  -->
         <GeneralElemsViews:NavBar Grid.Column="0" />
@@ -26,9 +26,9 @@
             <!--  Title bar  -->
             <Panel Grid.Row="0" Background="{StaticResource LightBackgroundBrush}">
                 <Grid ColumnDefinitions="5*, 5*">
-					<TextBlock
-						Margin = "10 0 0 0"
+                    <TextBlock
                         Grid.Column="0"
+                        Margin="10,0,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         Classes="Dark h1"
@@ -42,8 +42,31 @@
                         <Button Command="{Binding DebugFunc}">
                             Debug button
                         </Button>
-                        <Button Command="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext).TaskManagerVM.TaskVM.ShowAddTaskView}">
-                            Add Task
+                        <!--  Add task button  -->
+                        <Button
+                            Width="200"
+                            Margin="0,0,10,0"
+                            HorizontalAlignment="Right"
+                            Classes="ControlButton"
+                            Command="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext).TaskManagerVM.TaskVM.ShowAddTaskView}">
+                            <Grid ColumnDefinitions="*, 40">
+                                <TextBlock
+                                    Grid.Column="0"
+                                    Classes="Dark h2"
+                                    Text="Nuovo task" />
+                                <Border Grid.Column="1">
+                                    <Panel Background="{StaticResource LowPrioritySelectedBrush}">
+                                        <Image
+                                            Width="20"
+                                            Height="20"
+                                            Source="/Assets/icons/RemoveButtonIcon.png">
+                                            <Image.RenderTransform>
+                                                <RotateTransform Angle="45" />
+                                            </Image.RenderTransform>
+                                        </Image>
+                                    </Panel>
+                                </Border>
+                            </Grid>
                         </Button>
                     </WrapPanel>
                 </Grid>
@@ -51,7 +74,7 @@
 
             <!--  Content panel  -->
             <Panel Grid.Row="1">
-                <Grid ColumnDefinitions="40*, 5*, 55*">
+                <Grid ColumnDefinitions="45*, 20, 55*">
                     <!--  Task list  -->
                     <Panel Grid.Column="0">
                         <ListElemsViews:TaskListView />
@@ -60,7 +83,7 @@
                     <Panel Grid.Column="1" />
                     <!--  Task viewer  -->
                     <Panel Grid.Column="2">
-                        <ListElemsViews:TaskView />
+                        <ListElemsViews:TaskView Margin="0 5 15 15" />
                     </Panel>
                 </Grid>
             </Panel>

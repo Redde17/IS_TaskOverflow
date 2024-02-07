@@ -6,13 +6,6 @@ namespace TaskOverflow.Views
 {
     public partial class ModifyTaskView : UserControl
     {
-        private SolidColorBrush lowSelectedColor = new SolidColorBrush(Color.FromArgb(255, 118, 227, 108));
-        private SolidColorBrush mediumSelectedColor = new SolidColorBrush(Color.FromArgb(255, 239, 226, 111));
-        private SolidColorBrush highSelectedColor = new SolidColorBrush(Color.FromArgb(255, 235, 94, 94));
-        private SolidColorBrush lowUnselectedColor = new SolidColorBrush(Color.FromArgb(255, 72, 119, 71));
-        private SolidColorBrush mediumUnselectedColor = new SolidColorBrush(Color.FromArgb(255, 137, 131, 77));
-        private SolidColorBrush highUnselectedColor = new SolidColorBrush(Color.FromArgb(255, 135, 66, 69));
-
         public ModifyTaskView()
         {
             InitializeComponent();
@@ -20,26 +13,39 @@ namespace TaskOverflow.Views
 
         private void clickHandlerLow(object sender, RoutedEventArgs e)
         {
-            ((Button)sender).Background = lowSelectedColor;
+            ((Button)sender).Background = (IBrush?)this.FindResource("LowPrioritySelectedBrush");
+            LowPriorityButtonText.Foreground = (IBrush?)this.FindResource("LightTextBrush");
 
-            mediumPriorityButton.Background = mediumUnselectedColor;
-            highPriorityButton.Background = highUnselectedColor;
+            MediumPriorityButton.Background = (IBrush?)this.FindResource("MediumPriorityUnselectedBrush");
+            MediumPriorityButtonText.Foreground = (IBrush?)this.FindResource("LightDisabledTextBrush");
+
+            HighPriorityButton.Background = (IBrush?)this.FindResource("HighPriorityUnselectedBrush");
+            HighPriorityButtonText.Foreground = (IBrush?)this.FindResource("LightDisabledTextBrush");
         }
 
         private void clickHandlerMedium(object sender, RoutedEventArgs e)
         {
-            ((Button)sender).Background = mediumSelectedColor;
+            ((Button)sender).Background = (IBrush?)this.FindResource("MediumPrioritySelectedBrush");
+            MediumPriorityButtonText.Foreground = (IBrush?)this.FindResource("LightTextBrush");
 
-            lowPriorityButton.Background = lowUnselectedColor;
-            highPriorityButton.Background = highUnselectedColor;
+            LowPriorityButton.Background = (IBrush?)this.FindResource("LowPriorityUnselectedBrush");
+            LowPriorityButtonText.Foreground = (IBrush?)this.FindResource("LightDisabledTextBrush");
+
+            HighPriorityButton.Background = (IBrush?)this.FindResource("HighPriorityUnselectedBrush");
+            HighPriorityButtonText.Foreground = (IBrush?)this.FindResource("LightDisabledTextBrush");
+
         }
 
         private void clickHandlerHigh(object sender, RoutedEventArgs e)
         {
-            ((Button)sender).Background = highSelectedColor;
+            ((Button)sender).Background = (IBrush?)this.FindResource("HighPrioritySelectedBrush");
+            HighPriorityButtonText.Foreground = (IBrush?)this.FindResource("LightTextBrush");
 
-            mediumPriorityButton.Background = mediumUnselectedColor;
-            lowPriorityButton.Background = lowUnselectedColor;
+            MediumPriorityButton.Background = (IBrush?)this.FindResource("MediumPriorityUnselectedBrush");
+            MediumPriorityButtonText.Foreground = (IBrush?)this.FindResource("LightDisabledTextBrush");
+
+            LowPriorityButton.Background = (IBrush?)this.FindResource("LowPriorityUnselectedBrush");
+            LowPriorityButtonText.Foreground = (IBrush?)this.FindResource("LightDisabledTextBrush");
         }
     }
 }

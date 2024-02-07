@@ -13,6 +13,7 @@
                 <ResourceInclude Source="/Assets/Resources/MainColorDictionary.axaml" />
                 <ResourceInclude Source="/Assets/Resources/FontDictionary.axaml" />
 				<ResourceInclude Source="/Assets/Resources/CustomThemes/CustomComboBox.axaml" />
+				<ResourceInclude Source="/Assets/Resources/CustomThemes/CustomDateTimePickerShared.axaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

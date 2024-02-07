@@ -4,17 +4,23 @@
             Width="800"
             Height="800"
             Padding="20">
+
             <Border ClipToBounds="True" CornerRadius="20">
                 <Grid Background="{StaticResource LightBackgroundBrush}" RowDefinitions="50, 5*, 2*, 2*, 1*">
                     <!--  Title panel  -->
-                    <Panel Grid.Row="0" Background="{StaticResource DarkBackgroundBrush}">
-                        <TextBlock
-                            Margin="15,0"
-                            VerticalAlignment="Center"
-                            Classes="Light h2"
-                            FontWeight="Bold"
-                            Text="Task title" />
-                    </Panel>
+                    <Grid
+                        Grid.Row="0"
+                        Background="{StaticResource DarkBackgroundBrush}"
+                        RowDefinitions="2*, 8*">
+                        <!--<TextBlock Grid.Row="0">
+                    Titolo
+                </TextBlock>-->
+                        <TextBox
+                            Grid.Row="1"
+                            Classes="TitleTextBox"
+                            Text="Test"
+                            Watermark="Inserisci il titolo" />
+                    </Grid>
 
                     <!--  Description panel  -->
                     <Grid
@@ -24,77 +30,90 @@
                         <TextBlock
                             Grid.Row="0"
                             Classes="Dark h2"
-                            FontWeight="Bold"
-                            Text="Descrizione completa:" />
-                        <TextBlock
+                            FontWeight="DemiBold">
+                            Descrizione
+                        </TextBlock>
+                        <TextBox
                             Grid.Row="1"
-                            Classes="Dark h3"
-                            Text="Description text"
-                            TextWrapping="Wrap" />
+                            AcceptsReturn="True"
+                            TextWrapping="Wrap"
+                            Watermark="Inserisci la descrizione" />
                     </Grid>
 
                     <!--  Priority panel  -->
                     <StackPanel Grid.Row="2" Margin="15,0">
-                        <TextBlock
-                            Classes="Dark h2"
-                            FontWeight="Bold"
-                            Text="Prioritá" />
-                        <!--  TODO when MainTask get absorbed by Task  -->
-                        <TextBlock Foreground="Green">
-                            TODO when MainTask get absorbed by Task
+                        <TextBlock Classes="Dark h2" FontWeight="DemiBold">
+                            Prioritá
                         </TextBlock>
+                        <WrapPanel Classes="PrioritySelectorPanel">
+                            <Button
+                                Name="LowPriorityButton"
+                                Background="{StaticResource LowPriorityUnselectedBrush}"
+                                CommandParameter="0">
+                                <TextBlock Classes="Light h3" FontWeight="DemiBold">
+                                    Bassa
+                                </TextBlock>
+                            </Button>
+                            <Button
+                                Name="MediumPriorityButton"
+                                Background="{StaticResource MediumPriorityUnselectedBrush}"
+                                CommandParameter="1">
+                                <TextBlock Classes="Light h3" FontWeight="DemiBold">
+                                    Media
+                                </TextBlock>
+                            </Button>
+                            <Button
+                                Name="HighPriorityButton"
+                                Background="{StaticResource HighPriorityUnselectedBrush}"
+                                CommandParameter="2">
+                                <TextBlock Classes="Light h3" FontWeight="DemiBold">
+                                    Alta
+                                </TextBlock>
+                            </Button>
+                        </WrapPanel>
                     </StackPanel>
 
                     <!--  Date due panel  -->
-
                     <StackPanel Grid.Row="3" Margin="15,0">
-                        <TextBlock
-                            Classes="Dark h2"
-                            FontWeight="Bold"
-                            Text="Scadenza:" />
-                        <Border
-                            Width="260"
-                            HorizontalAlignment="Left"
-                            Background="{StaticResource DarkBackgroundBrush}"
-                            ClipToBounds="True"
-                            CornerRadius="15 0 15 0">
-                            <TextBlock
-                                Margin="10"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Classes="Light h3"
-                                FontWeight="DemiBold"
-                                Text="DD/MM/YYYY hh:mm:ss" />
-                        </Border>
+                        <TextBlock Classes="Dark h2" FontWeight="DemiBold">
+                            Scadenza
+                        </TextBlock>
+                        <WrapPanel Classes="DatePickerWrapPanel">
+                            <DatePicker DayFormat="ddd dd" />
+                            <TimePicker ClockIdentifier="24HourClock" MinuteIncrement="1" />
+                        </WrapPanel>
                     </StackPanel>
 
+                    <!--  Modify/Delete buttons panel  -->
                     <Panel
                         Grid.Row="4"
                         Margin="15,15"
                         VerticalAlignment="Bottom">
+                        <!--  Modify Button  -->
                         <Button HorizontalAlignment="Left" Classes="ControlButton">
-                            <Grid ColumnDefinitions="50, *">
+                            <Grid ColumnDefinitions="40, *">
                                 <Border Grid.Column="0">
-                                    <Panel Background="Yellow" Classes="ButtonIconPanel">
-                                        <Image Source="/Assets/icons/ModifyButtonIcon.png" />
+                                    <Panel Background="{StaticResource HighPrioritySelectedBrush}" Classes="ButtonIconPanel">
+                                        <Image Classes="ButtonIcon" Source="/Assets/icons/RemoveButtonIcon.png" />
                                     </Panel>
                                 </Border>
                                 <TextBlock
                                     Grid.Column="1"
                                     Classes="Dark h2"
-                                    Text="Modifica" />
+                                    Text="Annulla" />
                             </Grid>
-
                         </Button>
+
+                        <!--  Create Button  -->
                         <Button HorizontalAlignment="Right" Classes="ControlButton">
-                            <Grid ColumnDefinitions="*, 50">
+                            <Grid ColumnDefinitions="*, 40">
                                 <TextBlock
                                     Grid.Column="0"
                                     Classes="Dark h2"
-                                    Text="Elimina" />
+                                    Text="Crea" />
                                 <Border Grid.Column="1">
-                                    <Panel Background="Red" Classes="ButtonIconPanel">
-                                        <Image Source="/Assets/icons/RemoveButtonIcon.png" />
+                                    <Panel Background="{StaticResource LowPrioritySelectedBrush}">
+                                        <Image Source="/Assets/icons/CreateButtonIcon.png" />
                                     </Panel>
                                 </Border>
                             </Grid>
@@ -105,10 +124,10 @@
         </Border>
     </Design.PreviewWith>
 
-    <!--  Add Styles Here  -->
+    <!--  ControlButtons Styles  -->
     <Style Selector="Button.ControlButton">
         <Setter Property="Width" Value="180" />
-        <Setter Property="Height" Value="50" />
+        <Setter Property="Height" Value="40" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="Margin" Value="0" />
         <Setter Property="CornerRadius" Value="10" />
@@ -119,12 +138,12 @@
         </Style>
 
         <Style Selector="^ Panel">
-            <Setter Property="Width" Value="50" />
-            <Setter Property="Height" Value="50" />
+            <Setter Property="Width" Value="40" />
+            <Setter Property="Height" Value="40" />
         </Style>
 
         <Style Selector="^ Border">
-            <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="CornerRadius" Value="5" />
             <Setter Property="ClipToBounds" Value="True" />
         </Style>
 
@@ -135,7 +154,211 @@
         </Style>
     </Style>
 
+    <!--  TextBox and TitleTextBox styles  -->
+    <Style Selector="TextBox">
+        <Style Selector="^.TitleTextBox">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Foreground" Value="{StaticResource LightTextBrush}" />
+            <Setter Property="FontSize" Value="25" />
+            <Setter Property="Margin" Value="15 0 10 5" />
+            <Setter Property="Padding" Value="0 0 10 5" />
+
+            <Style Selector="^ /template/ Border#PART_BorderElement">
+                <Setter Property="BorderThickness" Value="0 0 0 2" />
+                <Setter Property="CornerRadius" Value="0" />
+                <Setter Property="BorderBrush" Value="White" />
+                <Setter Property="Background" Value="Transparent" />
+            </Style>
+
+            <Style Selector="^ /template/ TextBlock#PART_Watermark">
+                <Setter Property="Foreground" Value="{StaticResource LightTextBrush}" />
+                <Setter Property="FontSize" Value="25" />
+            </Style>
+
+            <!--  Focus state  -->
+            <Style Selector="^:focus">
+                <Style Selector="^ /template/ TextPresenter#PART_TextPresenter">
+                    <Setter Property="CaretBrush" Value="{StaticResource LightTextBrush}" />
+                </Style>
+            </Style>
+
+        </Style>
+
+        <!--  Focus state  -->
+        <Style Selector="^:focus">
+            <Style Selector="^ /template/ Border#PART_BorderElement">
+                <Setter Property="BorderBrush" Value="{StaticResource MainLinearGradientBrush}" />
+            </Style>
+        </Style>
+    </Style>
+
+    <!--  Priority selection styles  -->
+    <Style Selector="WrapPanel.PrioritySelectorPanel">
+        <Setter Property="HorizontalAlignment" Value="Center" />
+
+        <!--  Buttons styles  -->
+        <Style Selector="^ Button">
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Width" Value="150" />
+
+            <Style Selector="^ TextBlock">
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="Foreground" Value="{StaticResource LightDisabledTextBrush}" />
+            </Style>
+
+            <Style Selector="^:pressed">
+                <Setter Property="RenderTransform" Value="scale(1)" />
+            </Style>
+        </Style>
+
+        <!--  Low priority button styles  -->
+        <Style Selector="^ Button#LowPriorityButton /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="CornerRadius" Value="10 0 0 10" />
+            <Setter Property="BorderThickness" Value="0" />
+
+            <Style Selector="^:pointerover">
+                <Setter Property="Background" Value="{StaticResource LowPrioritySelectedBrush}" />
+            </Style>
+        </Style>
+
+        <!--  Medium priority button styles  -->
+        <Style Selector="^ Button#MediumPriorityButton /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="CornerRadius" Value="0 0 0 0" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Style Selector="^:pointerover">
+                <Setter Property="Background" Value="{StaticResource MediumPrioritySelectedBrush}" />
+            </Style>
+        </Style>
+
+        <!--  High priority button styles  -->
+        <Style Selector="^ Button#HighPriorityButton /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="CornerRadius" Value="0 10 10 0" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Style Selector="^:pointerover">
+                <Setter Property="Background" Value="{StaticResource HighPrioritySelectedBrush}" />
+            </Style>
+        </Style>
+    </Style>
+
+	<!-- Priority Panel in ExistingTaskView -->
+	<Style Selector="Border.PriorityPanel">
+		<Setter Property="CornerRadius" Value="15"/>
+		<Setter Property="ClipToBounds" Value="True"/>
+		<Setter Property="Width" Value="150"/>
+		<Setter Property="Height" Value="40"/>
+		
+		<Style Selector="^ Panel">
+			<Style Selector="^ TextBlock">
+				<Setter Property="HorizontalAlignment" Value="Center" />
+				<Setter Property="VerticalAlignment" Value="Center" />
+			</Style>
+		</Style>
+	</Style>
+	
+    <!--  Date and Time picker styles  -->
+    <Style Selector="WrapPanel.DatePickerWrapPanel">
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="10" />
+
+        <!--  Date Picker styles  -->
+        <Style Selector="^ DatePicker">
+            <Setter Property="Background" Value="{StaticResource LighterDarkBackgroundBrush}" />
+            <Setter Property="BorderBrush" Value="{StaticResource DarkBackgroundBrush}" />
+            <Setter Property="Foreground" Value="{StaticResource LightTextBrush}" />
+            <Setter Property="CornerRadius" Value="10 0 0 10" />
+            <Setter Property="BorderThickness" Value="0 0 0 0" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="FontWeight" Value="DemiBold" />
+
+            <Style Selector="^ /template/ Rectangle#PART_FirstSpacer">
+                <Setter Property="Fill" Value="{StaticResource DarkBackgroundBrush}" />
+            </Style>
+            <Style Selector="^ /template/ Rectangle#PART_SecondSpacer">
+                <Setter Property="Fill" Value="{StaticResource DarkBackgroundBrush}" />
+            </Style>
+
+            <Style Selector="^ Panel">
+                <Style Selector="^ Grid#PART_PickerContainer:pointerover">
+                    <Setter Property="Background" Value="Red" />
+                </Style>
 
 
+                <Style Selector="^ RepeatButton#PART_DayUpButton">
+                    <Setter Property="Background" Value="{StaticResource LightBackgroundBrush}" />
+                </Style>
+                <Style Selector="^ RepeatButton#PART_DayDownButton">
+                    <Setter Property="Background" Value="{StaticResource LightBackgroundBrush}" />
+                </Style>
+
+                <Style Selector="^ RepeatButton#PART_MonthUpButton">
+                    <Setter Property="Background" Value="{StaticResource LightBackgroundBrush}" />
+                </Style>
+                <Style Selector="^ RepeatButton#PART_MonthDownButton">
+                    <Setter Property="Background" Value="{StaticResource LightBackgroundBrush}" />
+                </Style>
+
+                <Style Selector="^ RepeatButton#PART_YearUpButton">
+                    <Setter Property="Background" Value="{StaticResource LightBackgroundBrush}" />
+                </Style>
+                <Style Selector="^ RepeatButton#PART_YearDownButton">
+                    <Setter Property="Background" Value="{StaticResource LightBackgroundBrush}" />
+                </Style>
+            </Style>
+
+            <!--  Changes foreground for watermark text when SelectedDate is null  -->
+            <Style Selector="^:hasnodate /template/ Button#PART_FlyoutButton TextBlock">
+                <Setter Property="Foreground" Value="{StaticResource LightTextBrush}" />
+                <Setter Property="FontSize" Value="15" />
+                <Setter Property="FontWeight" Value="DemiBold" />
+            </Style>
+        </Style>
+
+        <!--  Time Picker styles  -->
+        <Style Selector="^ TimePicker">
+            <Setter Property="Background" Value="{StaticResource LighterDarkBackgroundBrush}" />
+            <Setter Property="BorderBrush" Value="{StaticResource DarkBackgroundBrush}" />
+            <Setter Property="Foreground" Value="{StaticResource LightTextBrush}" />
+            <Setter Property="CornerRadius" Value="0 10 10 0" />
+            <Setter Property="BorderThickness" Value="1 0 0 0" />
+            <Setter Property="FontSize" Value="15" />
+            <Setter Property="FontWeight" Value="DemiBold" />
+
+            <Style Selector="^ /template/ Rectangle#PART_FirstSpacer">
+                <Setter Property="Fill" Value="{StaticResource DarkBackgroundBrush}" />
+            </Style>
+            <Style Selector="^ /template/ Rectangle#PART_SecondSpacer">
+                <Setter Property="Fill" Value="{StaticResource DarkBackgroundBrush}" />
+            </Style>
+
+            <!--  Changes foreground for watermark text when SelectedDate is null  -->
+            <Style Selector="^:hasnotime /template/ Button#PART_FlyoutButton TextBlock">
+                <Setter Property="Foreground" Value="{StaticResource LightTextBrush}" />
+                <Setter Property="FontSize" Value="15" />
+                <Setter Property="FontWeight" Value="DemiBold" />
+            </Style>
+
+            <Style Selector="^ Panel">
+                <Setter Property="Background" Value="{StaticResource LightBackgroundBrush}" />
+
+                <Style Selector="^ RepeatButton#PART_HourUpButton">
+                    <Setter Property="Background" Value="{StaticResource LightBackgroundBrush}" />
+                </Style>
+                <Style Selector="^ RepeatButton#PART_HourDownButton">
+                    <Setter Property="Background" Value="{StaticResource LightBackgroundBrush}" />
+                </Style>
+
+                <Style Selector="^ RepeatButton#PART_MinuteUpButton">
+                    <Setter Property="Background" Value="{StaticResource LightBackgroundBrush}" />
+                </Style>
+                <Style Selector="^ RepeatButton#PART_MinuteDownButton">
+                    <Setter Property="Background" Value="{StaticResource LightBackgroundBrush}" />
+                </Style>
+
+            </Style>
+        </Style>
+
+
+    </Style>
 
 </Styles>

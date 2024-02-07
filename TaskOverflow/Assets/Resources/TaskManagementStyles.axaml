@@ -167,48 +167,49 @@
     <!--  ComboBox sort selection style  -->
     <Style Selector="ComboBox">
         <Setter Property="BorderThickness" Value="0" />
-		<Setter Property="Width" Value="220" />
-		<Setter Property="Background" Value="{StaticResource LightBackgroundBrush}"/>
-		<Setter Property="CornerRadius" Value="5"/>
+        <Setter Property="Width" Value="220" />
+        <Setter Property="Background" Value="{StaticResource LightBackgroundBrush}" />
+        <Setter Property="CornerRadius" Value="5" />
 
-		
-		<Style Selector="^ ComboBoxItem">
-			<Setter Property="BorderThickness" Value="0" />
+        <Style Selector="^:pointerover /template/ Border#Background">
+            <Setter Property="Background" Value="{StaticResource MainLinearGradientBrush}" />
+        </Style>
 
-			<Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
-				<Setter Property="Background" Value="{StaticResource LightBackgroundBrush}" />
-			</Style>
+        <Style Selector="^ ComboBoxItem">
+            <Setter Property="BorderThickness" Value="0" />
 
-			<Style Selector="^:selected">
-				<Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
-					<Setter Property="Background" Value="{StaticResource MainLinearGradientBrush}" />
-				</Style>
-			</Style>
-		</Style>
-	</Style>
+            <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+                <Setter Property="Background" Value="{StaticResource LightBackgroundBrush}" />
+            </Style>
+
+            <Style Selector="^:selected /template/ ContentPresenter#PART_ContentPresenter">
+                <Setter Property="Background" Value="{StaticResource MainLinearGradientBrush}" />
+            </Style>
+        </Style>
+    </Style>
 
     <!--  Task list task card style  -->
-	<Style Selector="ListBox">
-		<Style Selector="^ ListBoxItem">
-			<Setter Property="Padding" Value="0" />
-			<Setter Property="Margin" Value="10,5" />
-			<Setter Property="BorderThickness" Value="4" />
-			<Setter Property="BorderBrush" Value="Transparent" />
-			<Setter Property="CornerRadius" Value="15" />
+    <Style Selector="ListBox">
+        <Style Selector="^ ListBoxItem">
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Margin" Value="10,5" />
+            <Setter Property="BorderThickness" Value="4" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="CornerRadius" Value="15" />
 
-			<Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
-				<Setter Property="BorderBrush" Value="#AFFAB7" />
-				<Setter Property="Background" Value="Transparent" />
-			</Style>
+            <Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+                <Setter Property="BorderBrush" Value="#AFFAB7" />
+                <Setter Property="Background" Value="Transparent" />
+            </Style>
 
-			<Style Selector="^:selected">
-				<Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
-					<Setter Property="BorderBrush" Value="{StaticResource MainLinearGradientBrush}" />
-					<Setter Property="Background" Value="Transparent" />
-				</Style>
-			</Style>
-		</Style>
-	</Style>
+            <Style Selector="^:selected">
+                <Style Selector="^ /template/ ContentPresenter#PART_ContentPresenter">
+                    <Setter Property="BorderBrush" Value="{StaticResource MainLinearGradientBrush}" />
+                    <Setter Property="Background" Value="Transparent" />
+                </Style>
+            </Style>
+        </Style>
+    </Style>
 
 
 

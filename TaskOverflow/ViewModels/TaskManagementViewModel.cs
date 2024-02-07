@@ -73,6 +73,11 @@ namespace TaskOverflow.ViewModels
             TaskVM.ShowModifyTaskView();
         }
 
+        public void StopModificationOfSelectedTask()
+        {
+            TaskVM.ShowExistingTaskView(TH.tasks[TaskListComboBoxSelectedIndex]);
+        }
+
         public void ModifySelectedTask()
         {
             TaskVM.ModifyTaskVM.ModifyTask();
@@ -81,10 +86,10 @@ namespace TaskOverflow.ViewModels
 
         public void SortingSelector(int selectedIndex)
         {
-            System.Diagnostics.Debug.WriteLine(
-                "DEBUG\n" +
-                $"Selected index: {selectedIndex}\n"
-            );
+            //System.Diagnostics.Debug.WriteLine(
+            //    "DEBUG\n" +
+            //    $"Selected index: {selectedIndex}\n"
+            //);
 
             //Index mapping
             //By prioriy up:    0

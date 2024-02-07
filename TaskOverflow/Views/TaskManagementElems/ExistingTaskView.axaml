@@ -2,6 +2,7 @@
     x:Class="TaskOverflow.Views.ExistingTaskView"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converter="using:TaskOverflow.Assets.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:TaskOverflow.ViewModels"
@@ -9,8 +10,13 @@
     d:DesignWidth="800"
     mc:Ignorable="d">
 
+    <UserControl.Resources>
+		<converter:TaskPriorityToLongStringConverter x:Key="TaskPriorityToLongStringConverter" />
+        <converter:PriorityToColorConverter x:Key="PriorityToColorConverter" />
+        <converter:DateTimeToStringConverter x:Key="DateTimeToStringConverter" />
+    </UserControl.Resources>
+
     <Border
-        Margin="20"
         ClipToBounds="True"
         CornerRadius="20"
         DataContext="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext).TaskManagerVM.TaskVM}">
@@ -34,7 +40,7 @@
                     Grid.Row="0"
                     Classes="Dark h2"
                     FontWeight="Bold"
-                    Text="Descrizione completa:" />
+                    Text="Descrizione" />
                 <TextBlock
                     Grid.Row="1"
                     Classes="Dark h3"
@@ -49,9 +55,11 @@
                     FontWeight="Bold"
                     Text="Prioritá" />
                 <!--  TODO when MainTask get absorbed by Task  -->
-                <TextBlock Foreground="Green">
-                    TODO when MainTask get absorbed by Task
-                </TextBlock>
+                <Border Classes="PriorityPanel">
+                    <Panel Background="{Binding ExistingTaskVM.SelectedTask.priority, Converter={StaticResource PriorityToColorConverter}}">
+                        <TextBlock Classes="Light h2" Text="{Binding ExistingTaskVM.SelectedTask.priority, Converter={StaticResource TaskPriorityToLongStringConverter}}" />
+                    </Panel>
+                </Border>
             </StackPanel>
 
             <!--  Date due panel  -->
@@ -59,10 +67,10 @@
                 <TextBlock
                     Classes="Dark h2"
                     FontWeight="Bold"
-                    Text="Scadenza:" />
+                    Text="Scadenza" />
                 <Border
                     Width="260"
-                    HorizontalAlignment="Left"
+                    HorizontalAlignment="Center"
                     Background="{StaticResource DarkBackgroundBrush}"
                     ClipToBounds="True"
                     CornerRadius="15 0 15 0">
@@ -87,7 +95,7 @@
                     HorizontalAlignment="Left"
                     Classes="ControlButton"
                     Command="{Binding StartModificationOfSelectedTask}">
-                    <Grid ColumnDefinitions="50, *">
+                    <Grid ColumnDefinitions="40, *">
                         <Border Grid.Column="0">
                             <Panel Background="{StaticResource MediumPrioritySelectedBrush}" Classes="ButtonIconPanel">
                                 <Image Classes="ButtonIcon" Source="/Assets/icons/ModifyButtonIcon.png" />
@@ -105,7 +113,7 @@
                     HorizontalAlignment="Right"
                     Classes="ControlButton"
                     Command="{Binding DeleteSelectedTask}">
-                    <Grid ColumnDefinitions="*, 50">
+                    <Grid ColumnDefinitions="*, 40">
                         <TextBlock
                             Grid.Column="0"
                             Classes="Dark h2"

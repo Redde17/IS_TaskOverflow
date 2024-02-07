@@ -77,7 +77,6 @@ namespace TaskOverflow.ViewModels
             newDate = newDate.Add(Time.Add(new TimeSpan(1, 0, 0)));
 
             newTask = new(
-                0, //TODO: generate id here
                 CreationTask.name,
                 CreationTask.description,
                 newDate,
@@ -152,7 +151,7 @@ namespace TaskOverflow.ViewModels
 
         public void deleteSelectedTask(Task task)
         {
-            TH.deleteTask(task);
+            TH.removeTask(task);
         }
     }
 }

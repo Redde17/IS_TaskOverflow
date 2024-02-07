@@ -16,6 +16,14 @@ namespace TaskOverflow.Models.TaskManagement
 
         public Task() { }
 
+        public Task(string name, string description, DateTime date, int priority) //constructor
+        {
+            this.name = name;
+            this.description = description;
+            this.date = date;
+            this.priority = priority;
+        }
+
         public Task(int id, string name, string description, DateTime date, int priority, int userId) //constructor
         {
             this.id = id;
