@@ -6,6 +6,7 @@ using System.Reactive.Disposables;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using TaskOverflow.Models.TaskManagement;
 using TaskOverflow.Models.DataPersistency;
 
 namespace TaskOverflow.Models.UserManagement
@@ -66,12 +67,14 @@ namespace TaskOverflow.Models.UserManagement
             return true;
         }
 
-        public bool chooseActiveUser(User user) //Cambia lo user attivo in quel esatto momento.
+        public bool chooseActiveUser(User user, TasksHandler TH) //Cambia lo user attivo in quel esatto momento.
         {
             if (user == null)
                 return false;
 
             activeUser = user;
+            TaskDAO taskDAO = new TaskDAO();
+            TH.tasks = taskDAO.getDBTasks(activeUser);
             return true;
         }
     }

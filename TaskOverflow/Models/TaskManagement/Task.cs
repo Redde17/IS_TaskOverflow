@@ -33,6 +33,5 @@ namespace TaskOverflow.Models.TaskManagement
             this.priority = priority;
             this.userId = userId;
         }
-
     }
 }

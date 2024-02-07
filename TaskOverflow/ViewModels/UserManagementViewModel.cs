@@ -12,7 +12,7 @@ namespace TaskOverflow.ViewModels
         public UserHandler UH { get; }
         public UserManagementViewModel() 
         {
-            UH = new();
+            //UH = new();
         }
     }
 }

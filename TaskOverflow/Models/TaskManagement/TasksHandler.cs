@@ -17,10 +17,12 @@ namespace TaskOverflow.Models.TaskManagement
     public class TasksHandler
     {
         public ObservableCollection<Task> tasks { get; set; }
-        private TaskDAO taskDAO { get; set; }
+        //private TaskDAO taskDAO { get; set; }
         private UserHandler userHandler;
 
         /*
+        NOTA per questa versione:
+            Il db esiste nei file ma non é ancora completamente implementato e testato, quindi niente persistenza.
         TODO
         Trovare un modo per:
         1) Controllare se l'active user funzioni
@@ -28,9 +30,11 @@ namespace TaskOverflow.Models.TaskManagement
 
         public TasksHandler()  //constructor
         {
-            this.taskDAO = new TaskDAO();
             this.userHandler = new UserHandler();
-            //this.tasks = taskDAO.getDBTasks(userHandler.activeUser);
+            //this.taskDAO = new TaskDAO();
+            this.userHandler = new UserHandler();
+
+            
             this.tasks = new ObservableCollection<Task>();
         }
 
@@ -40,7 +44,7 @@ namespace TaskOverflow.Models.TaskManagement
                 return false;
 
             tasks.Add(task);
-            taskDAO.insertTask(task);
+            //taskDAO.insertTask(task);
             return true;
         }
 
@@ -50,7 +54,7 @@ namespace TaskOverflow.Models.TaskManagement
                 return false;
 
             tasks.Remove(task);
-            taskDAO.deleteTask(task);
+            //taskDAO.deleteTask(task);
             return true;
         }
 
