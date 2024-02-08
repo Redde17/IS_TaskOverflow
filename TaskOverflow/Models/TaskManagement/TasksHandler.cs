@@ -17,7 +17,7 @@ namespace TaskOverflow.Models.TaskManagement
     public class TasksHandler
     {
         public ObservableCollection<Task> tasks { get; set; }
-        //private TaskDAO taskDAO { get; set; }
+        private TaskDAO taskDAO { get; set; }
         private UserHandler userHandler;
 
         /*
@@ -31,11 +31,13 @@ namespace TaskOverflow.Models.TaskManagement
         public TasksHandler()  //constructor
         {
             this.userHandler = new UserHandler();
-            //this.taskDAO = new TaskDAO();
+            this.taskDAO = new TaskDAO();
             this.userHandler = new UserHandler();
 
-            
-            this.tasks = new ObservableCollection<Task>();
+            if(userHandler.activeUser == null)
+                this.tasks = new ObservableCollection<Task>();
+            else
+                this.tasks = taskDAO.getDBTasks(userHandler.activeUser);
         }
 
         public bool addTask(Task task) //aggiunge una task alla lista di Task e lo aggiunge al database
@@ -44,7 +46,7 @@ namespace TaskOverflow.Models.TaskManagement
                 return false;
 
             tasks.Add(task);
-            //taskDAO.insertTask(task);
+            taskDAO.insertTask(task);
             return true;
         }
 
@@ -54,7 +56,7 @@ namespace TaskOverflow.Models.TaskManagement
                 return false;
 
             tasks.Remove(task);
-            //taskDAO.deleteTask(task);
+            taskDAO.deleteTask(task);
             return true;
         }
 

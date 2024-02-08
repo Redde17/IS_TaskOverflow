@@ -15,5 +15,4 @@
     Icon="/Assets/avalonia-logo.ico"
     mc:Ignorable="d"
 	Content="{Binding ContentViewModel}">
-    <views:TaskManagementView/>
 </Window>

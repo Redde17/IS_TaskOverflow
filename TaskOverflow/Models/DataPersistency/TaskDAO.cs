@@ -19,7 +19,7 @@ namespace TaskOverflow.Models.DataPersistency
 
             using (var db = new LiteDatabase(connection))
             {
-                var collection = db.GetCollection<Task>("Tasks");
+                var collection = db.GetCollection<Task>("task");
                 List<Task> Tasks = new List<Task>();
                 Tasks = collection.Query()
                     .Where(task => task.userId.Equals(user.id))
@@ -33,7 +33,7 @@ namespace TaskOverflow.Models.DataPersistency
         {
             using (var db = new LiteDatabase(connection))
             {
-                var collection = db.GetCollection<Task>("tasks");
+                var collection = db.GetCollection<Task>("task");
                 collection.Insert(task);
             }
         }
@@ -42,7 +42,7 @@ namespace TaskOverflow.Models.DataPersistency
         {
             using (var db = new LiteDatabase(connection))
             {
-                var collection = db.GetCollection<Task>("tasks");
+                var collection = db.GetCollection<Task>("task");
                 collection.Delete(task.id);
             }
         }

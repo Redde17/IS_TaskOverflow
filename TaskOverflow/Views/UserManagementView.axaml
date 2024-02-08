@@ -3,31 +3,67 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:GeneralElemsViews="clr-namespace:TaskOverflow.Views.GeneralElems"
+    xmlns:UserManagement="clr-namespace:TaskOverflow.Models.UserManagement"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:TaskOverflow.ViewModels"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
     <Grid Background="{StaticResource LighterDarkBackgroundBrush}" ColumnDefinitions="70, *">
         <!--  Sidebar for navigation  -->
-        <GeneralElemsViews:NavBar Grid.Column="0" />
-		
-        <WrapPanel
-            Grid.Column="1"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center">
-            <StackPanel>
-                <Panel Background="{StaticResource DarkBackgroundBrush}">
-                    <TextBlock>
-                        User image
-                    </TextBlock>
+        <Panel Grid.Column="0" Background="{StaticResource DarkBackgroundBrush}">
+            <Grid RowDefinitions="70,70,*,70,70">
+                <Panel Grid.Row="0">
+                    <Image
+                        Width="50"
+                        Height="50"
+                        Margin="10,10"
+                        Source="/Assets/icons/tempLogo.png" />
                 </Panel>
-                <Panel Background="{StaticResource DarkBackgroundBrush}">
-                    <TextBlock>
-                        User name1
-                    </TextBlock>
+            </Grid>
+        </Panel>
+
+        <Grid Grid.Column="1" DataContext="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext)}">
+            <Panel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <ListBox
+                    Background="Transparent"
+                    ItemsSource="{Binding UserManagerVM.UH.users}"
+                    SelectedIndex="{Binding UserListSelectedIndex}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate DataType="{x:Type UserManagement:User}">
+                            <StackPanel>
+                                <TextBlock Classes=" h1" Text="{Binding id}" />
+                                <TextBlock Classes=" h1" Text="{Binding name}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Panel>
+            <Panel HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                <Panel Name="AddNewUserButtonPanel">
+                    <Button Click="AddNewUserButton_Click" Command="{Binding UserManagerVM.StartAddUser}">
+                        Add new user
+                    </Button>
                 </Panel>
-            </StackPanel>
-        </WrapPanel>
+
+                <StackPanel Name="AddNewUserInputPanel" IsVisible="False">
+                    <StackPanel>
+                        <TextBlock>
+                            Inserire nome utente:
+                        </TextBlock>
+                        <TextBox Text="{Binding UserManagerVM.CreationUser.name}" Watermark="Inserire nome utente" />
+                    </StackPanel>
+                    <WrapPanel>
+                        <Button Click="AddNewUserDone_Click" Command="{Binding UserManagerVM.AddUser}">
+                            Annulla
+                        </Button>
+                        <Button Click="AddNewUserDone_Click" Command="{Binding UserManagerVM.AddUser}">
+                            Crea
+                        </Button>
+                    </WrapPanel>
+                </StackPanel>
+            </Panel>
+        </Grid>
     </Grid>
 </UserControl>

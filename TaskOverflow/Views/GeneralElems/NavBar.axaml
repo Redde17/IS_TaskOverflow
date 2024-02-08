@@ -33,20 +33,20 @@
                     Source="/Assets/icons/task.png" />
             </Button>
             <Panel Grid.Row="2" />
-            <Button Grid.Row="3" Classes="NavBarButton">
+            <!--<Button Grid.Row="3" Classes="NavBarButton">
                 <Image
                     Width="50"
                     Height="50"
                     Margin="10,10"
                     Source="/Assets/icons/notification.png" />
-            </Button>
+            </Button>-->
 
             <Button
                 Name="UserManagementViewButton"
                 Grid.Row="4"
                 Classes="NavBarButton"
                 Click="clickHandlerUserManagmentView"
-                Command="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext).navigateToUserManager}">
+                Command="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext).navigateToUserPage}">
                 <Image
                     Width="50"
                     Height="50"
