@@ -90,6 +90,7 @@ namespace TaskOverflow.ViewModels
         public void DeleteActiveUser()
         {
             //delete the user
+            UH.removeUser(UH.activeUser);
 
             //navigate to user selection page
             navigateToUserManager();
