@@ -19,7 +19,7 @@ namespace TaskOverflow.Models.DataPersistency
 
             using (var db = new LiteDatabase(connection))
             {
-                var collection = db.GetCollection<User>("Users");
+                var collection = db.GetCollection<User>("user");
                 List<User> Users = new List<User>();
                 Users = collection.Query()
                     .Select(user => user)

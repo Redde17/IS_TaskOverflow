@@ -18,5 +18,10 @@ namespace TaskOverflow.Models.UserManagement
             this.id = id;
             this.name = name;
         }
+
+        public User(string name)
+        {
+            this.name = name;
+        }
     }
 }
