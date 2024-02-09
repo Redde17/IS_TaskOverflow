@@ -47,16 +47,7 @@ namespace TaskOverflow.ViewModels
         public void AddUser()
         {
             printDebug($"Adding user with name: {CreationUser.name}");
-        }
-
-        public void RemoveUser()
-        {
-
-        }
-
-        public void ModifyUser()
-        {
-
+            UH.addUser( CreationUser );
         }
 
         //Debug functions

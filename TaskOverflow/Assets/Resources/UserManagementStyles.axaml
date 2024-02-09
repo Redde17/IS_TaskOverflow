@@ -1,0 +1,77 @@
+<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Design.PreviewWith>
+        <Border Padding="20">
+            <!--  Add Controls for Previewer Here  -->
+        </Border>
+    </Design.PreviewWith>
+
+	<!--  TextBox and TitleTextBox styles  -->
+	<Style Selector="TextBox">
+		<Style Selector="^.TitleTextBox">
+			<Setter Property="VerticalAlignment" Value="Center" />
+			<Setter Property="Foreground" Value="{StaticResource LightTextBrush}" />
+			<Setter Property="FontSize" Value="25" />
+			<Setter Property="Margin" Value="15 0 10 5" />
+			<Setter Property="Padding" Value="0 0 10 5" />
+
+			<Style Selector="^ /template/ Border#PART_BorderElement">
+				<Setter Property="BorderThickness" Value="0 0 0 2" />
+				<Setter Property="CornerRadius" Value="0" />
+				<Setter Property="BorderBrush" Value="White" />
+				<Setter Property="Background" Value="Transparent" />
+			</Style>
+
+			<Style Selector="^ /template/ TextBlock#PART_Watermark">
+				<Setter Property="Foreground" Value="{StaticResource LightTextBrush}" />
+				<Setter Property="FontSize" Value="25" />
+			</Style>
+
+			<!--  Focus state  -->
+			<Style Selector="^:focus">
+				<Style Selector="^ /template/ TextPresenter#PART_TextPresenter">
+					<Setter Property="CaretBrush" Value="{StaticResource LightTextBrush}" />
+				</Style>
+			</Style>
+
+		</Style>
+
+		<!--  Focus state  -->
+		<Style Selector="^:focus">
+			<Style Selector="^ /template/ Border#PART_BorderElement">
+				<Setter Property="BorderBrush" Value="{StaticResource MainLinearGradientBrush}" />
+			</Style>
+		</Style>
+	</Style>
+	
+	
+		<!--  UserControlButtons Styles  -->
+    <Style Selector="Button.UserControlButton">
+        <Setter Property="Width" Value="180" />
+        <Setter Property="Height" Value="40" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="CornerRadius" Value="10" />
+		<Setter Property="Background" Value="{StaticResource DarkBackgroundBrush}"/>
+
+        <Style Selector="^ Image">
+            <Setter Property="Width" Value="25" />
+            <Setter Property="Height" Value="25" />
+        </Style>
+
+        <Style Selector="^ Panel">
+            <Setter Property="Width" Value="40" />
+            <Setter Property="Height" Value="40" />
+        </Style>
+
+        <Style Selector="^ Border">
+            <Setter Property="CornerRadius" Value="5" />
+            <Setter Property="ClipToBounds" Value="True" />
+        </Style>
+
+        <Style Selector="^ TextBlock">
+            <Setter Property="FontWeight" Value="DemiBold" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+        </Style>
+    </Style>
+</Styles>

@@ -5,14 +5,18 @@ namespace TaskOverflow.ViewModels
 {
     public class UserPageViewModel : ViewModelBase
     {
+        private UserHandler UH { get; }
         private User _modifiedActiveUser;
+        private string _userName;
+        public string UserName { 
+            get => UH.activeUser.name; 
+            private set => this.RaiseAndSetIfChanged(ref _userName, value); 
+        }
         public User ModifiedActiveUser
         {
             get => _modifiedActiveUser;
             private set => this.RaiseAndSetIfChanged(ref _modifiedActiveUser, value);
         }
-
-        public UserHandler UH { get; }
 
         public UserPageViewModel(UserHandler UH) 
         {
@@ -35,6 +39,12 @@ namespace TaskOverflow.ViewModels
             System.Diagnostics.Debug.WriteLine(
                 "User modification button pressed process finalizing\n"
             );
+            UH.modifyUser(UH.activeUser, ModifiedActiveUser);
+
+            //notify change
+            //change is only to trigger the change to the ui, the actual value of the variable is not really used
+            //as the information used is from the UserHandler directly 
+            UserName = ModifiedActiveUser.name;
         }
     }
 }

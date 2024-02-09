@@ -59,12 +59,14 @@ namespace TaskOverflow.ViewModels
         public MainWindowViewModel()
         {
             UH = new UserHandler();
-            TH = new TasksHandler();
+            TH = new TasksHandler(UH);
 
             //MainWindow init
             TaskManagerVM = new TaskManagementViewModel(TH);
             UserManagerVM = new UserManagementViewModel(UH);
             UserPageVM = new UserPageViewModel(UH);
+
+            _userListSelectedIndex= -1;
 
             //ContentViewModel = TaskManagerVM;
             ContentViewModel = UserManagerVM;
@@ -73,7 +75,7 @@ namespace TaskOverflow.ViewModels
         private void ChangeSelectedUser(int choosenUserIndex)
         {
             UH.chooseActiveUser(UH.users[choosenUserIndex], TH);
-            printDebug($"changing active user to index: {choosenUserIndex}\n");
+            printDebug($"changing active user to index: {UH.users[choosenUserIndex].name}\n");
 
             printDebug($"fetched list:\n");
             //print tasks list for debug

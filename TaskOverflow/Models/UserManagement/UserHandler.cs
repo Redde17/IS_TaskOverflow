@@ -56,7 +56,7 @@ namespace TaskOverflow.Models.UserManagement
             if (oldUser == null || newUser == null)
                 return false;
 
-            if (users.Contains(oldUser))
+            if (!users.Contains(oldUser))
                 return false;
 
             users.Remove(oldUser);

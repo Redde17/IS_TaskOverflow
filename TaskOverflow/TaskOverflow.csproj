@@ -21,6 +21,10 @@
     <AvaloniaResource Remove="Assets\Resources\ThemeDictionary.axaml" />
   </ItemGroup>
 
+  <ItemGroup>
+    <AvaloniaXaml Remove="Assets\Resources\UserManagementStyles.axaml" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="11.0.6" />
@@ -43,6 +47,13 @@
 
   <ItemGroup>
     <Folder Include="Assets\icons\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <AvaloniaResource Update="Assets\Resources\UserManagementStyles.axaml">
+      <SubType>Designer</SubType>
+    </AvaloniaResource>
   </ItemGroup>
 
 

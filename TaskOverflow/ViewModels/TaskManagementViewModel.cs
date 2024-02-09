@@ -50,6 +50,7 @@ namespace TaskOverflow.ViewModels
         {
             this.TH = TH;     
             ComboBoxSelectedIndex = 0; // application start with task list sorted by priority up
+            _taskListComboBoxSelectedIndex = -1;
             TaskVM = new(this.TH);
         }
 
