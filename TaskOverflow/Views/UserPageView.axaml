@@ -16,7 +16,7 @@
 
         <Grid Grid.Column="1" DataContext="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext)}">
             <!--  Show user information  -->
-            <StackPanel>
+            <StackPanel Name="UserInformationPanel">
                 <Border BorderBrush="Black" BorderThickness="2">
                     <Panel
                         HorizontalAlignment="Center"
@@ -28,21 +28,20 @@
                             </TextBlock>
                             <TextBlock Text="{Binding UH.activeUser.name}" />
                         </StackPanel>
-
                     </Panel>
                 </Border>
                 <WrapPanel>
-                    <Button>
+                    <Button Command="{Binding DeleteActiveUser}">
                         Elimina
                     </Button>
-                    <Button>
+                    <Button Command="{Binding UserPageVM.StartModifyUser}" Click="ModifyUserButtonClick">
                         Modifica
                     </Button>
                 </WrapPanel>
             </StackPanel>
 
             <!--  Modify user information  -->
-            <StackPanel IsVisible="False">
+            <StackPanel Name="ModifyUserInformationPanel" IsVisible="False">
                 <Border BorderBrush="Black" BorderThickness="2">
                     <Panel
                         HorizontalAlignment="Center"
@@ -52,16 +51,16 @@
                             <TextBlock>
                                 Name:
                             </TextBlock>
-                            <TextBox Text="nothing" />
+                            <TextBox Text="{Binding ModifiedActiveUser.name}" />
                         </StackPanel>
 
                     </Panel>
                 </Border>
                 <WrapPanel>
-                    <Button>
+                    <Button Click="EndModifyUserButtonClick">
                         Annulla
                     </Button>
-                    <Button Command="{Binding UserPageVM.modifyUser}">
+                    <Button Command="{Binding UserPageVM.EndModifyUser}" Click="EndModifyUserButtonClick">
                         Conferma
                     </Button>
                 </WrapPanel>

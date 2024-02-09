@@ -49,7 +49,10 @@ namespace TaskOverflow.ViewModels
                 else //no user selected
                     printDebug($"user not selected with id: {value}");
 
-                _userListSelectedIndex = value;
+                //set selected user to none, as the information is not needed anymore
+                //keeping it will cause a selected list item to appear on the list during user selection
+                //that blocks the selected item from beign selected again.
+                _userListSelectedIndex = -1;
             }
         }
 
@@ -80,6 +83,14 @@ namespace TaskOverflow.ViewModels
             }
 
             navigateToTaskManager();
+        }
+
+        public void DeleteActiveUser()
+        {
+            //delete the user
+
+            //navigate to user selection page
+            navigateToUserManager();
         }
 
         //navigation functions

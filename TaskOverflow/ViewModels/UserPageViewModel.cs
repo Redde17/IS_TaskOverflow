@@ -1,9 +1,4 @@
 ﻿using ReactiveUI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TaskOverflow.Models.UserManagement;
 
 namespace TaskOverflow.ViewModels
@@ -18,7 +13,6 @@ namespace TaskOverflow.ViewModels
         }
 
         public UserHandler UH { get; }
-        public User NewCurrentActiveUser { get; set; }
 
         public UserPageViewModel(UserHandler UH) 
         {
@@ -27,10 +21,20 @@ namespace TaskOverflow.ViewModels
             _modifiedActiveUser = new();
         }
 
-        public void modifyUser()
+        public void StartModifyUser()
+        {
+            System.Diagnostics.Debug.WriteLine(
+                "User modification button pressed, process started\n"
+            );
+            ModifiedActiveUser = UH.activeUser;
+        }
+
+        public void EndModifyUser()
         {
             //ModifiedActiveUser = NewCurrentActiveUser;
-                        
+            System.Diagnostics.Debug.WriteLine(
+                "User modification button pressed process finalizing\n"
+            );
         }
     }
 }
