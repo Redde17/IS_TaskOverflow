@@ -1,5 +1,4 @@
 ﻿using ReactiveUI;
-using System;
 using TaskOverflow.Models.TaskManagement;
 using TaskOverflow.Models.UserManagement;
 
@@ -100,6 +99,7 @@ namespace TaskOverflow.ViewModels
         public void navigateToUserManager()
         {
             ContentViewModel = UserManagerVM;
+            UserManagerVM.UserListChanged(); //checks for how many users are in the user list to change some gui.
         }
 
         public void navigateToTaskManager()

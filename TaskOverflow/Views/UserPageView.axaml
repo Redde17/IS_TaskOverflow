@@ -81,7 +81,7 @@
                         HorizontalAlignment="Right"
                         Background="{StaticResource DarkBackgroundBrush}"
                         Classes="ControlButton"
-						Click="ModifyUserButtonClick"
+                        Click="ModifyUserButtonClick"
                         Command="{Binding UserPageVM.StartModifyUser}">
                         <Grid ColumnDefinitions="*, 40">
                             <TextBlock
@@ -99,31 +99,6 @@
             </StackPanel>
 
             <!--  Modify user information  -->
-            <!--<StackPanel Name="ModifyUserInformationPanel" IsVisible="False">
-                <Border BorderBrush="Black" BorderThickness="2">
-                    <Panel
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        DataContext="{Binding UserPageVM}">
-                        <StackPanel>
-                            <TextBlock>
-                                Name:
-                            </TextBlock>
-                            <TextBox Text="{Binding ModifiedActiveUser.name}" />
-                        </StackPanel>
-
-                    </Panel>
-                </Border>
-                <WrapPanel>
-                    <Button Click="EndModifyUserButtonClick">
-                        Annulla
-                    </Button>
-                    <Button Click="EndModifyUserButtonClick" Command="{Binding UserPageVM.EndModifyUser}">
-                        Conferma
-                    </Button>
-                </WrapPanel>
-            </StackPanel>-->
-
             <StackPanel
                 Name="ModifyUserInformationPanel"
                 Width="700"

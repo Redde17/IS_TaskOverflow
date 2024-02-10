@@ -12,10 +12,18 @@ namespace TaskOverflow.ViewModels
     public class UserManagementViewModel : ViewModelBase
     {
         private User _creationUser;
+        private string _userListTitleText;
+
         public User CreationUser 
         { 
             get => _creationUser;
             private set => this.RaiseAndSetIfChanged(ref _creationUser, value);
+        }
+
+        public string UserListTitleText
+        {
+            get => _userListTitleText;
+            private set => this.RaiseAndSetIfChanged(ref _userListTitleText, value);
         }
 
         public UserHandler UH { get; }
@@ -24,19 +32,7 @@ namespace TaskOverflow.ViewModels
             this.UH = UH;
             CreationUser = new User();
 
-            //UH.addUser(new User(1, "Name1"));
-            //UH.addUser(new User(2, "Name2"));
-            //UH.addUser(new User(3, "Name3"));
-            //UH.addUser(new User(4, "Name4"));
-
-            if (UH.users.Count == 0)
-                System.Diagnostics.Debug.WriteLine($"User list empty\n");
-            foreach (User user in UH.users) 
-            {
-                System.Diagnostics.Debug.WriteLine(
-                    $"\nID: {user.id} NAME: {user.name}\n"
-                );
-            }
+            UserListChanged();
         }
 
         public void StartAddUser()
@@ -48,6 +44,15 @@ namespace TaskOverflow.ViewModels
         {
             printDebug($"Adding user with name: {CreationUser.name}");
             UH.addUser( CreationUser );
+            UserListChanged();
+        }
+
+        public void UserListChanged()
+        {
+            if(UH.users.Count > 0)
+                UserListTitleText = "Seleziona un profilo";
+            else
+                UserListTitleText = "Crea un nuovo profilo";
         }
 
         //Debug functions

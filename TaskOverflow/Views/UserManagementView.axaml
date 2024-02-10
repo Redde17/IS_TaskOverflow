@@ -10,6 +10,12 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
+
+    <UserControl.Styles>
+        <StyleInclude Source="/Assets/Resources/UserManagementStyles.axaml" />
+        <StyleInclude Source="/Assets/Resources/TaskViewStyles.axaml" />
+    </UserControl.Styles>
+
     <Grid Background="{StaticResource LighterDarkBackgroundBrush}" ColumnDefinitions="70, *">
         <!--  Sidebar for navigation  -->
         <Panel Grid.Column="0" Background="{StaticResource DarkBackgroundBrush}">
@@ -24,45 +30,123 @@
             </Grid>
         </Panel>
 
+        <!--  Users list grid  -->
         <Grid Grid.Column="1" DataContext="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext)}">
-            <Panel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <!--  Users list title  -->
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    Classes="Light h1"
+                    FontWeight="DemiBold"
+                    Text="{Binding UserManagerVM.UserListTitleText}" />
+                <!--  Users list  -->
                 <ListBox
+                    HorizontalAlignment="Center"
                     Background="Transparent"
                     ItemsSource="{Binding UserManagerVM.UH.users}"
                     SelectedIndex="{Binding UserListSelectedIndex}">
+
+                    <!--  Users list orientation definition  -->
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+
+                    <!--  Users list items definition  -->
                     <ListBox.ItemTemplate>
                         <DataTemplate DataType="{x:Type UserManagement:User}">
-                            <StackPanel>
-                                <TextBlock Classes=" h1" Text="{Binding id}" />
-                                <TextBlock Classes=" h1" Text="{Binding name}" />
+                            <StackPanel Classes="UserListCard">
+                                <Border Name="UserIconPanel">
+                                    <Panel>
+                                        <Image Source="/Assets/icons/user.png" />
+                                    </Panel>
+                                </Border>
+                                <Border Name="UserNamePanel">
+                                    <Panel>
+                                        <TextBlock
+                                            Margin="10,5,10,5"
+                                            Classes="Light h2"
+                                            FontWeight="DemiBold"
+                                            Text="{Binding name}" />
+                                    </Panel>
+                                </Border>
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-            </Panel>
+            </StackPanel>
+            <!--  Panel to manage new users cretion  -->
             <Panel HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                <Panel Name="AddNewUserButtonPanel">
-                    <Button Click="AddNewUserButton_Click" Command="{Binding UserManagerVM.StartAddUser}">
-                        Add new user
+                <!--  New user button add  -->
+                <Panel Name="AddNewUserButtonPanel" Margin="10">
+                    <Button
+                        Width="350"
+                        Background="{StaticResource DarkBackgroundBrush}"
+                        Classes="ControlButton"
+                        Click="AddNewUserButton_Click"
+                        Command="{Binding UserManagerVM.StartAddUser}">
+                        <TextBlock Classes="Light h2" Text="Crea un nuovo profilo" />
                     </Button>
                 </Panel>
 
-                <StackPanel Name="AddNewUserInputPanel" IsVisible="False">
-                    <StackPanel>
-                        <TextBlock>
-                            Inserire nome utente:
-                        </TextBlock>
-                        <TextBox Text="{Binding UserManagerVM.CreationUser.name}" Watermark="Inserire nome utente" />
+                <!--  Panel for adding new user  -->
+                <Border
+                    Name="AddNewUserInputPanel"
+                    Margin="10"
+                    Classes="UserCreationPanel"
+                    IsVisible="False">
+                    <StackPanel Width="500" Margin="10">
+                        <StackPanel>
+                            <TextBlock
+                                Classes="Light h3"
+                                FontWeight="DemiBold"
+                                Text="Nome profilo" />
+                            <TextBox
+                                Classes="TitleTextBox"
+                                Text="{Binding UserManagerVM.CreationUser.name}"
+                                Watermark="Inserire il nome del profilo" />
+                        </StackPanel>
+                        <Panel Width="500" Margin="0,10,0,0">
+                            <Button
+                                HorizontalAlignment="Left"
+                                Classes="ControlButton"
+                                Click="AddNewUserDone_Click"
+                                Command="{Binding UserManagerVM.AddUser}">
+
+                                <Grid ColumnDefinitions="40, *">
+                                    <Border Grid.Column="0">
+                                        <Panel Background="{StaticResource HighPrioritySelectedBrush}">
+                                            <Image Source="/Assets/icons/RemoveButtonIconDark.png" />
+                                        </Panel>
+                                    </Border>
+                                    <TextBlock
+                                        Grid.Column="1"
+                                        Classes="Light h2"
+                                        Text="Annulla" />
+                                </Grid>
+                            </Button>
+                            <Button
+                                HorizontalAlignment="Right"
+                                Classes="ControlButton"
+                                Click="AddNewUserDone_Click"
+                                Command="{Binding UserManagerVM.AddUser}">
+
+                                <Grid ColumnDefinitions="*, 40">
+                                    <TextBlock
+                                        Grid.Column="0"
+                                        Classes="Light h2"
+                                        Text="Crea" />
+                                    <Border Grid.Column="1">
+                                        <Panel Background="{StaticResource LowPrioritySelectedBrush}">
+                                            <Image Source="/Assets/icons/CreateButtonIconDark.png" />
+                                        </Panel>
+                                    </Border>
+                                </Grid>
+                            </Button>
+                        </Panel>
                     </StackPanel>
-                    <WrapPanel>
-                        <Button Click="AddNewUserDone_Click" Command="{Binding UserManagerVM.AddUser}">
-                            Annulla
-                        </Button>
-                        <Button Click="AddNewUserDone_Click" Command="{Binding UserManagerVM.AddUser}">
-                            Crea
-                        </Button>
-                    </WrapPanel>
-                </StackPanel>
+                </Border>
             </Panel>
         </Grid>
     </Grid>
