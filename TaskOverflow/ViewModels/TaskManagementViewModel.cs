@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using Avalonia.Controls.Notifications;
 using TaskOverflow.Models.Notification;
+using TaskOverflow.Models.SystemAlert;
 using TaskOverflow.Models.TaskManagement;
 using TaskOverflow.Views.TaskManagementElems;
 using Notification = Avalonia.Controls.Notifications.Notification;
@@ -178,12 +179,10 @@ namespace TaskOverflow.ViewModels
         {
            Console.WriteLine("\nTest del NotificationHandler\n");
            
-           NotificationHandler notificationHandler = new NotificationHandler();
-
-           notificationHandler.showableNotifications.CollectionChanged += (sender, e) =>
-           {
-                Console.WriteLine($"{e.Action}");
-           };
+           AlertHandler alertHandler = new AlertHandler();
+           alertHandler.initHandler();
+           
+           NotificationHandler notificationHandler = new NotificationHandler(alertHandler);
            
            notificationHandler.pushNotification(new SystemNotification(notificationHandler.generateID(), "Test", "Prova", SystemNotification.NotificationType.Alert));
            notificationHandler.pushNotification(new TaskNotification(notificationHandler.generateID(), "Test2", "Task di test", new Task(0, "Task", "Task di test", new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour, DateTime.Now.Minute+1, 0))));
