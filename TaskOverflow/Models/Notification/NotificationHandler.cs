@@ -3,7 +3,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using TaskOverflow.Models.SystemAlert;
 
 namespace TaskOverflow.Models.Notification;
 
@@ -14,7 +13,6 @@ public class NotificationHandler
 
     public NotificationHandler() //builder
     {
-        AlertHandler alertHandler = new AlertHandler();
         showableNotifications = new ObservableCollection<Notification>();
         _tasksBeingChecked = new Collection<TaskNotification>();
 
@@ -26,7 +24,7 @@ public class NotificationHandler
         if (notification.GetType() == typeof(TaskNotification))
         {
             _tasksBeingChecked.Add((TaskNotification)notification);
-            _tasksBeingChecked.OrderBy(taskNotification => taskNotification.getReferredTask().date);
+            orderTasksByDate();
             showableNotifications.Add(new SystemNotification(generateID(), "Notifica creata correttamente", "TaskOverflow ti avviserà quando il tuo task sarà in scadenza", SystemNotification.NotificationType.Confirm));
         }
         else
@@ -39,9 +37,16 @@ public class NotificationHandler
     {
         Notification poppedNotification; //Salva temporaneamente la notifica in cima
 
-        poppedNotification = showableNotifications[0];
-        showableNotifications.RemoveAt(0);
-        return poppedNotification;
+        if (showableNotifications.Any())
+        {
+            poppedNotification = showableNotifications[0];
+            showableNotifications.RemoveAt(0);
+            return poppedNotification;
+        }
+        else
+        {
+            throw new InvalidOperationException("Non sono presenti notifiche in coda.");
+        }
     }
 
     public int generateID()
@@ -69,5 +74,28 @@ public class NotificationHandler
             }
         }
     }
+    
+     public void orderTasksByDate() //letteralmente TasksHandler.ascSort() solo per le date
+            {
+                int i, j;
+                for (i = 0; i < _tasksBeingChecked.Count - 1; i++) 
+                {
+                        int min = i;
+                        for (j = i + 1; j < _tasksBeingChecked.Count; j++)
+                        {
+                            if (_tasksBeingChecked[j].getReferredTask().date < _tasksBeingChecked[min].getReferredTask().date)
+                            {
+                                min = j;
+                                break;
+                            }
+                        }
+                        if (min != i)
+                        {
+                            TaskNotification temp = _tasksBeingChecked[min];
+                            _tasksBeingChecked[i] = _tasksBeingChecked[min];
+                            _tasksBeingChecked[min] = temp;
+                        }
+                }
+            }
     
 }
