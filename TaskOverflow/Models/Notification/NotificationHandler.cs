@@ -65,12 +65,15 @@ public class NotificationHandler
         var periodicTimer = new PeriodicTimer(TimeSpan.FromSeconds(60));
         while (await periodicTimer.WaitForNextTickAsync())
         {
-            TaskManagement.Task referredTask = _tasksBeingChecked[0].getReferredTask();
-            Console.WriteLine("Tic tac");
-            if (referredTask.date.Minute == DateTime.Now.Minute)
+            if (_tasksBeingChecked.Any())
             {
-                showableNotifications.Add(_tasksBeingChecked[0]);
-                _tasksBeingChecked.RemoveAt(0);
+                TaskManagement.Task referredTask = _tasksBeingChecked[0].getReferredTask();
+                Console.WriteLine("Tic tac");
+                if ((referredTask.date.Date == DateTime.Now.Date) && (referredTask.date.Hour == DateTime.Now.Hour) && (referredTask.date.Minute == DateTime.Now.Minute))
+                {
+                    showableNotifications.Add(_tasksBeingChecked[0]);
+                    _tasksBeingChecked.RemoveAt(0);
+                }
             }
         }
     }
