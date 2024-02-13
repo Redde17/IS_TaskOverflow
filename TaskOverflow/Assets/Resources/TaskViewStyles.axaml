@@ -17,7 +17,7 @@
                 </TextBlock>-->
                         <TextBox
                             Grid.Row="1"
-                            Classes="TitleTextBox"
+                            Classes="TitleTextBox ErrorTextBox"
                             Text="Test"
                             Watermark="Inserisci il titolo" />
                     </Grid>
@@ -180,16 +180,18 @@
                 <Style Selector="^ /template/ TextPresenter#PART_TextPresenter">
                     <Setter Property="CaretBrush" Value="{StaticResource LightTextBrush}" />
                 </Style>
+				<Style Selector="^ /template/ Border#PART_BorderElement">
+					<Setter Property="BorderBrush" Value="{StaticResource MainLinearGradientBrush}" />
+				</Style>
             </Style>
 
         </Style>
 
-        <!--  Focus state  -->
-        <Style Selector="^:focus">
-            <Style Selector="^ /template/ Border#PART_BorderElement">
-                <Setter Property="BorderBrush" Value="{StaticResource MainLinearGradientBrush}" />
-            </Style>
-        </Style>
+		<Style Selector="^.ErrorTextBox">
+			<Style Selector="^ /template/ Border#PART_BorderElement">
+				<Setter Property="BorderBrush" Value="{StaticResource HighPrioritySelectedBrush}" />
+			</Style>
+		</Style>
     </Style>
 
     <!--  Priority selection styles  -->
