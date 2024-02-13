@@ -1,8 +1,11 @@
 using System;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using TaskOverflow.Models.SystemAlert;
 
 namespace TaskOverflow.Models.Notification;
 
@@ -11,12 +14,27 @@ public class NotificationHandler
     public ObservableCollection<Notification> showableNotifications { get; set; } //Questa è una coda (push in coda, pop a [0]) in cui mettere le notifiche che saranno mostrate come pop-up
     private Collection<TaskNotification> _tasksBeingChecked { get; set; } //Questa Collection contiene le task che devono ancora scadere e su cui quindi dover effettuare il controllo della scadenza
 
-    public NotificationHandler() //builder
+    public NotificationHandler(AlertHandler alertHandler) //builder
     {
         showableNotifications = new ObservableCollection<Notification>();
         _tasksBeingChecked = new Collection<TaskNotification>();
+        
+        initNotification(alertHandler);
+    }
 
-        CheckExpiringTasks();
+    public async void initNotification(AlertHandler alertHandler)
+    {
+        
+        showableNotifications.CollectionChanged += (sender, e) =>
+        {
+            Console.WriteLine($"{e.Action}");
+            if (e.Action == NotifyCollectionChangedAction.Add)
+            {
+                alertHandler.showAlert(showableNotifications[0]);
+            }
+        };
+        
+        await CheckExpiringTasks();
     }
 
     public void pushNotification(Notification notification)
