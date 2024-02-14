@@ -30,6 +30,8 @@ namespace TaskOverflow.Models.DataPersistency
 
         public void insertUser(User user) //Inserisce un utente all'interno del database
         {
+            if (user == null) return;
+
             using (var db = new LiteDatabase(connection))
             {
                 var collection = db.GetCollection<User>("user");
