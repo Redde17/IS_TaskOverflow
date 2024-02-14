@@ -64,6 +64,7 @@ namespace TaskOverflow.ViewModels
         {
             this.TH = TH;
             CreationTask = new();
+            CreationTask.description = "";
             Date = DateTimeOffset.Now;
         }
 
@@ -75,6 +76,16 @@ namespace TaskOverflow.ViewModels
             //Aggiungo un ora poiché per qualche motivo durante la conversione ne sparisce una, non so perché
             newDate = Date.UtcDateTime;
             newDate = newDate.Add(Time.Add(new TimeSpan(1, 0, 0)));
+
+            if (CreationTask.name.Length > 50)
+                return; // Descrizione troppo lunga
+
+            if(!string.IsNullOrEmpty(CreationTask.description))
+                if (CreationTask.description.Length > 500)
+                    return; // Descrizione troppo lunga
+
+            if(newDate.CompareTo(DateTime.Now) < 0)
+                return; // La data di scadenza é prima della data corrente
 
             newTask = new(
                 CreationTask.name,

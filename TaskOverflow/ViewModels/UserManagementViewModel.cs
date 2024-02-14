@@ -42,6 +42,8 @@ namespace TaskOverflow.ViewModels
 
         public void AddUser()
         {
+            if (CreationUser.name.Length > 30) return;
+
             printDebug($"Adding user with name: {CreationUser.name}");
             UH.addUser( CreationUser );
             UserListChanged();

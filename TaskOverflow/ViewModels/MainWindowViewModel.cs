@@ -40,14 +40,9 @@ namespace TaskOverflow.ViewModels
             get => _userListSelectedIndex;
             set
             {
-                if (value >= 0)
-                { //change selected user
+                if (value >= 0) //change selected user
                     ChangeSelectedUser(value);
-                    printDebug($"user changed to id: {value}");
-                }
-                else //no user selected
-                    printDebug($"user not selected with id: {value}");
-
+                
                 //set selected user to none, as the information is not needed anymore
                 //keeping it will cause a selected list item to appear on the list during user selection
                 //that blocks the selected item from beign selected again.
@@ -71,18 +66,9 @@ namespace TaskOverflow.ViewModels
             ContentViewModel = UserManagerVM;
         }
 
-        private void ChangeSelectedUser(int choosenUserIndex)
+        public void ChangeSelectedUser(int choosenUserIndex)
         {
             UH.chooseActiveUser(UH.users[choosenUserIndex], TH);
-            printDebug($"changing active user to index: {UH.users[choosenUserIndex].name}\n");
-
-            printDebug($"fetched list:\n");
-            //print tasks list for debug
-            foreach (Task task in TH.tasks) 
-            {
-                printDebug($"Task name: {task.name}\n");
-            }
-
             navigateToTaskManager();
         }
 
@@ -99,7 +85,9 @@ namespace TaskOverflow.ViewModels
         public void navigateToUserManager()
         {
             ContentViewModel = UserManagerVM;
-            UserManagerVM.UserListChanged(); //checks for how many users are in the user list to change some gui.
+
+            //checks for how many users are in the user list to change some gui.
+            UserManagerVM.UserListChanged(); 
         }
 
         public void navigateToTaskManager()
@@ -111,14 +99,6 @@ namespace TaskOverflow.ViewModels
         {
             //UserPageVM.changeUser(UH.activeUser);
             ContentViewModel = UserPageVM;
-        }
-        
-        //Debug functions
-        public void printDebug(string message)
-        {
-            System.Diagnostics.Debug.WriteLine(
-                $"\nDEBUG message:\n{message}\n"
-            );
         }
     }
 }
