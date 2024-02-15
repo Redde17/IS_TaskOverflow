@@ -1,35 +1,63 @@
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using TaskOverflow.Models.SystemAlert;
 
 namespace TaskOverflow.Models.Notification;
 
 public class NotificationHandler
 {
     public ObservableCollection<Notification> showableNotifications { get; set; } //Questa è una coda (push in coda, pop a [0]) in cui mettere le notifiche che saranno mostrate come pop-up
-    private Collection<TaskNotification> _tasksBeingChecked { get; set; } //Questa Collection contiene le task che devono ancora scadere e su cui quindi dover effettuare il controllo della scadenza
+    private List<TaskNotification> _tasksBeingChecked { get; set; } //Questa Collection contiene le task che devono ancora scadere e su cui quindi dover effettuare il controllo della scadenza
 
-    public NotificationHandler() //builder
+    public NotificationHandler(AlertHandler alertHandler) //builder
     {
         showableNotifications = new ObservableCollection<Notification>();
-        _tasksBeingChecked = new Collection<TaskNotification>();
+        _tasksBeingChecked = new List<TaskNotification>();
+        
+        initNotification(alertHandler);
+    }
 
-        CheckExpiringTasks();
+    public async void initNotification(AlertHandler alertHandler)
+    {
+        
+        showableNotifications.CollectionChanged += (sender, e) =>
+        {
+            Console.WriteLine($"{e.Action}");
+            if (e.Action == NotifyCollectionChangedAction.Add)
+            {
+                alertHandler.showAlert(showableNotifications[0]);
+            }
+        };
+        
+        await CheckExpiringTasks();
     }
 
     public void pushNotification(Notification notification)
     {
-        if (notification.GetType() == typeof(TaskNotification))
+        switch (notification.GetType())
         {
-            _tasksBeingChecked.Add((TaskNotification)notification);
-            orderTasksByDate();
-            showableNotifications.Add(new SystemNotification(generateID(), "Notifica creata correttamente", "TaskOverflow ti avviserà quando il tuo task sarà in scadenza", SystemNotification.NotificationType.Confirm));
-        }
-        else
-        {
-            showableNotifications.Add(notification); //Add aggiunge in coda   
+            case Type tn when tn==typeof(TaskNotification):
+            {
+                _tasksBeingChecked.Add((TaskNotification)notification);
+                orderTasksByDate();
+                showableNotifications.Add(new SystemNotification(generateID(), "Notifica creata correttamente", "TaskOverflow ti avviserà quando il tuo task sarà in scadenza", SystemNotification.NotificationType.Confirm));
+                break;
+            }
+            case Type sn when sn == typeof(SystemNotification):
+            {
+                showableNotifications.Add(notification);
+                break;
+            }
+            default:
+            {
+                throw new NotImplementedException("Questo tipo di notifica non è supportata");
+            }
         }
     }
     
@@ -79,26 +107,13 @@ public class NotificationHandler
     }
     
      public void orderTasksByDate() //letteralmente TasksHandler.ascSort() solo per le date
-            {
-                int i, j;
-                for (i = 0; i < _tasksBeingChecked.Count - 1; i++) 
-                {
-                        int min = i;
-                        for (j = i + 1; j < _tasksBeingChecked.Count; j++)
-                        {
-                            if (_tasksBeingChecked[j].getReferredTask().date < _tasksBeingChecked[min].getReferredTask().date)
-                            {
-                                min = j;
-                                break;
-                            }
-                        }
-                        if (min != i)
-                        {
-                            TaskNotification temp = _tasksBeingChecked[min];
-                            _tasksBeingChecked[i] = _tasksBeingChecked[min];
-                            _tasksBeingChecked[min] = temp;
-                        }
-                }
-            }
+     {
+         _tasksBeingChecked = _tasksBeingChecked.OrderBy(notification => notification.getReferredTask().date).ToList();
+     }
+
+     public List<TaskNotification> getTaskNotificationList()
+     {
+         return _tasksBeingChecked;
+     }
     
 }
