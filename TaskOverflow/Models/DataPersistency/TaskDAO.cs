@@ -54,6 +54,5 @@ namespace TaskOverflow.Models.DataPersistency
                 collection.Delete(task.id);
             }
         }
-
     }
 }

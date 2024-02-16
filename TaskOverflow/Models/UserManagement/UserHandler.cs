@@ -62,8 +62,11 @@ namespace TaskOverflow.Models.UserManagement
             users.Remove(oldUser);
             users.Add(newUser);
 
-            userDAO.deleteUser(oldUser);
-            userDAO.insertUser(newUser);
+            //userDAO.deleteUser(oldUser);
+            //userDAO.insertUser(newUser);
+
+            userDAO.modifyUser(newUser);
+
             return true;
         }
 

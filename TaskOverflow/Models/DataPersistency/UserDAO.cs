@@ -43,8 +43,21 @@ namespace TaskOverflow.Models.DataPersistency
         {
             using (var db = new LiteDatabase(connection))
             {
+                var userCollection = db.GetCollection<User>("user");
+                userCollection.Delete(user.id);
+
+                //delete users tasks
+                var tasksCollection = db.GetCollection<Task>("task");
+                tasksCollection.DeleteMany(task => task.userId == user.id);
+            }
+        }
+
+        public void modifyUser(User user)
+        {
+            using (var db = new LiteDatabase(connection))
+            {
                 var collection = db.GetCollection<User>("user");
-                collection.Delete(user.id);
+                collection.Update(user);
             }
         }
     }
