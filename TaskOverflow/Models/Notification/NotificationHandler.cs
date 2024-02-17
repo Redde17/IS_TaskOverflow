@@ -6,7 +6,6 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using TaskOverflow.Models.SystemAlert;
 
 namespace TaskOverflow.Models.Notification;
 
@@ -15,15 +14,15 @@ public class NotificationHandler
     public ObservableCollection<Notification> showableNotifications { get; set; } //Questa è una coda (push in coda, pop a [0]) in cui mettere le notifiche che saranno mostrate come pop-up
     private List<TaskNotification> _tasksBeingChecked { get; set; } //Questa Collection contiene le task che devono ancora scadere e su cui quindi dover effettuare il controllo della scadenza
 
-    public NotificationHandler(AlertHandler alertHandler) //builder
+    public NotificationHandler() //builder
     {
         showableNotifications = new ObservableCollection<Notification>();
         _tasksBeingChecked = new List<TaskNotification>();
         
-        initNotification(alertHandler);
+        initNotification();
     }
 
-    public async void initNotification(AlertHandler alertHandler)
+    public async void initNotification()
     {
         
         showableNotifications.CollectionChanged += (sender, e) =>
@@ -31,7 +30,7 @@ public class NotificationHandler
             Console.WriteLine($"{e.Action}");
             if (e.Action == NotifyCollectionChangedAction.Add)
             {
-                alertHandler.showAlert(showableNotifications[0]);
+                Console.WriteLine($"Notification added to queue");
             }
         };
         
