@@ -5,7 +5,6 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using Avalonia.Controls.Notifications;
 using TaskOverflow.Models.Notification;
-using TaskOverflow.Models.SystemAlert;
 using TaskOverflow.Models.TaskManagement;
 using TaskOverflow.Views.TaskManagementElems;
 using Notification = Avalonia.Controls.Notifications.Notification;

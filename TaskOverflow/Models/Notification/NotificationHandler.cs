@@ -6,8 +6,6 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using TaskOverflow.Models.SystemAlert;
-
 namespace TaskOverflow.Models.Notification;
 
 public class NotificationHandler
