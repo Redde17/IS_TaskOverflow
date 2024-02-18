@@ -225,8 +225,8 @@ namespace TaskOverflow_Test.MD_Testing
             //imposta i dati di creazione del task
             MainWindowVM.TaskManagerVM.TaskVM.AddTaskVM.CreationTask.name = Titolo;
             MainWindowVM.TaskManagerVM.TaskVM.AddTaskVM.CreationTask.description = Descrizione;
-            MainWindowVM.TaskManagerVM.TaskVM.AddTaskVM.Date = DateTime.Now;            //Data valida, ovvero al momento del test
-            MainWindowVM.TaskManagerVM.TaskVM.AddTaskVM.Time = DateTime.Now.TimeOfDay;  //Tempo valido, ovvero al momento del test
+            MainWindowVM.TaskManagerVM.TaskVM.AddTaskVM.Date = DateTime.Now.Date;                                   //Data valida, ovvero al momento del test
+            MainWindowVM.TaskManagerVM.TaskVM.AddTaskVM.Time = DateTime.Now.TimeOfDay.Add(new TimeSpan(1, 0, 0));   //Tempo valido, ovvero al momento del test
 
             int TaskAmountActualDB;
             int TaskAmountActualLocal;
