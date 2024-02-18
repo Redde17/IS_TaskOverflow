@@ -64,8 +64,14 @@ namespace TaskOverflow.ViewModels
         {
             this.TH = TH;
             CreationTask = new();
+            CreationTask.name = "";
             CreationTask.description = "";
-            Date = DateTimeOffset.Now;
+            Date = DateTimeOffset.Now.Date;
+            Date = Date.Date;
+            Time = DateTime.Now.TimeOfDay;
+            System.Diagnostics.Debug.WriteLine(
+                $"Date: {Date} Time {Time}\n"
+            );
         }
 
         public void createTask()
@@ -73,12 +79,12 @@ namespace TaskOverflow.ViewModels
             Task newTask;
             DateTime newDate;
 
-            //Aggiungo un ora poiché per qualche motivo durante la conversione ne sparisce una, non so perché
-            newDate = Date.UtcDateTime;
-            newDate = newDate.Add(Time.Add(new TimeSpan(1, 0, 0)));
+            newDate = Date.Date;
+            newDate = newDate.Add(Time);
 
-            if (CreationTask.name.Length > 50)
-                return; // Descrizione troppo lunga
+            if (!string.IsNullOrEmpty(CreationTask.name))
+                if (CreationTask.name.Length > 50)
+                    return; // Descrizione troppo lunga
 
             if(!string.IsNullOrEmpty(CreationTask.description))
                 if (CreationTask.description.Length > 500)
@@ -135,6 +141,13 @@ namespace TaskOverflow.ViewModels
 
         public void ModifyTask()
         {
+            DateTime newDate;
+
+            newDate = Date.Date;
+            newDate = newDate.Add(Time);
+
+            ModificationTask.date = newDate;
+
             TH.modifyTask(toBeModifiedTask, ModificationTask);
         }
 

@@ -87,6 +87,7 @@ namespace TaskOverflow.ViewModels
         public void ModifySelectedTask()
         {
             TaskVM.ModifyTaskVM.ModifyTask();
+            SortingSelector(ComboBoxSelectedIndex);
             TaskVM.ShowNothing();
         }
 

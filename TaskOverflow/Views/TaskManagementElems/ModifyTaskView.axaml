@@ -7,6 +7,7 @@
     xmlns:vm="using:TaskOverflow.ViewModels"
     d:DesignHeight="450"
     d:DesignWidth="800"
+    DataContext="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext)}"
     mc:Ignorable="d">
     <Border
         ClipToBounds="True"
@@ -19,8 +20,10 @@
                 Background="{StaticResource DarkBackgroundBrush}"
                 RowDefinitions="2*, 8*">
                 <TextBox
+                    Name="TaskTitleTextBox"
                     Grid.Row="1"
                     Classes="TitleTextBox"
+                    MaxLength="50"
                     Text="{Binding ModificationTask.name}"
                     Watermark="Inserisci il titolo" />
             </Grid>
@@ -37,8 +40,10 @@
                     Descrizione
                 </TextBlock>
                 <TextBox
+                    Name="TaskDescriptionTextBox"
                     Grid.Row="1"
                     AcceptsReturn="True"
+                    MaxLength="500"
                     Text="{Binding ModificationTask.description}"
                     TextWrapping="Wrap"
                     Watermark="Inserisci la descrizione" />
@@ -90,40 +95,6 @@
                         </TextBlock>
                     </Button>
                 </WrapPanel>
-
-                <!--  OLD  -->
-                <!--<WrapPanel>
-                    <Button
-                        Name="lowPriorityButton"
-                        Background="{StaticResource LowPriorityUnselectedBrush}"
-                        Click="clickHandlerLow"
-                        Command="{Binding PrioritySelector}"
-                        CommandParameter="0">
-                        <TextBlock Classes="Light h3" FontWeight="DemiBold">
-                            Bassa
-                        </TextBlock>
-                    </Button>
-                    <Button
-                        Name="mediumPriorityButton"
-                        Background="{StaticResource MediumPriorityUnselectedBrush}"
-                        Click="clickHandlerMedium"
-                        Command="{Binding PrioritySelector}"
-                        CommandParameter="1">
-                        <TextBlock Classes="Light h3" FontWeight="DemiBold">
-                            Media
-                        </TextBlock>
-                    </Button>
-                    <Button
-                        Name="highPriorityButton"
-                        Background="{StaticResource HighPriorityUnselectedBrush}"
-                        Click="clickHandlerHigh"
-                        Command="{Binding PrioritySelector}"
-                        CommandParameter="2">
-                        <TextBlock Classes="Light h3" FontWeight="DemiBold">
-                            Alta
-                        </TextBlock>
-                    </Button>
-                </WrapPanel>-->
             </StackPanel>
 
             <!--  Date due panel  -->
@@ -132,19 +103,18 @@
                     Scadenza
                 </TextBlock>
                 <WrapPanel Classes="DatePickerWrapPanel">
-                    <DatePicker DayFormat="ddd dd" SelectedDate="{Binding Date}" />
+                    <DatePicker
+                        Name="TaskDatePicker"
+                        DayFormat="ddd dd"
+                        SelectedDate="{Binding Date}" />
                     <TimePicker
+                        Name="TaskTimePicker"
                         ClockIdentifier="24HourClock"
                         MinuteIncrement="1"
                         SelectedTime="{Binding Time}" />
-                </WrapPanel>
 
-                <!--  OLD  -->
-                <!--<DatePicker DayFormat="ddd dd" SelectedDate="{Binding Date}" />
-                <TimePicker
-                    ClockIdentifier="24HourClock"
-                    MinuteIncrement="1"
-                    SelectedTime="{Binding Time}" />-->
+                </WrapPanel>
+                <TextBlock Name="DateTimePickerErrorTextBlock" Classes="ErrorText h3" />
             </StackPanel>
 
             <!--  Confirm/Reverese Action buttons panel  -->
@@ -152,7 +122,7 @@
                 Grid.Row="4"
                 Margin="15,15"
                 VerticalAlignment="Bottom"
-				DataContext="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext).TaskManagerVM}">
+                DataContext="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext).TaskManagerVM}">
                 <!--  Reverese Action Button  -->
                 <Button
                     HorizontalAlignment="Left"
@@ -174,7 +144,7 @@
                 <Button
                     HorizontalAlignment="Right"
                     Classes="ControlButton"
-                    Command="{Binding ModifySelectedTask}">
+                    Click="ModifyTaskButton_Click">
                     <Grid ColumnDefinitions="*, 40">
                         <TextBlock
                             Grid.Column="0"

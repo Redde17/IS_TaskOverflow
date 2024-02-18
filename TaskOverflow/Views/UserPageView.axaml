@@ -8,6 +8,7 @@
     xmlns:vm="using:TaskOverflow.ViewModels"
     d:DesignHeight="800"
     d:DesignWidth="1500"
+    DataContext="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext)}"
     mc:Ignorable="d">
 
     <UserControl.Styles>
@@ -125,8 +126,10 @@
                                 Nome profilo:
                             </TextBlock>
                             <TextBox
+                                Name="UserNameTextBox"
                                 Padding="10,0,0,0"
                                 Classes="TitleTextBox"
+                                MaxLength="20"
                                 Text="{Binding ModifiedActiveUser.name}"
                                 Watermark="Inserisci il nome" />
                         </StackPanel>
@@ -143,7 +146,7 @@
                         HorizontalAlignment="Left"
                         Background="{StaticResource DarkBackgroundBrush}"
                         Classes="ControlButton"
-                        Click="EndModifyUserButtonClick">
+                        Click="CancelModifyUserButtonClick">
                         <Grid ColumnDefinitions="40, *">
                             <Border Grid.Column="0">
                                 <Panel Background="{StaticResource HighPrioritySelectedBrush}">
@@ -162,8 +165,7 @@
                         HorizontalAlignment="Right"
                         Background="{StaticResource DarkBackgroundBrush}"
                         Classes="ControlButton"
-                        Click="EndModifyUserButtonClick"
-                        Command="{Binding UserPageVM.EndModifyUser}">
+                        Click="EndModifyUserButtonClick">
                         <Grid ColumnDefinitions="*, 40">
                             <TextBlock
                                 Grid.Column="0"
@@ -197,3 +199,5 @@
         </Grid>
     </Grid>
 </UserControl>
+
+<!--  Command="{Binding UserPageVM.EndModifyUser}"  -->

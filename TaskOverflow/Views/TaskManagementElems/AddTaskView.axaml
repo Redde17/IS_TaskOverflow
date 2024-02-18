@@ -7,6 +7,7 @@
     xmlns:vm="using:TaskOverflow.ViewModels"
     d:DesignHeight="800"
     d:DesignWidth="800"
+    DataContext="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext)}"
     mc:Ignorable="d">
 
     <Border
@@ -20,8 +21,10 @@
                 Background="{StaticResource DarkBackgroundBrush}"
                 RowDefinitions="2*, 8*">
                 <TextBox
+                    Name="TaskTitleTextBox"
                     Grid.Row="1"
                     Classes="TitleTextBox"
+                    MaxLength="50"
                     Text="{Binding CreationTask.name}"
                     Watermark="Inserisci il titolo" />
             </Grid>
@@ -30,7 +33,7 @@
             <Grid
                 Grid.Row="1"
                 Margin="15,0"
-                RowDefinitions="1*, 9*">
+                RowDefinitions="1*, 9*, *">
                 <TextBlock
                     Grid.Row="0"
                     Classes="Dark h2"
@@ -38,8 +41,10 @@
                     Descrizione
                 </TextBlock>
                 <TextBox
+                    Name="TaskDescriptionTextBox"
                     Grid.Row="1"
                     AcceptsReturn="True"
+                    MaxLength="500"
                     Text="{Binding CreationTask.description}"
                     TextWrapping="Wrap"
                     Watermark="Inserisci la descrizione" />
@@ -100,17 +105,22 @@
                 </TextBlock>
 
                 <WrapPanel Classes="DatePickerWrapPanel">
-                    <DatePicker DayFormat="ddd dd" SelectedDate="{Binding Date}" />
+                    <DatePicker
+                        Name="TaskDatePicker"
+                        DayFormat="ddd dd"
+                        SelectedDate="{Binding Date}" />
                     <TimePicker
+                        Name="TaskTimePicker"
                         ClockIdentifier="24HourClock"
                         MinuteIncrement="1"
                         SelectedTime="{Binding Time}" />
                 </WrapPanel>
+                <TextBlock Name="DateTimePickerErrorTextBlock" Classes="ErrorText h3" />
             </StackPanel>
 
-            <!--  Modify/Delete buttons panel  -->
+            <!--  Dekete/Create buttons panel  -->
             <Panel Grid.Row="4" Margin="15,0">
-                <!--  Modify Button  -->
+                <!--  Delete Button  -->
                 <Button
                     HorizontalAlignment="Left"
                     Classes="ControlButton"
@@ -132,7 +142,7 @@
                 <Button
                     HorizontalAlignment="Right"
                     Classes="ControlButton"
-                    Command="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext).TaskManagerVM.CreateTask}">
+                    Click="CreateNewTaskButton_Click">
                     <Grid ColumnDefinitions="*, 40">
                         <TextBlock
                             Grid.Column="0"

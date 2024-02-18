@@ -108,6 +108,9 @@
     <Style Selector="TextBlock.h3">
         <Setter Property="FontSize" Value="20" />
     </Style>
+	<Style Selector="TextBlock.ErrorText">
+		<Setter Property="Foreground" Value="{StaticResource HighPrioritySelectedBrush}" />
+	</Style>
 	
 	<!-- Classes for global buttons -->
 	<Style Selector="Button">

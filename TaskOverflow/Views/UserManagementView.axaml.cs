@@ -23,23 +23,18 @@ namespace TaskOverflow.Views
             var mainWindowViewModel = (MainWindowViewModel)DataContext;
 
             //check for input fields
-            if (!string.IsNullOrEmpty(UserNameInputBox.Text))
+            if (string.IsNullOrEmpty(UserNameInputBox.Text))
             {
-                //execute command
-                mainWindowViewModel.UserManagerVM.AddUser();
-
-                //change panel
-                AddNewUserInputPanel.IsVisible = false;
-                AddNewUserButtonPanel.IsVisible = true;
-            } else
-            {
-                //show error
-                System.Diagnostics.Debug.WriteLine(
-                    $"\nERROR: Campo nome utente vuoto\n"
-                );
-
                 SetErrorUserInputBox();
+                return;
             }
+
+            //execute command
+            mainWindowViewModel.UserManagerVM.AddUser();
+
+            //change panel
+            AddNewUserInputPanel.IsVisible = false;
+            AddNewUserButtonPanel.IsVisible = true;
         }
 
         private void AddNewUserReverseButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
